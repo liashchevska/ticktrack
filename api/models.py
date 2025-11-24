@@ -28,3 +28,26 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+
+class Board(models.Model):
+    owner = models.ForeignKey(CustomUser, on_delete=models.deletion.CASCADE)
+    name = models.CharField(max_length=100)
+    details = models.TextField()
+
+    def add_new_ticket(self):
+        return
+
+
+class Ticket(models.Model):
+    class Status(models.IntegerChoices):
+        TO_DO = 1
+        IN_PROGRESS = 2
+        DONE = 3
+    
+    board = models.ForeignKey(Board, on_delete=models.deletion.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    due_at = models.DateTimeField(null=True)
+    done_at = models.DateTimeField(null=True)
+    status = models.IntegerField(choices=Status, default=Status.TO_DO)
+    details = models.TextField()
