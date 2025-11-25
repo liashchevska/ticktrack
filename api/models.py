@@ -41,11 +41,11 @@ class Board(models.Model):
 
 class Ticket(models.Model):
     class Status(models.IntegerChoices):
-        TO_DO = 1
-        IN_PROGRESS = 2
-        DONE = 3
+        TO_DO = 1, _('To do')
+        IN_PROGRESS = 2, _('In progress')
+        DONE = 3, _('Done')
     
-    board = models.ForeignKey(Board, on_delete=models.deletion.CASCADE)
+    board = models.ForeignKey(Board, on_delete=models.deletion.CASCADE, related_name='tickets')
     created_at = models.DateTimeField(auto_now_add=True)
     due_at = models.DateTimeField(null=True)
     done_at = models.DateTimeField(null=True)
