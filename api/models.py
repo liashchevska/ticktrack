@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
 
 
 class Board(models.Model):
-    owner = models.ForeignKey(CustomUser, on_delete=models.deletion.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.deletion.CASCADE, related_name='boards')
     name = models.CharField(max_length=100)
     details = models.TextField()
 
