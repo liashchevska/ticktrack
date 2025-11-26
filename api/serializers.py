@@ -12,7 +12,7 @@ class TicketSerializer(serializers.ModelSerializer):
         
 
 class BoardSerializer(serializers.ModelSerializer):
-    tickets = TicketSerializer(many=True, read_only=True)
+    tickets = TicketSerializer(many=True)
 
     class Meta:
         model = Board
