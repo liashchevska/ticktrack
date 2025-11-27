@@ -16,9 +16,8 @@ class TicketViewSet(viewsets.ModelViewSet):
     serializer_class = TicketSerializer
 
     def get_queryset(self):
-        return Ticket.objects.filter(board__owner=self.request.user)
-
-    # @action(methods=['get'], detail=False)
-    # def get_tickets_for_board(self, request, board):
-    #     pass
-    #
+        tickets = Ticket.objects.filter(board__owner=self.request.user)
+        board = self.request.query_params.get('board')
+        if board is not None:
+            return tickets.filter(board_id=board)
+        return tickets
