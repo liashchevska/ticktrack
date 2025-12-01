@@ -11,7 +11,7 @@ class BoardPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
 class TicketEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['id', 'status', 'details']
+        fields = ["id", "status", "title", "description"]
 
     def to_representation(self, instance):
         return TicketSerializer(instance).data
@@ -19,11 +19,14 @@ class TicketEditSerializer(serializers.ModelSerializer):
 
 class TicketSerializer(serializers.ModelSerializer):
     board = BoardPrimaryKeyRelatedField()
-    status = serializers.CharField(source="get_status_display", read_only=True)
+    status = serializers.SerializerMethodField()
+
     class Meta:
         model = Ticket
-        fields = ['id', 'board', 'status', 'details']
-        
+        fields = ["id", "board", "status", "title", "description"]
+
+    def get_status(self, instance):
+        return {"value": instance.status, "label": instance.get_status_display()}
 
 
 class BoardSerializer(serializers.ModelSerializer):

@@ -15,9 +15,6 @@ class CustomUserManager(BaseUserManager):
         if email is None:
             raise ValueError(_('Email is required'))
         return self._create_user(email, password, **extra_fields)
-    
-    # def create_superuser(self, email, password=None, **extra_fields):
-    #     return  self._create_user(email, password, **extra_fields)
 
 
 class CustomUser(AbstractUser):
@@ -40,14 +37,16 @@ class Board(models.Model):
 
 
 class Ticket(models.Model):
-    class Status(models.IntegerChoices):
-        TO_DO = 1, _('To do')
-        IN_PROGRESS = 2, _('In progress')
-        DONE = 3, _('Done')
+    class Status(models.TextChoices):
+        NEW = "NEW", _('New')
+        IN_PROGRESS = "INPROGRESS", _('In progress')
+        DONE = "DONE", _('Done')
     
     board = models.ForeignKey(Board, on_delete=models.deletion.CASCADE, related_name='tickets')
+    
     created_at = models.DateTimeField(auto_now_add=True)
     due_at = models.DateTimeField(null=True)
     done_at = models.DateTimeField(null=True)
-    status = models.IntegerField(choices=Status, default=Status.TO_DO)
-    details = models.TextField()
+    status = models.CharField(choices=Status, default=Status.NEW, max_length=10)
+    title = models.CharField(max_length=175)
+    description = models.TextField()
