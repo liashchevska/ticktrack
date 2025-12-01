@@ -8,14 +8,22 @@ class BoardPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
         return Board.objects.filter(owner=request.user)
 
 
-class TicketSerializer(serializers.ModelSerializer):
-    current_status = serializers.CharField(source="get_status_display", read_only=True)
-    board = BoardPrimaryKeyRelatedField()
-
+class TicketEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ["id", "board", "current_status", "status", "details"]
-        extra_kwargs = {"status": {"write_only": True}, "board": {"write_only": True}}
+        fields = ['id', 'status', 'details']
+
+    def to_representation(self, instance):
+        return TicketSerializer(instance).data
+
+
+class TicketSerializer(serializers.ModelSerializer):
+    board = BoardPrimaryKeyRelatedField()
+    status = serializers.CharField(source="get_status_display", read_only=True)
+    class Meta:
+        model = Ticket
+        fields = ['id', 'board', 'status', 'details']
+        
 
 
 class BoardSerializer(serializers.ModelSerializer):
