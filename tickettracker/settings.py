@@ -171,3 +171,15 @@ CORS_ALLOW_CREDENTIALS = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION_BY_CODE_ENABLED = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+HEADLESS_FRONTEND_URLS = {
+    "account_confirm_email": "/account/verify-email/{key}",
+    "account_reset_password": "/account/password/reset",
+    "account_reset_password_from_key": "/account/password/reset/key/{key}",
+    "account_signup": "/account/signup",
+    "socialaccount_login_error": "/account/provider/callback",
+}
