@@ -26,6 +26,11 @@ async function handleResponse(response) {
   const text = await response.text()
   const _data = text ? JSON.parse(text) : null
 
+  if (_data.status === 401) {
+    storage.removeItem('sessionToken')
+    return _data
+  }
+
   const token = _data.meta?.sessionToken
   if (token) storage.setItem('sessionToken', token)
 
