@@ -30,7 +30,7 @@ function handleAuthResponse(response) {
     ok: response.ok,
     status: response.status,
     statusText: response.statusText,
-    user: response.data.user ?? {},
+    user: response.data?.user ?? {},
     flows: response.data?.flows ?? [],
     errors: response.errors ?? [],
     meta: response.meta ?? []
