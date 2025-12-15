@@ -3,19 +3,18 @@ import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { handleAuthResponse, request, } from '@/utils/request';
 import { API } from '@/endpoints';
-import router from '@/router';
 
 export const useAuthStore = defineStore('auth', () => {
-  const user = useStorage('user', null)
+  const user = useStorage('user', {})
   const isAuthenticated = computed(() => (Object.keys(user.value).length > 0))
   const isVerificationPending = ref(false)
 
   async function login(payload) {
     const response = await request(API.AUTH.LOGIN, 'POST', payload)
-    const { ok, errors, user } = handleAuthResponse(response)
+    const { ok, errors, user: userData } = handleAuthResponse(response)
 
     if (!ok && errors.length) throw errors
-    user.value = user
+    user.value = userData
   }
 
   async function signup(payload) {
@@ -27,10 +26,18 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function logout() {
-    await request(API.AUTH.SESSION, 'DELETE')
-    user.value = null
+  async function verifyEmail(payload) {
+    const response = await request(API.AUTH.VERIFY_EMAIL, 'POST', payload)
+    const { ok, errors, user: userData } = handleAuthResponse(response)
+    if (!ok && errors.length) throw errors
+    user.value = userData
+    isVerificationPending.value = false
   }
 
-  return { user, isAuthenticated, login, signup, logout }
+  async function logout() {
+    await request(API.AUTH.SESSION, 'DELETE')
+    user.value = {}
+  }
+
+  return { user, isAuthenticated, isVerificationPending, login, signup, logout, verifyEmail }
 })
