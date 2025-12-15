@@ -1,8 +1,8 @@
+import { useAuthStore } from "@/stores/auth";
 import Cookies from "js-cookie";
 
-const storage = window.sessionStorage
-
-async function request(endpoint, method, data) {
+async function request(endpoint, method, payload) {
+  const { sessionToken } = useAuthStore()
   const csrftoken = Cookies.get('csrftoken')
   const options = {
     method: method,
@@ -12,34 +12,33 @@ async function request(endpoint, method, data) {
     },
     credentials: 'include'
   }
-  const token = storage.getItem('sessionToken')
-  if (token) options.headers['X-Session-Token'] = token
-  if (typeof body != undefined) {
+
+  if (sessionToken) options.headers['X-Session-Token'] = sessionToken
+
+  if (typeof payload !== undefined) {
     options.headers['Content-Type'] = 'application/json'
-    options.body = JSON.stringify(data)
+    options.body = JSON.stringify(payload)
   }
   const response = await fetch(endpoint, options)
-  return await handleResponse(response)
+  return await parseResponse(response)
 }
 
-async function handleResponse(response) {
+async function parseResponse(response) {
   const text = await response.text()
-  const _data = text ? JSON.parse(text) : null
+  const data = text ? JSON.parse(text) : null
+  return { ...data, ok: response.ok, statusText: response.statusText }
+}
 
-  if (_data.status === 401) {
-    storage.removeItem('sessionToken')
-    return _data
+function handleAuthResponse(response) {
+  return {
+    ok: response.ok,
+    status: response.status,
+    statusText: response.statusText,
+    user: response.user ?? {},
+    flows: response.data?.flows ?? [],
+    errors: response.errors ?? [],
+    meta: response.meta ?? []
   }
-
-  const token = _data.meta?.sessionToken
-  if (token) storage.setItem('sessionToken', token)
-
-  if (!response.ok) {
-    const errors = _data.errors || response.statusText
-    throw errors
-  }
-
-  return _data
 }
 
 function groupErrorsByParam(errors) {
@@ -49,4 +48,5 @@ function groupErrorsByParam(errors) {
   }
   return groupedErrors
 }
-export { request, groupErrorsByParam }
+
+export { request, handleAuthResponse, groupErrorsByParam }
