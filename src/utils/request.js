@@ -1,8 +1,6 @@
-import { useAuthStore } from "@/stores/auth";
 import Cookies from "js-cookie";
 
 async function request(endpoint, method, payload) {
-  const { sessionToken } = useAuthStore()
   const csrftoken = Cookies.get('csrftoken')
   const options = {
     method: method,
@@ -12,8 +10,6 @@ async function request(endpoint, method, payload) {
     },
     credentials: 'include'
   }
-
-  if (sessionToken) options.headers['X-Session-Token'] = sessionToken
 
   if (typeof payload !== undefined) {
     options.headers['Content-Type'] = 'application/json'
@@ -34,7 +30,7 @@ function handleAuthResponse(response) {
     ok: response.ok,
     status: response.status,
     statusText: response.statusText,
-    user: response.user ?? {},
+    user: response.data.user ?? {},
     flows: response.data?.flows ?? [],
     errors: response.errors ?? [],
     meta: response.meta ?? []
