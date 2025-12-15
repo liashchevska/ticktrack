@@ -24,7 +24,6 @@ export const useAuthStore = defineStore('auth', () => {
     if (!ok && errors.length) throw errors
     if (flows.some(flow => flow.id === 'verify_email' && flow.is_pending)) {
       isVerificationPending.value = true
-      router.push('/email/verify')
     }
   }
 

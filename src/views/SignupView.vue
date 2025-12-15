@@ -16,6 +16,7 @@ import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue'
 import { string } from 'yup';
 import { groupErrorsByParam } from '@/utils/request';
+import router from '@/router';
 
 const auth = useAuthStore()
 const { handleSubmit, setFieldError } = useForm()
@@ -25,6 +26,7 @@ const backendErrors = ref({})
 const onSubmit = handleSubmit(async values => {
   try {
     await auth.signup(values)
+    router.push('/email/verify')
   } catch (errors) {
     backendErrors.value = groupErrorsByParam(errors)
     for (var field of Object.keys(values)) {
