@@ -3,6 +3,13 @@ from api.models import Ticket
 from api.serializers import BoardSerializer, TicketSerializer, TicketEditSerializer
 from allauth.headless.contrib.rest_framework.authentication import XSessionTokenAuthentication
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http.response import JsonResponse
+
+@ensure_csrf_cookie
+def csrf(request):
+    return JsonResponse({'detail': 'CSRF cookie set'})
 
 class BoardViewSet(viewsets.ModelViewSet):
     serializer_class = BoardSerializer

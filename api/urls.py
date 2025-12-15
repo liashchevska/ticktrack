@@ -7,5 +7,7 @@ router = routers.SimpleRouter()
 router.register(r"boards", BoardViewSet, basename="board")
 router.register(r"tickets", TicketViewSet, basename="ticket")
 
-urlpatterns = []
+urlpatterns = [
+        path('csrf/', views.csrf),
+]
 urlpatterns += router.urls
