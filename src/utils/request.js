@@ -1,6 +1,17 @@
+import { API } from "@/endpoints";
 import Cookies from "js-cookie";
 
-async function request(endpoint, method, payload) {
+let csrfRefreshPromise = null
+
+function refreshCsrfToken() {
+  if (!csrfRefreshPromise) {
+    csrfRefreshPromise = fetch(API.CSRF, { credentials: 'include' })
+      .finally(() => { csrfRefreshPromise = null })
+  }
+  return csrfRefreshPromise
+}
+
+async function request(endpoint, method, payload, triedCsrfTokenRefresh = false) {
   const csrftoken = Cookies.get('csrftoken')
   const options = {
     method: method,
@@ -11,11 +22,15 @@ async function request(endpoint, method, payload) {
     credentials: 'include'
   }
 
-  if (typeof payload !== undefined) {
+  if (payload !== undefined) {
     options.headers['Content-Type'] = 'application/json'
     options.body = JSON.stringify(payload)
   }
   const response = await fetch(endpoint, options)
+  if (response.status === 403 && !triedCsrfTokenRefresh) {
+    await refreshCsrfToken()
+    return request(endpoint, method, payload, true)
+  }
   return await parseResponse(response)
 }
 
