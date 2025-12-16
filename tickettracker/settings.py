@@ -155,9 +155,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 HEADLESS_ONLY = True
 
-CORS_ALLOWED_ORIGINS = [
-    "https://127.0.0.1",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:5173"
+# ]
 
 from corsheaders.defaults import default_headers
 CORS_ALLOW_HEADERS = (
@@ -167,12 +167,21 @@ CORS_ALLOW_HEADERS = (
     "x-password-reset-key",
 )
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5173"
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:5173"
+]
+
+HEADLESS_ONLY = True
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION_BY_CODE_ENABLED = True
+ACCOUNT_EMAIL_VERIFICATION_SUPPORTS_RESEND = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
