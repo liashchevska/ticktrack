@@ -40,15 +40,20 @@ async function parseResponse(response) {
   return { ...data, ok: response.ok, statusText: response.statusText }
 }
 
+function getVerificationPendingStatus(flows) {
+  return flows.some(flow => flow.id === 'verify_email' && flow.is_pending)
+}
+
 function handleAuthResponse(response) {
+  const flows = response.data?.flows ?? []
   return {
     ok: response.ok,
     status: response.status,
     statusText: response.statusText,
     user: response.data?.user ?? {},
-    flows: response.data?.flows ?? [],
     errors: response.errors ?? [],
-    meta: response.meta ?? []
+    meta: response.meta ?? [],
+    verificationPendingStatus: getVerificationPendingStatus(flows)
   }
 }
 

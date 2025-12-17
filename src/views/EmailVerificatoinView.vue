@@ -5,6 +5,7 @@
     <div v-if="errorMessage">{{ errorMessage }}</div>
     <button type="submit">Verify</button>
   </form>
+  <button @click="auth.resendVerificationCode">Resend verification code</button>
 </template>
 
 <script setup>

@@ -11,19 +11,18 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(payload) {
     const response = await request(API.AUTH.LOGIN, 'POST', payload)
-    const { ok, errors, user: userData } = handleAuthResponse(response)
+    const { ok, errors, verificationPendingStatus, user: userData } = handleAuthResponse(response)
 
     if (!ok && errors.length) throw errors
+    isVerificationPending.value = verificationPendingStatus
     user.value = userData
   }
 
   async function signup(payload) {
     const response = await request(API.AUTH.SIGNUP, 'POST', payload)
-    const { ok, errors, flows } = handleAuthResponse(response)
+    const { ok, errors, verificationPendingStatus } = handleAuthResponse(response)
     if (!ok && errors.length) throw errors
-    if (flows.some(flow => flow.id === 'verify_email' && flow.is_pending)) {
-      isVerificationPending.value = true
-    }
+    isVerificationPending.value = verificationPendingStatus
   }
 
   async function verifyEmail(payload) {
@@ -34,10 +33,16 @@ export const useAuthStore = defineStore('auth', () => {
     isVerificationPending.value = false
   }
 
+  async function resendVerificationCode() {
+    const response = await request(API.AUTH.VERYFY_EMAIL_RESEND, 'POST')
+    const { ok, status } = handleAuthResponse(response)
+    // if (!ok && status === 429) { throw {} }
+  }
+
   async function logout() {
     await request(API.AUTH.SESSION, 'DELETE')
     user.value = {}
   }
 
-  return { user, isAuthenticated, isVerificationPending, login, signup, logout, verifyEmail }
+  return { user, isAuthenticated, isVerificationPending, login, signup, logout, verifyEmail, resendVerificationCode }
 })
