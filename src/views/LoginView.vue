@@ -20,6 +20,10 @@ const backendErrors = ref([])
 const onSubmit = handleSubmit(async values => {
   try {
     await auth.login(values)
+    if (auth.isVerificationPending) {
+      router.push('email/verify')
+      return
+    }
     router.push('/')
   } catch (errors) {
     backendErrors.value = groupErrorsByParam(errors)

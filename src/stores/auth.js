@@ -3,11 +3,12 @@ import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { handleAuthResponse, request, } from '@/utils/request';
 import { API } from '@/endpoints';
+import { useSessionStorage } from '@vueuse/core';
 
 export const useAuthStore = defineStore('auth', () => {
   const user = useStorage('user', {})
   const isAuthenticated = computed(() => (Object.keys(user.value).length > 0))
-  const isVerificationPending = ref(false)
+  const isVerificationPending = useSessionStorage('isVerificationPending', false)
 
   async function login(payload) {
     const response = await request(API.AUTH.LOGIN, 'POST', payload)
