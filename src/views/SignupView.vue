@@ -1,27 +1,31 @@
 <template>
   <form @submit.prevent="onSubmit">
-    Name:
-    <input v-model="name" />
-    <div v-if="nameErrors">{{ nameErrors }}</div>
-    <AuthFields />
+    <CustomField name="name" type="text" />
+    <CustomField name="email" type="email" />
+    <CustomField name="password" type="password" />
     <button type="submit">Submit</button>
   </form>
 </template>
 
 
 <script setup>
-import AuthFields from '@/components/AuthFields.vue';
-import { useForm, useField } from 'vee-validate';
+import { useForm } from 'vee-validate';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue'
-import { string } from 'yup';
+import { object, string } from 'yup';
 import { groupErrorsByParam } from '@/utils/request';
 import router from '@/router';
+import CustomField from '@/components/CustomField.vue';
 
 const auth = useAuthStore()
-const { handleSubmit, setFieldError } = useForm()
+const { handleSubmit, setFieldError } = useForm({
+  validationSchema: object({
+    name: string().required(),
+    email: string().required().email(),
+    password: string().required()
+  })
+})
 
-const { value: name, errors: nameErrors } = useField('name', string().required())
 const backendErrors = ref({})
 const onSubmit = handleSubmit(async values => {
   try {
