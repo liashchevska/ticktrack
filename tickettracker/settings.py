@@ -153,7 +153,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-HEADLESS_ONLY = True
 
 # CORS_ALLOWED_ORIGINS = [
 #     "http://127.0.0.1:5173"
