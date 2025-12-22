@@ -11,13 +11,13 @@
 <script setup>
 import { useForm } from 'vee-validate';
 import { useAuthStore } from '@/stores/auth';
-import { ref } from 'vue'
 import { object, string } from 'yup';
-import { groupErrorsByParam } from '@/utils/request';
 import router from '@/router';
 import CustomField from '@/components/CustomField.vue';
+import { useBackendErrors } from '@/composables/useBackendErrors';
 
 const auth = useAuthStore()
+const { setErrors } = useBackendErrors()
 const { handleSubmit, setFieldError } = useForm({
   validationSchema: object({
     name: string().required(),
@@ -26,16 +26,12 @@ const { handleSubmit, setFieldError } = useForm({
   })
 })
 
-const backendErrors = ref({})
 const onSubmit = handleSubmit(async values => {
   try {
     await auth.signup(values)
     router.push('/email/verify')
   } catch (errors) {
-    backendErrors.value = groupErrorsByParam(errors)
-    for (var field of Object.keys(values)) {
-      setFieldError(field, backendErrors.value[field])
-    }
+    setErrors(errors, setFieldError)
   }
 })
 </script>

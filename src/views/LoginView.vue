@@ -4,16 +4,16 @@
     <CustomField name="password" type="password" />
     <button type="submit">Submit</button>
   </form>
+  <button @click="requestPasswordReset">Forgot password?</button>
 </template>
 
 <script setup>
 import { useForm } from 'vee-validate';
-import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import { groupErrorsByParam } from '@/utils/request';
 import router from '@/router';
 import { object, string } from 'yup';
 import CustomField from '@/components/CustomField.vue';
+import { useBackendErrors } from '@/composables/useBackendErrors';
 
 const auth = useAuthStore()
 const { handleSubmit, setFieldError } = useForm({
@@ -22,7 +22,7 @@ const { handleSubmit, setFieldError } = useForm({
     password: string().required()
   })
 })
-const backendErrors = ref([])
+const { setErrors } = useBackendErrors()
 
 const onSubmit = handleSubmit(async values => {
   try {
@@ -33,11 +33,10 @@ const onSubmit = handleSubmit(async values => {
     }
     router.push('/')
   } catch (errors) {
-    backendErrors.value = groupErrorsByParam(errors)
-    for (var field of Object.keys(values)) {
-      setFieldError(field, backendErrors.value[field])
-    }
+    setErrors(errors, setFieldError)
   }
 })
-
+function requestPasswordReset() {
+  router.push('/password/request')
+}
 </script>
