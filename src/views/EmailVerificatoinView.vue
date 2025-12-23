@@ -1,33 +1,27 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <CustomField name="key" type="text" />
-    <button type="submit">Verify</button>
-  </form>
+  <BaseForm :schema="validationSchema" :action="auth.verifyEmail" :onSuccess="onSuccess">
+    <template #fields>
+      <BaseField name="key" type="text" />
+    </template>
+    <template #actions>
+      <button type="submit">Verify</button>
+    </template>
+  </BaseForm>
   <button @click="auth.resendVerificationCode">Resend verification code</button>
 </template>
 
 <script setup>
-import CustomField from '@/components/CustomField.vue';
+import BaseField from '@/components/BaseField.vue';
 import router from '@/router';
 import { useAuthStore } from '@/stores/auth';
-import { useBackendErrors } from '@/composables/useBackendErrors';
-import { useForm } from 'vee-validate';
-import { string } from 'yup';
+import { object, string } from 'yup';
+import BaseForm from '@/components/BaseForm.vue';
 
+const validationSchema = object({
+  key: string().required()
+})
 const auth = useAuthStore()
-const { setErrors } = useBackendErrors()
-const { handleSubmit, setFieldError } = useForm({
-  validationSchema: {
-    key: string().required()
-  }
-})
-
-const onSubmit = handleSubmit(async values => {
-  try {
-    await auth.verifyEmail(values)
-    router.push('/')
-  } catch (errors) {
-    setErrors(errors, setFieldError)
-  }
-})
+const onSuccess = () => {
+  router.push('/')
+}
 </script>
