@@ -16,7 +16,7 @@ import { object } from 'yup';
 const props = defineProps({
   schema: { type: object, required: true },
   action: { type: Function, required: true },
-  onSuccess: { type: Function, required: true }
+  onSuccess: { type: Function, required: false }
 })
 
 const { setErrors } = useBackendErrors()
