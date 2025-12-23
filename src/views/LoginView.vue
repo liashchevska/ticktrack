@@ -8,6 +8,7 @@
       <button type="submit">Login</button>
     </template>
   </BaseForm>
+  <RouterLink to="/password/request">Forgot your password?</RouterLink>
 </template>
 
 <script setup>
@@ -31,8 +32,4 @@ const onSuccess = () => {
   }
   router.push('/')
 }
-// <button @click="requestPasswordReset">Forgot password?</button>
-// function requestPasswordReset() {
-//   router.push('/password/request')
-// }
 </script>

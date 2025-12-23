@@ -40,8 +40,8 @@ async function parseResponse(response) {
   return { ...data, ok: response.ok, statusText: response.statusText }
 }
 
-function getVerificationPendingStatus(flows) {
-  return flows.some(flow => flow.id === 'verify_email' && flow.is_pending)
+function getFlowStatus(flows, flowId) {
+  return flows.some(flow => flow.id === flowId && flow.is_pending)
 }
 
 function handleAuthResponse(response) {
@@ -53,7 +53,8 @@ function handleAuthResponse(response) {
     user: response.data?.user ?? {},
     errors: response.errors ?? [],
     meta: response.meta ?? [],
-    verificationPendingStatus: getVerificationPendingStatus(flows)
+    verificationPendingStatus: getFlowStatus(flows, 'verify_email'),
+    passwordResetPendingStatus: getFlowStatus(flows, 'password_reset_by_code')
   }
 }
 

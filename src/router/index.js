@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import EmailVerificatoinView from '@/views/EmailVerificatoinView.vue'
 import { useAuthStore } from '@/stores/auth'
+import PasswordResetView from '@/views/PasswordResetView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,7 +29,13 @@ const router = createRouter({
       path: '/email/verify',
       component: EmailVerificatoinView,
       meta: { requiresVerificationPending: true }
+    },
+    {
+      path: '/password/request',
+      component: PasswordResetView,
+      meta: { requiresNoAuth: true }
     }
+
   ],
 })
 
