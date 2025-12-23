@@ -1,5 +1,5 @@
 <template>
-  {{ props.name }}
+  <slot> {{ props.name }} </slot>
   <input v-model="value" :type="props.type" />
   <div v-if="errors.length"> {{ errors }} </div>
 </template>
