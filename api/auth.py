@@ -30,7 +30,7 @@ url_to_view = {
     "email/verify/": views.VerifyEmailView,
     "email/verify/resend/": views.ResendEmailVerificationCodeView,
     "password/request/": views.RequestPasswordResetView,
-    "password/reset": views.ResetPasswordView,
+    "password/reset/": views.ResetPasswordView,
 }
 
 
