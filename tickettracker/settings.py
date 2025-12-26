@@ -142,6 +142,10 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.SessionAuthentication',
         # XSessionTokenAuthentication,
     # ],   
+    'DEFAULT_RENDERER_CLASSES': [
+        'api.renderers.ApiRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer', 
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
@@ -181,6 +185,7 @@ ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION_BY_CODE_ENABLED = True
 ACCOUNT_EMAIL_VERIFICATION_SUPPORTS_RESEND = True
+ACCOUNT_PASSWORD_RESET_BY_CODE_ENABLED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
