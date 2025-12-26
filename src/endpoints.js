@@ -13,11 +13,11 @@ export const API = {
     RESET_PASSWORD: `${BASE_URL}/auth/${CLIENT}/password/reset/`
   },
   TICKET: {
-    LIST: `${BASE_URL}/api/tickets`,
-    DETAIL: (id) => `${BASE_URL}/api/tickets/${id}`
+    LIST: `${BASE_URL}/api/tickets/`,
+    DETAIL: (id) => `${BASE_URL}/api/tickets/${id}/`
   },
   BOARD: {
-    LIST: `${BASE_URL}/api/boards`,
-    DETAIL: (id) => `${BASE_URL}/api/boards/${id}`
+    LIST: `${BASE_URL}/api/boards/`,
+    DETAIL: (id) => `${BASE_URL}/api/boards/${id}/`
   }
 }
