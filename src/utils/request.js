@@ -31,13 +31,25 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
     await refreshCsrfToken()
     return request(endpoint, method, payload, true)
   }
-  return await parseResponse(response)
+  const parsed = await parseResponse(response)
+  return normalizeResponse(parsed)
 }
 
 async function parseResponse(response) {
   const text = await response.text()
-  const data = text ? JSON.parse(text) : null
-  return { ...data, ok: response.ok, statusText: response.statusText }
+  const body = text ? JSON.parse(text) : null
+  return { ...body, ok: response.ok, statusText: response.statusText }
+}
+
+function normalizeResponse(response) {
+  return {
+    ok: response.ok,
+    status: response.status,
+    statusText: response.statusText,
+    data: response.data ?? null,
+    meta: response.meta ?? null,
+    errors: response.errors ?? null,
+  }
 }
 
 function getFlowStatus(flows, flowId) {
@@ -45,14 +57,11 @@ function getFlowStatus(flows, flowId) {
 }
 
 function handleAuthResponse(response) {
-  const flows = response.data?.flows ?? []
+  const { data, ...rest } = response
+  const flows = data?.flows ?? []
   return {
-    ok: response.ok,
-    status: response.status,
-    statusText: response.statusText,
-    user: response.data?.user ?? {},
-    errors: response.errors ?? [],
-    meta: response.meta ?? [],
+    ...rest,
+    user: data?.user ?? {},
     verificationPendingStatus: getFlowStatus(flows, 'verify_email'),
     passwordResetPendingStatus: getFlowStatus(flows, 'password_reset_by_code')
   }
