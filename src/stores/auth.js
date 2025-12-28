@@ -5,11 +5,18 @@ import { handleAuthResponse, request, } from '@/utils/request';
 import { API } from '@/endpoints';
 import { useSessionStorage } from '@vueuse/core';
 
+
 export const useAuthStore = defineStore('auth', () => {
   const user = useStorage('user', {})
   const isAuthenticated = computed(() => (Object.keys(user.value).length > 0))
   const isVerificationPending = useSessionStorage('isVerificationPending', false)
   const isPasswordResetPending = useSessionStorage('isPasswordResetPending', false)
+
+  function $reset() {
+    user.value = {}
+    isVerificationPending.value = false
+    isPasswordResetPending.value = false
+  }
 
   async function login(payload) {
     const response = await request(API.AUTH.LOGIN, 'POST', payload)
@@ -53,12 +60,11 @@ export const useAuthStore = defineStore('auth', () => {
     const { errors, passwordResetPendingStatus } = handleAuthResponse(response)
     if (errors.length) { throw errors }
     isPasswordResetPending.value = passwordResetPendingStatus
-
   }
 
   async function logout() {
     await request(API.AUTH.SESSION, 'DELETE')
-    user.value = {}
+    $reset()
   }
 
   return {
