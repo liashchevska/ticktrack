@@ -11,8 +11,8 @@
 </template>
 <script setup>
 import { useAuthStore } from '@/stores/auth';
-import BaseField from './BaseField.vue';
-import BaseForm from './BaseForm.vue';
+import BaseField from './Base/BaseField.vue';
+import BaseForm from './Base/BaseForm.vue';
 import router from '@/router';
 import { object, string } from 'yup';
 

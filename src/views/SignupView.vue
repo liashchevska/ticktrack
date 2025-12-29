@@ -16,8 +16,8 @@
 import { useAuthStore } from '@/stores/auth';
 import { object, string } from 'yup';
 import router from '@/router';
-import BaseForm from '@/components/BaseForm.vue';
-import BaseField from '@/components/BaseField.vue';
+import BaseForm from '@/components/Base/BaseForm.vue';
+import BaseField from '@/components/Base/BaseField.vue';
 
 const validationSchema = object({
   name: string().required(),

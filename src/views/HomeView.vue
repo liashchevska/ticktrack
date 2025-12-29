@@ -17,8 +17,8 @@
 </template>
 
 <script setup>
-import BaseField from '@/components/BaseField.vue';
-import BaseForm from '@/components/BaseForm.vue';
+import BaseField from '@/components/Base/BaseField.vue';
+import BaseForm from '@/components/Base/BaseForm.vue';
 import BaseList from '@/components/BaseList.vue';
 import LogoutButton from '@/components/LogoutButton.vue';
 import router from '@/router';

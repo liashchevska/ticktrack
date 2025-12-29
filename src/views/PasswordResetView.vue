@@ -9,8 +9,8 @@
 </template>
 
 <script setup>
-import BaseField from '@/components/BaseField.vue';
-import BaseForm from '@/components/BaseForm.vue';
+import BaseField from '@/components/Base/BaseField.vue';
+import BaseForm from '@/components/Base/BaseForm.vue';
 import PasswordResetForm from '@/components/PasswordResetForm.vue';
 import { useAuthStore } from '@/stores/auth';
 import { object, string } from 'yup';

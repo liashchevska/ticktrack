@@ -15,8 +15,8 @@
 import { useAuthStore } from '@/stores/auth'
 import router from '@/router';
 import { object, string } from 'yup';
-import BaseField from '@/components/BaseField.vue';
-import BaseForm from '@/components/BaseForm.vue';
+import BaseField from '@/components/Base/BaseField.vue';
+import BaseForm from '@/components/Base/BaseForm.vue';
 
 const auth = useAuthStore()
 

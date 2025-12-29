@@ -11,11 +11,11 @@
 </template>
 
 <script setup>
-import BaseField from '@/components/BaseField.vue';
+import BaseField from '@/components/Base/BaseField.vue';
 import router from '@/router';
 import { useAuthStore } from '@/stores/auth';
 import { object, string } from 'yup';
-import BaseForm from '@/components/BaseForm.vue';
+import BaseForm from '@/components/Base/BaseForm.vue';
 
 const validationSchema = object({
   key: string().required()
