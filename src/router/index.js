@@ -5,6 +5,9 @@ import SignupView from '@/views/SignupView.vue'
 import EmailVerificatoinView from '@/views/EmailVerificatoinView.vue'
 import { useAuthStore } from '@/stores/auth'
 import PasswordResetView from '@/views/PasswordResetView.vue'
+import BoardView from '@/views/BoardView.vue'
+import { storeToRefs } from 'pinia'
+import { useBoardsStore } from '@/stores/board'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +15,16 @@ const router = createRouter({
     {
       path: '/',
       component: HomeView,
-      meta: { requiresAuth: true },
+      children: [
+        {
+          path: ':id',
+          component: BoardView
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        requiresBoardList: true,
+      },
     },
     {
       path: '/login',
@@ -39,10 +51,9 @@ const router = createRouter({
   ],
 })
 
-
-router.beforeEach((to, from) => {
-  const { isAuthenticated, isVerificationPending } = useAuthStore()
-
+router.beforeEach(async (to, from) => {
+  const { isAuthenticated, isVerificationPending } = storeToRefs(useAuthStore())
+  const { initBoardList } = useBoardsStore()
   if (to.meta.requiresAuth && !isAuthenticated) {
     return '/login'
   }
@@ -51,6 +62,10 @@ router.beforeEach((to, from) => {
   }
   if (to.meta.requiresNoAuth && isAuthenticated) {
     return '/'
+  }
+  // Prefetch board list on page load.
+  if (to.meta.requiresBoardList) {
+    await initBoardList()
   }
 })
 
