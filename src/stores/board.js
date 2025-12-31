@@ -44,6 +44,9 @@ export const useBoardsStore = defineStore('boards', () => {
   async function updateBoard(payload) { }
   async function deleteBoard(payload) { }
 
+  async function resetCurrentBoard(params) {
+    currentBoard.value = null
+  }
   return {
     isInitialized,
     boardList,
@@ -54,6 +57,7 @@ export const useBoardsStore = defineStore('boards', () => {
     fetchBoard,
     createBoard,
     updateBoard,
-    deleteBoard
+    deleteBoard,
+    resetCurrentBoard
   }
 })
