@@ -1,6 +1,7 @@
 from rest_framework import viewsets, authentication, permissions
 from api.models import Ticket
-from api.serializers import BoardSerializer, TicketSerializer, TicketEditSerializer
+from api.serializers import BoardSerializer, TicketSerializer, TicketEditSerializer,\
+    BoardDetailSerizlizer
 from allauth.headless.contrib.rest_framework.authentication import XSessionTokenAuthentication
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -25,6 +26,11 @@ class BoardViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return BoardDetailSerizlizer
+        return BoardSerializer
 
 
 class TicketViewSet(viewsets.ModelViewSet):
