@@ -4,10 +4,10 @@ import { defineStore } from "pinia";
 import { handleAuthResponse, request, } from '@/utils/request';
 import { API } from '@/endpoints';
 import { useSessionStorage } from '@vueuse/core';
-import { useBoardsStore } from './board';
+import { useBoardStore } from './board';
 
 export const useAuthStore = defineStore('auth', () => {
-  const boardStore = useBoardsStore()
+  const boardStore = useBoardStore()
   const user = useStorage('user', {})
   const isAuthenticated = computed(() => (Object.keys(user.value).length > 0))
   const isVerificationPending = useSessionStorage('isVerificationPending', false)

@@ -6,7 +6,7 @@ import EmailVerificatoinView from '@/views/EmailVerificatoinView.vue'
 import { useAuthStore } from '@/stores/auth'
 import PasswordResetView from '@/views/PasswordResetView.vue'
 import { storeToRefs } from 'pinia'
-import { useBoardsStore } from '@/stores/board'
+import { useBoardStore } from '@/stores/board'
 import BoardDetailView from '@/views/BoardDetailView.vue'
 
 const router = createRouter({
@@ -54,7 +54,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   const { isAuthenticated, isVerificationPending } = storeToRefs(useAuthStore())
-  const { initBoardList } = useBoardsStore()
+  const { initBoardList } = useBoardStore()
   if (to.meta.requiresAuth && !isAuthenticated) {
     return '/login'
   }

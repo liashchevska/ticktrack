@@ -13,13 +13,13 @@
 <script setup>
 import BaseField from '@/components/Base/BaseField.vue'
 import BaseForm from '@/components/Base/BaseForm.vue'
-import { useBoardsStore } from '@/stores/board'
+import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { computed } from 'vue'
 
 // import { useAuthStore } from '@/stores/auth'
 // const auth = useAuthStore()
-const { createBoard, updateBoard } = useBoardsStore()
+const { createBoard, updateBoard } = useBoardStore()
 
 const props = defineProps({
   board: {
