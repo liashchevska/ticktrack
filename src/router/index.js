@@ -5,20 +5,21 @@ import SignupView from '@/views/SignupView.vue'
 import EmailVerificatoinView from '@/views/EmailVerificatoinView.vue'
 import { useAuthStore } from '@/stores/auth'
 import PasswordResetView from '@/views/PasswordResetView.vue'
-import BoardView from '@/views/BoardView.vue'
 import { storeToRefs } from 'pinia'
 import { useBoardsStore } from '@/stores/board'
+import BoardDetailView from '@/views/BoardDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    { path: '/', redirect: '/boards' },
     {
-      path: '/',
+      path: '/boards',
       component: HomeView,
       children: [
         {
           path: ':id',
-          component: BoardView
+          component: BoardDetailView
         }
       ],
       meta: {
