@@ -24,6 +24,7 @@ const props = defineProps({
 const { setErrors } = useBackendErrors()
 const { handleSubmit, setFieldError, resetForm } = useForm({
   validationSchema: props.schema,
+  initialValues: props.initialValues
 })
 
 const { submit } = useFormSubmit({
