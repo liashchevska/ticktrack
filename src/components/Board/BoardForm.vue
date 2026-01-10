@@ -17,8 +17,6 @@ import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { computed } from 'vue'
 
-// import { useAuthStore } from '@/stores/auth'
-// const auth = useAuthStore()
 const { createBoard, updateBoard } = useBoardStore()
 
 const props = defineProps({
@@ -29,12 +27,15 @@ const props = defineProps({
 })
 
 const isInUpdateMode = computed(() => Boolean(props.board))
-const action = computed(() => isInUpdateMode.value ? updateBoard : createBoard)
+const action = computed(() => isInUpdateMode.value ? updateBoardWrapper : createBoard)
 
 const boardValidationSchema = object({
   name: string().required()
 })
 
+function updateBoardWrapper(values) {
+  return updateBoard(props.board.id, values)
+}
 function onSuccess() { }
 
 </script>
