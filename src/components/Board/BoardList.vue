@@ -1,12 +1,16 @@
 <template>
-  <BaseList :item-list="props.boardList" @itemClicked="openBoardView" />
+  <BaseList :item-list="props.boardList" @itemClicked="openBoardView">
+    <template #default="{ item }">
+      <span>{{ item.name }}</span>
+    </template>
+  </BaseList>
   <BoardForm />
 </template>
 
 
 <script setup>
 import { useRouter } from 'vue-router'
-import BaseList from '../BaseList.vue'
+import BaseList from '../Base/BaseList.vue'
 import BoardForm from './BoardForm.vue'
 
 const router = useRouter()
