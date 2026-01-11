@@ -17,7 +17,7 @@ import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { computed } from 'vue'
 
-const { createBoard, updateBoard } = useBoardStore()
+const { createBoard, updateBoard, fetchBoardList } = useBoardStore()
 
 const props = defineProps({
   board: {
@@ -36,6 +36,8 @@ const boardValidationSchema = object({
 function updateBoardWrapper(values) {
   return updateBoard(props.board.id, values)
 }
-function onSuccess() { }
+async function onSuccess() {
+  await fetchBoardList()
+}
 
 </script>
