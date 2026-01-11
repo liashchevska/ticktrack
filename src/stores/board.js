@@ -45,8 +45,6 @@ export const useBoardStore = defineStore('boards', () => {
     const { ok, data, errors } = await request(API.BOARD.DETAIL(id), 'PUT', payload)
     if (!ok) throw { errors }
     currentBoard.value = data
-    // UPDATE BOARD LIST: Update only one item?
-    await fetchBoardList()
   }
   async function deleteBoard(payload) { }
 
