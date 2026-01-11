@@ -55,17 +55,17 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
   const { isAuthenticated, isVerificationPending } = storeToRefs(useAuthStore())
   const { initBoardList } = useBoardStore()
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  if (to.matched.some(r => r.meta.requiresAuth) && !isAuthenticated.value) {
     return '/login'
   }
-  if (to.meta.requiresVerificationPending && !isVerificationPending) {
+  if (to.matched.some(r => r.meta.requiresVerificationPending) && !isVerificationPending.value) {
     return '/'
   }
-  if (to.meta.requiresNoAuth && isAuthenticated) {
+  if (to.matched.some(r => r.meta.requiresNoAuth) && isAuthenticated.value) {
     return '/'
   }
   // Prefetch board list on page load.
-  if (to.meta.requiresBoardList) {
+  if (to.matched.some(r => r.meta.requiresBoardList)) {
     await initBoardList()
   }
 })
