@@ -1,5 +1,13 @@
 import { ref } from 'vue'
-import { groupErrorsByParam } from '../utils/request'
+
+function groupErrorsByParam(errors) {
+  if (!errors) return {}
+  const groupedErrors = {}
+  for (var error of errors) {
+    (groupedErrors[error.param] ??= []).push(error.message)
+  }
+  return groupedErrors
+}
 
 // remove backendErrors? + handle non-field errors?
 export function useBackendErrors() {

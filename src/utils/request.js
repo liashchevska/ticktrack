@@ -67,12 +67,4 @@ function handleAuthResponse(response) {
   }
 }
 
-function groupErrorsByParam(errors) {
-  const groupedErrors = {}
-  for (var error of errors) {
-    (groupedErrors[error.param] ??= []).push(error.message)
-  }
-  return groupedErrors
-}
-
-export { request, handleAuthResponse, groupErrorsByParam }
+export { request, handleAuthResponse }
