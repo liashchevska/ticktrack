@@ -48,7 +48,7 @@ function normalizeResponse(response) {
     statusText: response.statusText,
     data: response.data ?? null,
     meta: response.meta ?? null,
-    errors: response.errors ?? null,
+    errors: response.errors ?? [],
   }
 }
 
