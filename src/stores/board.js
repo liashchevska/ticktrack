@@ -46,11 +46,16 @@ export const useBoardStore = defineStore('boards', () => {
     if (!ok) throw { errors }
     currentBoard.value = data
   }
-  async function deleteBoard(payload) { }
-
-  async function resetCurrentBoard(params) {
+  async function deleteBoard(id, payload) {
+    const { ok, errors } = await request(API.BOARD.DETAIL(id), 'DELETE')
+    if (!ok) throw { errors }
+    boardList.value = boardList.value.filter(b => b.id !== id)
+    resetCurrentBoard()
+  }
+  function resetCurrentBoard(params) {
     currentBoard.value = null
   }
+
   return {
     isInitialized,
     boardList,
