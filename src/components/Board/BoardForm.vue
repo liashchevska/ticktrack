@@ -15,7 +15,8 @@ import BaseField from '@/components/Base/BaseField.vue'
 import BaseForm from '@/components/Base/BaseForm.vue'
 import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
-import { computed } from 'vue'
+import { useEntityForm } from '@/composables/useEntityForm'
+import { toRef } from 'vue'
 
 const { createBoard, updateBoard, fetchBoardList } = useBoardStore()
 
@@ -26,16 +27,17 @@ const props = defineProps({
   }
 })
 
-const isInUpdateMode = computed(() => Boolean(props.board))
-const action = computed(() => isInUpdateMode.value ? updateBoardWrapper : createBoard)
+const { isInUpdateMode, action } = useEntityForm({
+  entity: toRef(props, 'board'),
+  createAction: createBoard,
+  updateAction: updateBoard
+})
 
 const boardValidationSchema = object({
   name: string().required()
 })
 
-function updateBoardWrapper(values) {
-  return updateBoard(props.board.id, values)
-}
+// Move to view
 async function onSuccess() {
   await fetchBoardList()
 }
