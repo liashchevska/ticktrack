@@ -1,13 +1,10 @@
 <template>
-  <BoardList :board-list="boardStore.boardList" />
-  <RouterView />
+  <BoardListView />
+  <RouterView /> <!-- renders BoardDetailView based on route -->
 </template>
 
 <script setup>
-import BoardList from '@/components/Board/BoardList.vue';
-import { useBoardStore } from '@/stores/board';
+import BoardListView from './BoardListView.vue';
 import { RouterView } from 'vue-router'
-
-const boardStore = useBoardStore()
 
 </script>
