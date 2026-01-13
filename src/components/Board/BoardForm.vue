@@ -1,6 +1,7 @@
 <template>
   <div>Update mode: {{ isInUpdateMode }}</div>
-  <BaseForm :schema="boardValidationSchema" :action="action" :initial-values="props.board" :on-success="onSuccess">
+  <BaseForm ref="baseForm" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
+    :on-success="onSuccess">
     <template #fields>
       <BaseField name="name" type="text">Name:</BaseField>
     </template>
@@ -16,9 +17,9 @@ import BaseForm from '@/components/Base/BaseForm.vue'
 import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { useEntityForm } from '@/composables/useEntityForm'
-import { toRef } from 'vue'
+import { toRef, useTemplateRef } from 'vue'
 
-const { createBoard, updateBoard, fetchBoardList } = useBoardStore()
+const { createBoard, updateBoard } = useBoardStore()
 
 const props = defineProps({
   board: {
@@ -37,9 +38,11 @@ const boardValidationSchema = object({
   name: string().required()
 })
 
-// Move to view
-async function onSuccess() {
-  await fetchBoardList()
+const baseFormRef = useTemplateRef('baseForm')
+const emit = defineEmits(['success'])
+function onSuccess() {
+  baseFormRef.value.resetForm()
+  emit('success')
 }
 
 </script>
