@@ -1,14 +1,15 @@
 <template>
-  <div>Update mode: {{ isInUpdateMode }}</div>
-  <BaseForm ref="baseForm" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
-    :on-success="onSuccess">
-    <template #fields>
-      <BaseField name="name" type="text">Name:</BaseField>
-    </template>
-    <template #actions>
-      <button type="submit">Submit</button>
-    </template>
-  </BaseForm>
+  <BaseModal v-model="isOpen" :title="props.title">
+    <BaseForm ref="baseForm" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
+      :on-success="onSuccess">
+      <template #fields>
+        <BaseField name="name" type="text">Name:</BaseField>
+      </template>
+      <template #actions>
+        <button type="submit">Submit</button>
+      </template>
+    </BaseForm>
+  </BaseModal>
 </template>
 
 <script setup>
@@ -18,13 +19,18 @@ import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { useEntityForm } from '@/composables/useEntityForm'
 import { toRef, useTemplateRef } from 'vue'
+import BaseModal from '../Base/BaseModal.vue'
 
 const { createBoard, updateBoard } = useBoardStore()
-
+const isOpen = defineModel('modelValue')
 const props = defineProps({
   board: {
     type: Object,
     default: null
+  },
+  title: {
+    type: String,
+    default: ''
   }
 })
 

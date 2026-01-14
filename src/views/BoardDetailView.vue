@@ -3,18 +3,20 @@
     <BaseDetail @delete="deleteBoard">
       <BoardDetail :board="currentBoard" />
     </BaseDetail>
-    <BoardForm :board="currentBoard" @updated="boardStore.fetchBoardList" />
+    <BoardFormModal v-model="isUpdateOpen" :board="currentBoard" @updated="boardStore.fetchBoardList" />
   </template>
 </template>
 
 <script setup>
 import BaseDetail from '@/components/Base/BaseDetail.vue'
 import BoardDetail from '@/components/Board/BoardDetail.vue'
-import BoardForm from '@/components/Board/BoardForm.vue'
+import BoardFormModal from '@/components/Board/BoardFormModal.vue'
 import { useBoardStore } from '@/stores/board'
 import { storeToRefs } from 'pinia'
-import { watch, onBeforeUnmount } from 'vue'
+import { watch, onBeforeUnmount, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+const isUpdateOpen = ref(false)
 
 const route = useRoute()
 const router = useRouter()
