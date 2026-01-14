@@ -3,7 +3,7 @@
     <BaseDetail @delete="deleteBoard">
       <BoardDetail :board="currentBoard" />
     </BaseDetail>
-    <BoardForm :board="currentBoard" />
+    <BoardForm :board="currentBoard" @updated="boardStore.fetchBoardList" />
   </template>
 </template>
 

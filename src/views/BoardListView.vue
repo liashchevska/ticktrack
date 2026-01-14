@@ -4,7 +4,7 @@
       <span>{{ item.name }}</span>
     </template>
   </BaseList>
-  <BoardForm />
+  <BoardForm @created="boardStore.fetchBoardList" />
 </template>
 
 
