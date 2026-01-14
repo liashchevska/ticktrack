@@ -39,10 +39,11 @@ const boardValidationSchema = object({
 })
 
 const baseFormRef = useTemplateRef('baseForm')
-const emit = defineEmits(['success'])
+const emit = defineEmits(['created', 'updated'])
+
 function onSuccess() {
   baseFormRef.value.resetForm()
-  emit('success')
+  emit(isInUpdateMode.value ? 'updated' : 'created')
 }
 
 </script>
