@@ -3,7 +3,7 @@ import { request } from "@/utils/request";
 import { API } from "@/endpoints";
 import { ref } from 'vue'
 
-export const useBoardStore = defineStore('boards', () => {
+export const useBoardStore = defineStore('board', () => {
   const isInitialized = ref(false)
   const isInitializing = ref(false)
   const boardList = ref([])
