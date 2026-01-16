@@ -1,7 +1,6 @@
 from rest_framework import viewsets, authentication, permissions
 from api.models import Ticket
-from api.serializers import BoardSerializer, TicketSerializer, TicketEditSerializer,\
-    BoardDetailSerizlizer
+from api.serializers import BoardSerializer, TicketSerializer, TicketEditSerializer
 from allauth.headless.contrib.rest_framework.authentication import XSessionTokenAuthentication
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -27,11 +26,6 @@ class BoardViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return BoardDetailSerizlizer
-        return BoardSerializer
-
 
 class TicketViewSet(viewsets.ModelViewSet):
     authentication_classes = [
@@ -42,7 +36,7 @@ class TicketViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         tickets = Ticket.objects.filter(board__owner=self.request.user)
-        board = self.request.query_params.get('board')
+        board = self.request.query_params.get('board_id')
         if board is not None:
             return tickets.filter(board_id=board)
         return tickets
