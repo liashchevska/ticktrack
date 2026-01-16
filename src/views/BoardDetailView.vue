@@ -12,8 +12,7 @@ import BaseDetail from '@/components/Base/BaseDetail.vue'
 import BoardDetail from '@/components/Board/BoardDetail.vue'
 import BoardFormModal from '@/components/Board/BoardFormModal.vue'
 import { useBoardStore } from '@/stores/board'
-import { storeToRefs } from 'pinia'
-import { watch, onBeforeUnmount, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const isUpdateOpen = ref(false)
@@ -21,13 +20,17 @@ const isUpdateOpen = ref(false)
 const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
-const { currentBoard } = storeToRefs(boardStore)
+const currentBoard = computed(() => boardStore.boardList.find(b => b.id == route.params.id) || null)
 
 async function deleteBoard() {
   await boardStore.deleteBoard(currentBoard.value.id)
   router.push('/boards')
 }
 
-watch(() => route.params.id, boardStore.fetchBoard, { immediate: true })
-onBeforeUnmount(() => { boardStore.resetCurrentBoard() })
+// import { useTicketStore } from '@/stores/ticket'
+// const ticketStore = useTicketStore()
+// watch(() => route.params.id, (id) => {
+//   // if (!id) return
+//   ticketStore.fetchTickets(id)
+// }, { immediate: true })
 </script>

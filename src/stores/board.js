@@ -7,11 +7,9 @@ export const useBoardStore = defineStore('board', () => {
   const isInitialized = ref(false)
   const isInitializing = ref(false)
   const boardList = ref([])
-  const currentBoard = ref(null)
 
   function $reset() {
     boardList.value = []
-    currentBoard.value = null
     isInitialized.value = false
   }
 
@@ -30,43 +28,32 @@ export const useBoardStore = defineStore('board', () => {
     const { ok, data } = await request(API.BOARD.LIST, 'GET')
     if (ok) { boardList.value = data }
   }
-  async function fetchBoard(id, payload) {
-    const { ok, data } = await request(API.BOARD.DETAIL(id), 'GET')
-    if (ok) { currentBoard.value = data }
-  }
   async function createBoard(payload) {
     const { ok, data } = await request(API.BOARD.LIST, 'POST', payload)
     if (ok) {
       boardList.value = [...boardList.value, data]
-      currentBoard.value = data
     }
   }
   async function updateBoard(id, payload) {
     const { ok, data, errors } = await request(API.BOARD.DETAIL(id), 'PUT', payload)
     if (!ok) throw { errors }
-    currentBoard.value = data
+    // Update board data in list.
+    // currentBoard.value = data
   }
   async function deleteBoard(id, payload) {
     const { ok, errors } = await request(API.BOARD.DETAIL(id), 'DELETE')
     if (!ok) throw { errors }
     boardList.value = boardList.value.filter(b => b.id !== id)
-    resetCurrentBoard()
-  }
-  function resetCurrentBoard(params) {
-    currentBoard.value = null
   }
 
   return {
     isInitialized,
     boardList,
-    currentBoard,
     initBoardList,
     $reset,
     fetchBoardList,
-    fetchBoard,
     createBoard,
     updateBoard,
     deleteBoard,
-    resetCurrentBoard
   }
 })
