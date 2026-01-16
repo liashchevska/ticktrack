@@ -13,7 +13,7 @@ export const API = {
     RESET_PASSWORD: `${BASE_URL}/auth/${CLIENT}/password/reset/`
   },
   TICKET: {
-    LIST: `${BASE_URL}/api/tickets/`,
+    LIST: (params = {}) => `${BASE_URL}/api/tickets?${new URLSearchParams(params).toString()}`,
     DETAIL: (id) => `${BASE_URL}/api/tickets/${id}/`
   },
   BOARD: {
