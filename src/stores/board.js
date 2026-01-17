@@ -37,8 +37,7 @@ export const useBoardStore = defineStore('board', () => {
   async function updateBoard(id, payload) {
     const { ok, data, errors } = await request(API.BOARD.DETAIL(id), 'PUT', payload)
     if (!ok) throw { errors }
-    // Update board data in list.
-    // currentBoard.value = data
+    boardList.value = boardList.value.map(board => board.id == id ? data : board)
   }
   async function deleteBoard(id, payload) {
     const { ok, errors } = await request(API.BOARD.DETAIL(id), 'DELETE')
