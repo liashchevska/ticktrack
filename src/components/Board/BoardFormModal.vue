@@ -34,7 +34,7 @@ const props = defineProps({
   }
 })
 
-const { isInUpdateMode, action } = useEntityForm({
+const { action, successEvent } = useEntityForm({
   entity: toRef(props, 'board'),
   createAction: createBoard,
   updateAction: updateBoard
@@ -49,7 +49,7 @@ const emit = defineEmits(['created', 'updated'])
 
 function onSuccess() {
   baseFormRef.value.resetForm()
-  emit(isInUpdateMode.value ? 'updated' : 'created')
+  emit(successEvent.value)
 }
 
 </script>

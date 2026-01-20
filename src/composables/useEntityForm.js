@@ -13,5 +13,7 @@ export function useEntityForm({
     if (!isInUpdateMode.value) { return createAction }
     return (values) => updateAction(getId(entity.value), values)
   })
-  return { isInUpdateMode, action }
+
+  const successEvent = computed(() => isInUpdateMode.value ? 'updated' : 'created')
+  return { isInUpdateMode, action, successEvent }
 }
