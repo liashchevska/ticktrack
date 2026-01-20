@@ -13,7 +13,7 @@ export const useTicketStore = defineStore('ticket', () => {
   }
 
   async function fetchTickets(boardId) {
-    const { ok, data, errors } = await request(API.TICKET.LIST({ 'board_id': boardId }))
+    const { ok, data, errors } = await request(API.TICKET.FILTER({ 'board_id': boardId }))
     if (!ok) throw { errors }
     ticketsByBoard.value[boardId] = data.reduce((accumulator, item) => {
       accumulator[item.id] = item
