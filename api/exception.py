@@ -1,5 +1,5 @@
 from rest_framework.views import exception_handler
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, ErrorDetail
 
 
 def custom_exception_handler(exc, context):
@@ -9,14 +9,17 @@ def custom_exception_handler(exc, context):
         and response is not None
         and isinstance(response.data, dict)
     ):
-        response.data = format_errors(response.data)
+        response.data = {"errors": format_errors(response.data)}
     return response
 
 
-# Handle non-field errors
 def format_errors(errors):
     formated = []
     for field, error_list in errors.items():
         for error in error_list:
-            formated.append({"param": field, "message": str(error), "code": error.code})
+            current = {"param": field , "message": str(error)}
+            # Add code if not non-field error
+            if isinstance(error, ErrorDetail):
+                current["code"] = error.code
+            formated.append(current) 
     return formated
