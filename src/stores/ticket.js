@@ -14,23 +14,25 @@ export const useTicketStore = defineStore('ticket', () => {
 
   async function fetchTickets(boardId) {
     const { ok, data, errors } = await request(API.TICKET.FILTER({ 'board_id': boardId }))
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     ticketsByBoard.value[boardId] = data.reduce((accumulator, item) => {
       accumulator[item.id] = item
       return accumulator
     }, {})
   }
 
-  async function createTicket(boardId, payload) {
+  // signature with or without boardId
+  async function createTicket(payload) {
+    const boardId = payload.boardId
     const { ok, errors, data } = await request(API.TICKET.LIST, 'POST', payload)
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     ticketsByBoard.value[boardId] ??= {}
     ticketsByBoard.value[boardId][data.id] = data
   }
 
   async function updateTicket(ticketId, payload) {
     const { ok, errors, data } = await request(API.TICKET.DETAIL(ticketId), 'POST', payload)
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     const boardId = data.board_id
     const board = ticketsByBoard.value[boardId]
     if (!board) return
@@ -39,7 +41,7 @@ export const useTicketStore = defineStore('ticket', () => {
 
   async function deleteTicket(boardId, ticketId) {
     const { ok, errors } = await request(API.TICKET.DETAIL(ticketId), 'DELETE')
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     const board = ticketsByBoard.value[boardId]
     delete board[ticketId]
   }

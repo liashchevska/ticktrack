@@ -26,23 +26,25 @@ export const useBoardStore = defineStore('board', () => {
 
   async function fetchBoardList(payload) {
     const { ok, data, errors } = await request(API.BOARD.LIST, 'GET')
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     boardList.value = data
   }
+
   async function createBoard(payload) {
     const { ok, data, errors } = await request(API.BOARD.LIST, 'POST', payload)
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     boardList.value = [...boardList.value, data]
-
   }
+
   async function updateBoard(id, payload) {
     const { ok, data, errors } = await request(API.BOARD.DETAIL(id), 'PUT', payload)
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     boardList.value = boardList.value.map(board => board.id == id ? data : board)
   }
+
   async function deleteBoard(id, payload) {
     const { ok, errors } = await request(API.BOARD.DETAIL(id), 'DELETE')
-    if (!ok) throw { errors }
+    if (!ok) { throw errors }
     boardList.value = boardList.value.filter(board => board.id !== id)
   }
 
