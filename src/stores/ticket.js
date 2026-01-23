@@ -21,9 +21,8 @@ export const useTicketStore = defineStore('ticket', () => {
     }, {})
   }
 
-  // signature with or without boardId
-  async function createTicket(payload) {
-    const boardId = payload.boardId
+  async function createTicket(boardId, payload) {
+    payload.board = boardId
     const { ok, errors, data } = await request(API.TICKET.LIST, 'POST', payload)
     if (!ok) { throw errors }
     ticketsByBoard.value[boardId] ??= {}
@@ -31,9 +30,9 @@ export const useTicketStore = defineStore('ticket', () => {
   }
 
   async function updateTicket(ticketId, payload) {
-    const { ok, errors, data } = await request(API.TICKET.DETAIL(ticketId), 'POST', payload)
+    const { ok, errors, data } = await request(API.TICKET.DETAIL(ticketId), 'PUT', payload)
     if (!ok) { throw errors }
-    const boardId = data.board_id
+    const boardId = data.board
     const board = ticketsByBoard.value[boardId]
     if (!board) return
     ticketsByBoard.value[boardId][ticketId] = data
