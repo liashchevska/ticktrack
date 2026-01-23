@@ -12,9 +12,10 @@ import BaseDetail from '@/components/Base/BaseDetail.vue'
 import BoardDetail from '@/components/Board/BoardDetail.vue'
 import BoardFormModal from '@/components/Board/BoardFormModal.vue'
 import { useBoardStore } from '@/stores/board'
-import { watch, ref, computed } from 'vue'
+import { watch, ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTicketStore } from '@/stores/ticket'
+import { useTicketStatusList } from '@/composables/useTicketStatusList'
 
 const isUpdateOpen = ref(false)
 
@@ -37,4 +38,9 @@ watch(() => route.params.id, (id) => {
   if (!id) return
   ticketStore.fetchTickets(id)
 }, { immediate: true })
+
+const { fetchTicketStatusList } = useTicketStatusList()
+onMounted(async () => {
+  await fetchTicketStatusList()
+})
 </script>
