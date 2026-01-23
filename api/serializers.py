@@ -19,14 +19,14 @@ class TicketEditSerializer(serializers.ModelSerializer):
 
 class TicketSerializer(serializers.ModelSerializer):
     board = BoardPrimaryKeyRelatedField()
-    status = serializers.SerializerMethodField()
+    # status = serializers.SerializerMethodField()
 
     class Meta:
         model = Ticket
         fields = ["id", "board", "status", "title", "description"]
 
-    def get_status(self, instance):
-        return {"value": instance.status, "label": instance.get_status_display()}
+    # def get_status(self, instance):
+    #     return {"value": instance.status, "label": instance.get_status_display()}
 
 
 class BoardSerializer(serializers.ModelSerializer):

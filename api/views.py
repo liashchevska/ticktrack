@@ -5,6 +5,7 @@ from allauth.headless.contrib.rest_framework.authentication import XSessionToken
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import ensure_csrf_cookie
+from rest_framework.views import APIView
 from django.http.response import JsonResponse
 
 @ensure_csrf_cookie
@@ -46,3 +47,6 @@ class TicketViewSet(viewsets.ModelViewSet):
             return TicketEditSerializer
         return TicketSerializer
 
+class TicketStatusList(APIView):
+    def get(self, request):
+        return Response([{'status': status, 'label': label} for status, label in Ticket.Status.choices])

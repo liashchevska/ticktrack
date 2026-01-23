@@ -9,5 +9,6 @@ router.register(r"tickets", TicketViewSet, basename="ticket")
 
 urlpatterns = [
         path('csrf/', views.csrf),
+        path('meta/ticket-status-list/', views.TicketStatusList.as_view())
 ]
 urlpatterns += router.urls
