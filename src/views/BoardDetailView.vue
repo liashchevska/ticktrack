@@ -1,7 +1,7 @@
 <template>
   <template v-if="currentBoard">
     <BaseDetail @delete="deleteBoard">
-      <BoardDetail :board="currentBoard" :tickets="tickets" />
+      <BoardDetail :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
     </BaseDetail>
     <BoardFormModal v-model="isUpdateOpen" :board="currentBoard" @updated="boardStore.fetchBoardList" />
   </template>
@@ -30,7 +30,9 @@ async function deleteBoard() {
   await boardStore.deleteBoard(currentBoard.value.id)
   router.push('/boards')
 }
-
+async function onTicketDelete(ticketId) {
+  await ticketStore.deleteTicket(currentBoard.value.id, ticketId)
+}
 watch(() => route.params.id, (id) => {
   if (!id) return
   ticketStore.fetchTickets(id)
