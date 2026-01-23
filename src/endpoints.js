@@ -20,5 +20,8 @@ export const API = {
   BOARD: {
     LIST: `${BASE_URL}/api/boards/`,
     DETAIL: (id) => `${BASE_URL}/api/boards/${id}/`
+  },
+  META: {
+    TICKET_STATUS_LIST: `${BASE_URL}/api/meta/ticket-status-list/`
   }
 }
