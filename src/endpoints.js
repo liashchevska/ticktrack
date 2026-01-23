@@ -14,7 +14,7 @@ export const API = {
   },
   TICKET: {
     LIST: `${BASE_URL}/api/tickets/`,
-    FILTER: (params = {}) => `${BASE_URL}/api/tickets?${new URLSearchParams(params).toString()}`,
+    FILTER: (params = {}) => `${BASE_URL}/api/tickets/?${new URLSearchParams(params).toString()}`,
     DETAIL: (id) => `${BASE_URL}/api/tickets/${id}/`
   },
   BOARD: {
