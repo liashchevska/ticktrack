@@ -30,7 +30,7 @@ export const useTicketStore = defineStore('ticket', () => {
   }
 
   async function updateTicket(ticketId, payload) {
-    const { ok, errors, data } = await request(API.TICKET.DETAIL(ticketId), 'PUT', payload)
+    const { ok, errors, data } = await request(API.TICKET.DETAIL(ticketId), 'PATCH', payload)
     if (!ok) { throw errors }
     const boardId = data.board
     const board = ticketsByBoard.value[boardId]
