@@ -30,7 +30,7 @@ class CustomUser(AbstractUser):
 class Board(models.Model):
     owner = models.ForeignKey(CustomUser, on_delete=models.deletion.CASCADE, related_name='boards')
     title = models.CharField(max_length=100)
-    details = models.TextField()
+    description = models.TextField()
 
     def add_new_ticket(self):
         return
