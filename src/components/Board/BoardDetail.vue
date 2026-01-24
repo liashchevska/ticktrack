@@ -1,13 +1,14 @@
 <template>
   Board no. {{ props.board.id }}
-  <template v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-    {{ ticketStatus }}
-    <BaseList :item-list="ticketGroup">
-      <template #default="{ item }">
-        <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
-      </template>
-    </BaseList>
-
+  <template v-if="isInitialized">
+    <template v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
+      {{ ticketStatus }}
+      <BaseList :item-list="ticketGroup">
+        <template #default="{ item }">
+          <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
+        </template>
+      </BaseList>
+    </template>
   </template>
 
   <TicketFormModal v-model="isCreateOpen" title="Create new ticket" />
@@ -25,15 +26,17 @@ const props = defineProps({
   tickets: Array,
   onTicketDelete: Function
 })
-const { ticketStatusList } = useTicketStatusList()
+const { ticketStatusList, isInitialized } = useTicketStatusList()
 const ticketsByStatus = computed(() => {
-  const temp = Object.fromEntries(
+  const buckets = Object.fromEntries(
     Object.keys(ticketStatusList.value).map(status => [status, []])
   )
   props.tickets.forEach(ticket => {
-    temp[ticket.status].push(ticket)
+    if (buckets[ticket.status]) {
+      buckets[ticket.status].push(ticket)
+    }
   })
-  return temp
+  return buckets
 })
 const isCreateOpen = ref(false)
 </script>
