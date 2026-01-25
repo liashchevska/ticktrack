@@ -1,7 +1,8 @@
 <template>
+  <h2>Boards:</h2>
   <BaseList :item-list="boardList" @itemClicked="openBoardView">
     <template #default="{ item }">
-      <span>{{ item.name }}</span>
+      <div> {{ item.title }} </div>
     </template>
   </BaseList>
   <BoardFormModal v-model="isCreateOpen" @created="boardStore.fetchBoardList" title="Create" />

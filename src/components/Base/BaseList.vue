@@ -1,7 +1,9 @@
 <template>
-  <div v-for="item in itemList" :key="item.id" @click="emit('itemClicked', item.id)">
-    <slot :item="item"></slot>
-  </div>
+  <ul>
+    <li v-for="item in itemList" :key="item.id" @click="emit('itemClicked', item.id)">
+      <slot :item="item"></slot>
+    </li>
+  </ul>
 </template>
 
 <script setup>

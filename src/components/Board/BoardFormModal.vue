@@ -3,7 +3,7 @@
     <BaseForm ref="baseForm" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
       :on-success="onSuccess">
       <template #fields>
-        <BaseField name="name" type="text">Name:</BaseField>
+        <BaseField name="title" type="text">title:</BaseField>
       </template>
       <template #actions>
         <button type="submit">Submit</button>
@@ -41,7 +41,8 @@ const { action, successEvent } = useEntityForm({
 })
 
 const boardValidationSchema = object({
-  name: string().required()
+  title: string().required(),
+  description: string().required()
 })
 
 const baseFormRef = useTemplateRef('baseForm')

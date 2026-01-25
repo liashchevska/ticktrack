@@ -1,6 +1,12 @@
 <template>
-  <BoardListView />
-  <RouterView /> <!-- renders BoardDetailView based on route -->
+  <div class="board-page">
+    <aside aria-label="Board list">
+      <BoardListView />
+    </aside>
+    <section aria-label="Board detail">
+      <RouterView /> <!-- renders BoardDetailView based on route -->
+    </section>
+  </div>
 </template>
 
 <script setup>

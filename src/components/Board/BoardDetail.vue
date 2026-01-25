@@ -1,14 +1,14 @@
 <template>
-  Board no. {{ props.board.id }}
+  <h1> Current board: {{ props.board.title }} </h1>
   <template v-if="isInitialized">
-    <template v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-      {{ ticketStatus }}
+    <section v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
+      <h2 class="status-{{ ticketStatus }}"> {{ ticketStatus }} </h2>
       <BaseList :item-list="ticketGroup">
         <template #default="{ item }">
           <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
         </template>
       </BaseList>
-    </template>
+    </section>
   </template>
 
   <TicketFormModal v-model="isCreateOpen" title="Create new ticket" />
