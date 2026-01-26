@@ -5,7 +5,8 @@
       <div> {{ item.title }} </div>
     </template>
   </BaseList>
-  <BoardFormModal v-model="isCreateOpen" @created="boardStore.fetchBoardList" title="Create" />
+  <button @click="isCreateOpen = true">Create board</button>
+  <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create" />
 </template>
 
 
@@ -25,4 +26,5 @@ const { boardList } = storeToRefs(boardStore)
 function openBoardView(id) {
   router.push(`/boards/${id}`)
 }
+// function onBoardCreated()
 </script>
