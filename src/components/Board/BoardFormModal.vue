@@ -4,6 +4,7 @@
       :on-success="onSuccess">
       <template #fields>
         <BaseField name="title" type="text">title:</BaseField>
+        <BaseField name="description" type="text">description:</BaseField>
       </template>
       <template #actions>
         <button type="submit">Submit</button>
