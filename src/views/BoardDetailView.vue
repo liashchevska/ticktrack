@@ -3,6 +3,7 @@
     <BaseDetail @delete="deleteBoard">
       <BoardDetail :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
     </BaseDetail>
+    <button @click="isUpdateOpen = true">Edit board</button>
     <BoardFormModal v-model="isUpdateOpen" :board="currentBoard" @updated="boardStore.fetchBoardList" />
   </template>
 </template>

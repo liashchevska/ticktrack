@@ -2,6 +2,7 @@
   <BaseDetail @delete="onTicketDelete(ticket.id)">
     <div>Ticket {{ ticket.id }} {{ ticket.name }}{{ ticket.status.value }}</div>
   </BaseDetail>
+  <button @click="isUpdateOpen = true">Edit ticket</button>
   <TicketFormModal v-model="isUpdateOpen" :ticket="props.ticket" />
 </template>
 
