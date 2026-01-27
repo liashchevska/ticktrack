@@ -10,7 +10,7 @@
       </BaseList>
     </section>
   </template>
-
+  <button @click="isCreateOpen = true">Create ticket</button>
   <TicketFormModal v-model="isCreateOpen" title="Create new ticket" />
 </template>
 
