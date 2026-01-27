@@ -1,8 +1,9 @@
 <template>
   <template v-if="currentBoard">
-    <BaseDetail @delete="deleteBoard">
+    <BaseDetail @delete="isConfirmOpen = true">
       <BoardDetail :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
     </BaseDetail>
+    <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
     <button @click="isUpdateOpen = true">Edit board</button>
     <BoardFormModal v-model="isUpdateOpen" :board="currentBoard" @updated="boardStore.fetchBoardList" />
   </template>
@@ -17,8 +18,10 @@ import { watch, ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTicketStore } from '@/stores/ticket'
 import { useTicketStatusList } from '@/composables/useTicketStatusList'
+import ConfirmDialog from '@/components/Base/ConfirmDialog.vue'
 
 const isUpdateOpen = ref(false)
+const isConfirmOpen = ref(false)
 
 const route = useRoute()
 const router = useRouter()
