@@ -4,7 +4,7 @@
       :on-success="onSuccess">
       <template #fields>
         <BaseField name="title" type="text">Title:</BaseField>
-        <BaseField name="description" type="text">description:</BaseField>
+        <BaseField name="description" as="textarea" type="text">description:</BaseField>
       </template>
       <template #actions>
         <button type="submit">Submit</button>
@@ -39,7 +39,7 @@ const isOpen = defineModel('modelValue')
 const ticketValidationSchema = object({
   title: string().required(),
   description: string().required(),
-  // board_id:
+  // status: string().required(),
 })
 const { createTicket, updateTicket } = useTicketStore()
 const route = useRoute()
