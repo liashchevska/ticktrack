@@ -2,14 +2,14 @@
   <Transition>
     <div v-if="isOpen" @click.self="close">
       <div class="modal">
-        <header class="modal-header">
-          <h2 class="modal-title"> {{ title }} </h2>
-          <button class="modal-close" @click="isOpen = false">✕</button>
+        <header class="modal__header">
+          <h2 class="modal__title"> {{ title }} </h2>
+          <button class="modal__close" @click="isOpen = false">✕</button>
         </header>
-        <main class="modal-body">
+        <main class="modal__body">
           <slot></slot>
         </main>
-        <footer class="modal-footer" v-if="$slots.actions">
+        <footer class="modal__footer" v-if="$slots.actions">
           <slot name="actions"></slot>
         </footer>
       </div>
