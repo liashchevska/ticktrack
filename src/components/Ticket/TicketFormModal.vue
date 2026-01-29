@@ -5,6 +5,13 @@
       <template #fields>
         <BaseField name="title" type="text">Title:</BaseField>
         <BaseField name="description" as="textarea" type="text">description:</BaseField>
+        <BaseField v-if="ticket" name="status" as="select">
+          <template #field-content>
+            <option v-for="(label, value) in ticketStatusList" :key="value" :value="value">
+              {{ label }}
+            </option>
+          </template>
+        </BaseField>
       </template>
       <template #actions>
         <button type="submit">Submit</button>
@@ -35,11 +42,11 @@ const props = defineProps({
 })
 
 const isOpen = defineModel('modelValue')
-
+const { ticketStatusList } = useTicketStatusList()
 const ticketValidationSchema = object({
   title: string().required(),
   description: string().required(),
-  // status: string().required(),
+  status: string()
 })
 const { createTicket, updateTicket } = useTicketStore()
 const route = useRoute()
