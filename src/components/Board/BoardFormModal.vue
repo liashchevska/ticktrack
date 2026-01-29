@@ -1,7 +1,7 @@
 <template>
   <BaseModal v-model="isOpen" :title="props.title">
-    <BaseForm ref="baseForm" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
-      :on-success="onSuccess">
+    <BaseForm :schema="boardValidationSchema" :action="action" :initial-values="props.board"
+      :on-success="() => emit(successEvent)">
       <template #fields>
         <BaseField name="title" type="text">title:</BaseField>
         <BaseField name="description" as="textarea" type="text">description:</BaseField>
@@ -19,10 +19,11 @@ import BaseForm from '@/components/Base/BaseForm.vue'
 import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { useEntityForm } from '@/composables/useEntityForm'
-import { toRef, useTemplateRef } from 'vue'
+import { toRef } from 'vue'
 import BaseModal from '../Base/BaseModal.vue'
 
 const { createBoard, updateBoard } = useBoardStore()
+const emit = defineEmits(['created', 'updated'])
 const isOpen = defineModel('modelValue')
 const props = defineProps({
   board: {
@@ -45,13 +46,5 @@ const boardValidationSchema = object({
   title: string().required(),
   description: string().required()
 })
-
-const baseFormRef = useTemplateRef('baseForm')
-const emit = defineEmits(['created', 'updated'])
-
-function onSuccess() {
-  baseFormRef.value.resetForm()
-  emit(successEvent.value)
-}
 
 </script>

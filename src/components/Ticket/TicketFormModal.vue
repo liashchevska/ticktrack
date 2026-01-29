@@ -1,7 +1,7 @@
 <template>
   <BaseModal v-model="isOpen" :title="props.title">
-    <BaseForm ref="baseForm" :schema="ticketValidationSchema" :action="action" :initial-values="props.ticket"
-      :on-success="onSuccess">
+    <BaseForm :schema="ticketValidationSchema" :action="action" :initial-values="props.ticket"
+      :on-success="() => emit(successEvent)">
       <template #fields>
         <BaseField name="title" type="text">Title:</BaseField>
         <BaseField name="description" as="textarea" type="text">description:</BaseField>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { toRef, useTemplateRef } from 'vue'
+import { toRef } from 'vue'
 import { object, string } from 'yup'
 import BaseForm from '../Base/BaseForm.vue'
 import BaseModal from '../Base/BaseModal.vue'
@@ -29,6 +29,7 @@ import BaseField from '../Base/BaseField.vue'
 import { useEntityForm } from '@/composables/useEntityForm'
 import { useTicketStore } from '@/stores/ticket'
 import { useRoute } from 'vue-router'
+import { useTicketStatusList } from '@/composables/useTicketStatusList'
 
 const props = defineProps({
   ticket: {
@@ -41,6 +42,7 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['created', 'updated'])
 const isOpen = defineModel('modelValue')
 const { ticketStatusList } = useTicketStatusList()
 const ticketValidationSchema = object({
@@ -56,13 +58,5 @@ const { action, successEvent } = useEntityForm({
   createAction: (values) => { createTicket(currentBoardId, values) },
   updateAction: updateTicket
 })
-
-const baseFormRef = useTemplateRef('baseForm')
-const emit = defineEmits(['created', 'updated'])
-
-function onSuccess() {
-  baseFormRef.value.resetForm()
-  emit(successEvent.value)
-}
 
 </script>

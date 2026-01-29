@@ -27,10 +27,11 @@ const { handleSubmit, setFieldError, resetForm } = useForm({
   initialValues: props.initialValues
 })
 
-defineExpose({ resetForm })
-
 const { submit } = useFormSubmit({
-  onSuccess: props.onSuccess,
+  onSuccess: () => {
+    resetForm()
+    props.onSuccess?.()
+  },
   onError: (errors) => { setErrors(errors, setFieldError) }
 })
 
@@ -40,7 +41,7 @@ const onSubmit = handleSubmit(values => {
   })
 })
 
-watch(() => props.initialValues, (values) => {
-  resetForm({ values: values })
+watch(() => props.initialValues, values => {
+  if (values) resetForm({ values })
 })
 </script>
