@@ -10,16 +10,13 @@
       </BaseList>
     </section>
   </template>
-  <button @click="isCreateOpen = true">Create ticket</button>
-  <TicketFormModal v-model="isCreateOpen" title="Create new ticket" />
 </template>
 
 <script setup>
 import { useTicketStatusList } from '@/composables/useTicketStatusList';
 import BaseList from '../Base/BaseList.vue';
-import TicketFormModal from '../Ticket/TicketFormModal.vue';
 import TicketInList from '../Ticket/TicketInList.vue';
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   board: Object,
@@ -38,5 +35,4 @@ const ticketsByStatus = computed(() => {
   })
   return buckets
 })
-const isCreateOpen = ref(false)
 </script>
