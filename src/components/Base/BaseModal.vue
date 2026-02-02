@@ -1,6 +1,6 @@
 <template>
   <Transition>
-    <div v-if="isOpen" @click.self="close">
+    <div v-if="isOpen" @click.self="isOpen = false">
       <div class="modal">
         <header class="modal__header">
           <h2 class="modal__title"> {{ title }} </h2>
