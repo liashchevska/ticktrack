@@ -1,6 +1,6 @@
 <template>
   <label class="field">
-    <span class="field_label">
+    <span class="field-label">
       <slot name="label">{{ props.name }}</slot>
     </span>
     <component :is="props.as" :value="value" @input="value = $event.target.value" v-bind="$attrs"
@@ -25,3 +25,10 @@ const { value, errors } = useField(props.name, undefined, {
 })
 defineOptions({ inheritAttrs: false })
 </script>
+
+<style lang="css">
+.field {
+  display: block;
+  /* position: absolute; */
+}
+</style>

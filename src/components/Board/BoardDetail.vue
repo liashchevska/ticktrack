@@ -1,14 +1,16 @@
 <template>
   <h1> Current board: {{ props.board.title }} </h1>
   <template v-if="isInitialized">
-    <section v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-      <h2 class="status-{{ ticketStatus }}"> {{ ticketStatus }} </h2>
-      <BaseList :item-list="ticketGroup">
-        <template #default="{ item }">
-          <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
-        </template>
-      </BaseList>
-    </section>
+    <div class="board-detail__tickets">
+      <section v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
+        <h2 class="status-{{ ticketStatus }}"> {{ ticketStatus }} </h2>
+        <BaseList :item-list="ticketGroup">
+          <template #default="{ item }">
+            <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
+          </template>
+        </BaseList>
+      </section>
+    </div>
   </template>
 </template>
 
@@ -36,3 +38,11 @@ const ticketsByStatus = computed(() => {
   return buckets
 })
 </script>
+
+<style lang="css">
+.board-detail__tickets {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <h2>Boards:</h2>
+  <h1>Boards:</h1>
   <BaseList :item-list="boardList" @itemClicked="openBoardView">
     <template #default="{ item }">
       <div> {{ item.title }} </div>

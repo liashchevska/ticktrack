@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form class="base-form" @submit.prevent="onSubmit">
     <slot name="fields"></slot>
     <slot name="actions">
       <button type="submit">Submit</button>
@@ -45,3 +45,9 @@ watch(() => props.initialValues, values => {
   if (values) resetForm({ values })
 })
 </script>
+
+<style lang="css">
+.base-form {
+  position: relative;
+}
+</style>

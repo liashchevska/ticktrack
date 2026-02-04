@@ -1,0 +1,44 @@
+html {
+  box-sizing: border-box;
+
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+}
+
+body,
+ul,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-size: 2rem;
+}
+
+:root {
+  --z-modal: 100;
+  --filter-blur: blur(3px);
+}
+
+.title {}
