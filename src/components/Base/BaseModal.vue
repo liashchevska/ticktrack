@@ -17,11 +17,18 @@
   </Transition>
 </template>
 <script setup>
-
+import { onMounted, onUnmounted } from 'vue'
 defineProps({
   title: { type: String, required: false }
 })
 const isOpen = defineModel()
+
+function closeOnEscape(event) {
+  if (event.key !== 'Escape') return
+  isOpen.value && (isOpen.value = false)
+}
+onMounted(() => window.addEventListener('keyup', closeOnEscape))
+onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
 </script>
 
 <style lang="css">
