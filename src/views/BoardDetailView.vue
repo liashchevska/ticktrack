@@ -5,11 +5,11 @@
     </BaseDetail>
     <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
 
-    <button @click="isUpdateOpen = true">Edit board</button>
-    <BoardFormModal v-model="isUpdateOpen" :board="currentBoard" @updated="boardStore.fetchBoardList" />
+    <button @click="isUpdateBoardOpen = true">Edit board</button>
+    <BoardFormModal v-model="isUpdateBoardOpen" :board="currentBoard" @updated="isUpdateBoardOpen = false" />
 
     <button @click="isCreateTicketOpen = true">Create ticket</button>
-    <TicketFormModal v-model="isCreateTicketOpen" title="Create new ticket" />
+    <TicketFormModal v-model="isCreateTicketOpen" @created="isCreateTicketOpen = false" title="Create new ticket" />
   </template>
 </template>
 
@@ -25,7 +25,7 @@ import { useTicketStatusList } from '@/composables/useTicketStatusList'
 import ConfirmDialog from '@/components/Base/ConfirmDialog.vue'
 import TicketFormModal from '@/components/Ticket/TicketFormModal.vue'
 
-const isUpdateOpen = ref(false)
+const isUpdateBoardOpen = ref(false)
 const isConfirmOpen = ref(false)
 const isCreateTicketOpen = ref(false)
 

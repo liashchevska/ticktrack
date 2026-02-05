@@ -1,10 +1,10 @@
 <template>
   <BaseDetail @delete="isConfirmOpen = true">
-    <div>Ticket {{ ticket.id }} {{ ticket.name }}{{ ticket.status.value }}</div>
+    <div>Ticket {{ ticket.id }} {{ ticket.title }} {{ ticket.status }}</div>
   </BaseDetail>
   <ConfirmDialog v-model="isConfirmOpen" @confirm="onTicketDelete(ticket.id)" />
   <button @click="isUpdateOpen = true">Edit ticket</button>
-  <TicketFormModal v-model="isUpdateOpen" :ticket="props.ticket" />
+  <TicketFormModal v-model="isUpdateOpen" :ticket="props.ticket" @updated="isUpdateOpen = false" />
 </template>
 
 <script setup>
