@@ -4,9 +4,11 @@
       <div class="modal">
         <header class="modal__header">
           <h2 class="modal__title"> {{ title }} </h2>
-          <button class="modal__close" @click="isOpen = false">✕</button>
+          <button class="icon-button" @click="isOpen = false">
+            <CloseIcon class="icon-button__icon modal__close-icon" />
+          </button>
         </header>
-        <main class="modal__body">
+        <main class="modal__body" :class="{ 'pd-bottom': !$slots.actions }">
           <slot></slot>
         </main>
         <footer class="modal__footer" v-if="$slots.actions">
@@ -18,6 +20,7 @@
 </template>
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
+import CloseIcon from '@/assets/icons/close-x-svgrepo-com.svg?component'
 defineProps({
   title: { type: String, required: false }
 })
@@ -33,7 +36,8 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
 
 <style lang="css">
 .modal__backdrop {
-  backdrop-filter: var(--filter-blur);
+  backdrop-filter: blur(3px);
+  background-color: rgba(55, 55, 55, 0.5);
   position: fixed;
   inset: 0;
 
@@ -47,13 +51,44 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
 .modal {
   display: flex;
   flex-direction: column;
+
+  max-width: 30rem;
+  max-height: 90vh;
+  width: 100%;
+
+  transform: translateY(-10vh);
+  background-color: aliceblue;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.modal__title {
+  line-height: 1;
 }
 
 .modal__header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm);
 }
 
-.modal__close {
-  margin-left: auto;
+.modal__body {
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+.pd-bottom {
+  padding-bottom: var(--space-sm);
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-sm);
+}
+
+.modal__close-icon {
+  transform: translateY(0.1em);
 }
 </style>
