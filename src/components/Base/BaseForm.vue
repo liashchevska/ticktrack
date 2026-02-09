@@ -1,5 +1,5 @@
 <template>
-  <form class="base-form" @submit.prevent="onSubmit">
+  <form :id="props.id" class="base-form" @submit.prevent="onSubmit">
     <slot name="fields"></slot>
     <slot name="actions">
       <button type="submit">Submit</button>
@@ -18,7 +18,8 @@ const props = defineProps({
   schema: { type: object, required: true },
   action: { type: Function, required: true },
   onSuccess: { type: Function, required: false },
-  initialValues: { type: Object, required: false }
+  initialValues: { type: Object, required: false },
+  id: { type: String }
 })
 
 const { setErrors } = useBackendErrors()

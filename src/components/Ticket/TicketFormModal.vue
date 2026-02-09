@@ -1,6 +1,6 @@
 <template>
   <BaseModal v-model="isOpen" :title="props.title">
-    <BaseForm :schema="ticketValidationSchema" :action="action" :initial-values="props.ticket"
+    <BaseForm :id="formId" :schema="ticketValidationSchema" :action="action" :initial-values="props.ticket"
       :on-success="() => emit(successEvent)">
       <template #fields>
         <BaseField name="title" type="text">Title:</BaseField>
@@ -14,14 +14,16 @@
         </BaseField>
       </template>
       <template #actions>
-        <button type="submit">Submit</button>
+        <Teleport defer to=".modal__footer">
+          <button type="submit" :form="formId">Submit</button>
+        </Teleport>
       </template>
     </BaseForm>
   </BaseModal>
 </template>
 
 <script setup>
-import { toRef } from 'vue'
+import { toRef, computed } from 'vue'
 import { object, string } from 'yup'
 import BaseForm from '../Base/BaseForm.vue'
 import BaseModal from '../Base/BaseModal.vue'
@@ -44,6 +46,7 @@ const props = defineProps({
 
 const emit = defineEmits(['created', 'updated'])
 const isOpen = defineModel('modelValue')
+
 const { ticketStatusList } = useTicketStatusList()
 const ticketValidationSchema = object({
   title: string().required(),
@@ -53,10 +56,11 @@ const ticketValidationSchema = object({
 const { createTicket, updateTicket } = useTicketStore()
 const route = useRoute()
 const currentBoardId = route.params.id
-const { action, successEvent } = useEntityForm({
+const { isInUpdateMode, action, successEvent } = useEntityForm({
   entity: toRef(props, 'ticket'),
   createAction: (values) => { createTicket(currentBoardId, values) },
   updateAction: updateTicket
 })
+const formId = computed(() => isInUpdateMode.value ? 'ticketUpdate' : 'ticketCreate')
 
 </script>

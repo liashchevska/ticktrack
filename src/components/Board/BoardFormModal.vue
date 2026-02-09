@@ -1,13 +1,15 @@
 <template>
   <BaseModal v-model="isOpen" :title="props.title">
-    <BaseForm :schema="boardValidationSchema" :action="action" :initial-values="props.board"
+    <BaseForm :id="formId" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
       :on-success="() => emit(successEvent)">
       <template #fields>
         <BaseField name="title" type="text">title:</BaseField>
         <BaseField name="description" as="textarea" type="text">description:</BaseField>
       </template>
       <template #actions>
-        <button type="submit">Submit</button>
+        <Teleport defer to=".modal__footer">
+          <button type="submit" :form="formId">Submit</button>
+        </Teleport>
       </template>
     </BaseForm>
   </BaseModal>
@@ -19,7 +21,7 @@ import BaseForm from '@/components/Base/BaseForm.vue'
 import { useBoardStore } from '@/stores/board'
 import { object, string } from 'yup'
 import { useEntityForm } from '@/composables/useEntityForm'
-import { toRef } from 'vue'
+import { toRef, computed } from 'vue'
 import BaseModal from '../Base/BaseModal.vue'
 
 const { createBoard, updateBoard } = useBoardStore()
@@ -36,12 +38,12 @@ const props = defineProps({
   }
 })
 
-const { action, successEvent } = useEntityForm({
+const { isInUpdateMode, action, successEvent } = useEntityForm({
   entity: toRef(props, 'board'),
   createAction: createBoard,
   updateAction: updateBoard
 })
-
+const formId = computed(() => isInUpdateMode.value ? 'boardUpdate' : 'boardCreate')
 const boardValidationSchema = object({
   title: string().required(),
   description: string().required()

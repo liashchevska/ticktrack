@@ -8,10 +8,10 @@
             <CloseIcon class="icon-button__icon modal__close-icon" />
           </button>
         </header>
-        <main class="modal__body" :class="{ 'pd-bottom': !$slots.actions }">
+        <main class="modal__body">
           <slot></slot>
         </main>
-        <footer class="modal__footer" v-if="$slots.actions">
+        <footer class="modal__footer">
           <slot name="actions"></slot>
         </footer>
       </div>
@@ -76,10 +76,6 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
 .modal__body {
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
-}
-
-.pd-bottom {
-  padding-bottom: var(--space-sm);
 }
 
 .modal__footer {
