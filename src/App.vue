@@ -30,9 +30,6 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
   justify-content: flex-end;
   align-items: center;
   padding: 1rem;
-}
-
-.app__user {
-  margin-right: 1rem;
+  gap: 1rem
 }
 </style>
