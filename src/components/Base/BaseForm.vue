@@ -50,5 +50,9 @@ watch(() => props.initialValues, values => {
 <style lang="css">
 .base-form {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: inherit;
 }
 </style>

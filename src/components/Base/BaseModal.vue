@@ -57,8 +57,8 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
   width: 100%;
 
   transform: translateY(-10vh);
-  background-color: aliceblue;
-  border-radius: var(--border-radius);
+  background-color: var(--modal-background);
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
@@ -73,8 +73,9 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
 }
 
 .modal__body {
-  padding-left: var(--space-sm);
-  padding-right: var(--space-sm);
+  padding: var(--space-sm);
+  padding-bottom: 0;
+  background-color: inherit;
 }
 
 .modal__footer {
