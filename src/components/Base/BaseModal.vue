@@ -4,7 +4,7 @@
       <div class="modal">
         <header class="modal__header">
           <h2 class="modal__title"> {{ title }} </h2>
-          <button class="icon-button" @click="isOpen = false">
+          <button class="icon-button modal__close-btn" @click="isOpen = false">
             <CloseIcon class="icon-button__icon modal__close-icon" />
           </button>
         </header>
@@ -68,7 +68,6 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
 
 .modal__header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: var(--space-sm);
 }
@@ -82,6 +81,11 @@ onUnmounted(() => window.removeEventListener('keyup', closeOnEscape))
   display: flex;
   justify-content: flex-end;
   padding: var(--space-sm);
+  gap: var(--space-xs);
+}
+
+.modal__close-btn {
+  margin-left: auto;
 }
 
 .modal__close-icon {

@@ -21,6 +21,7 @@
   --line-height-md: 1.5;
 
   /* spacing  */
+  --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
 }
