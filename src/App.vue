@@ -23,13 +23,13 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 #app {
   display: flex;
   flex-direction: column;
+  padding: 1rem 1.5rem;
 }
 
 .app__header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 1rem;
   gap: 1rem
 }
 </style>
