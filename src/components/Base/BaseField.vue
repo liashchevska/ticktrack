@@ -48,7 +48,8 @@ defineOptions({ inheritAttrs: false })
   background: transparent;
   border-radius: var(--radius-xs);
   border: 1px solid var(--color-accent);
-  padding: var(--space-xs)
+  padding: var(--space-xs);
+  font: inherit;
 }
 
 textarea.field__control {
