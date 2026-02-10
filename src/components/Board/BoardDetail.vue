@@ -43,6 +43,6 @@ const ticketsByStatus = computed(() => {
 .board-detail__tickets {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 </style>
