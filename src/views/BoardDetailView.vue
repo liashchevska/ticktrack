@@ -1,21 +1,21 @@
 <template>
   <template v-if="currentBoard">
-    <BaseDetail @delete="isConfirmOpen = true">
-      <BoardDetail :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
-    </BaseDetail>
-    <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
-
-    <button @click="isUpdateBoardOpen = true">Edit board</button>
-    <BoardFormModal v-model="isUpdateBoardOpen" :board="currentBoard" @updated="isUpdateBoardOpen = false" />
+    <h1> {{ currentBoard.title }} </h1>
 
     <button @click="isCreateTicketOpen = true">Create ticket</button>
+    <button @click="isUpdateBoardOpen = true">Edit board</button>
+    <button @click="isConfirmOpen = true">Delete board</button>
+
+    <BoardTickets :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
+
+    <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
+    <BoardFormModal v-model="isUpdateBoardOpen" :board="currentBoard" @updated="isUpdateBoardOpen = false" />
     <TicketFormModal v-model="isCreateTicketOpen" @created="isCreateTicketOpen = false" title="Create new ticket" />
   </template>
 </template>
 
 <script setup>
-import BaseDetail from '@/components/Base/BaseDetail.vue'
-import BoardDetail from '@/components/Board/BoardDetail.vue'
+import BoardTickets from '@/components/Board/BoardTickets.vue'
 import BoardFormModal from '@/components/Board/BoardFormModal.vue'
 import { useBoardStore } from '@/stores/board'
 import { watch, ref, computed, onMounted } from 'vue'

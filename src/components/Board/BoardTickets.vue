@@ -1,5 +1,4 @@
 <template>
-  <h1> Current board: {{ props.board.title }} </h1>
   <template v-if="isInitialized">
     <div class="board-detail__tickets">
       <section v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
@@ -44,5 +43,6 @@ const ticketsByStatus = computed(() => {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: var(--space-sm);
 }
 </style>
