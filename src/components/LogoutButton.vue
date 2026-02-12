@@ -3,12 +3,14 @@
 </template>
 
 <script setup>
-import router from '@/router';
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth';
 
+const router = useRouter()
 const auth = useAuthStore()
+
 async function logout() {
   await auth.logout()
-  router.push('/login')
+  router.push({ name: 'login' })
 }
 </script>
