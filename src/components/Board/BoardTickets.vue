@@ -1,8 +1,8 @@
 <template>
   <template v-if="isInitialized">
-    <div class="board-detail__tickets">
+    <div>
       <section v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-        <h2 class="status-{{ ticketStatus }}"> {{ ticketStatus }} </h2>
+        <h2> {{ ticketStatus }} </h2>
         <BaseList :item-list="ticketGroup">
           <template #default="{ item }">
             <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
@@ -38,11 +38,4 @@ const ticketsByStatus = computed(() => {
 })
 </script>
 
-<style lang="css">
-.board-detail__tickets {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: var(--space-sm);
-}
-</style>
+<style lang="css"></style>

@@ -1,5 +1,5 @@
 <template>
-  <form :id="props.id" class="base-form" @submit.prevent="onSubmit">
+  <form :id="props.id" @submit.prevent="onSubmit">
     <slot name="fields"></slot>
     <slot name="actions">
       <button type="submit">Submit</button>
@@ -47,12 +47,4 @@ watch(() => props.initialValues, values => {
 })
 </script>
 
-<style lang="css">
-.base-form {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  background: inherit;
-}
-</style>
+<style lang="css"></style>

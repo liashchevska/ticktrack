@@ -1,11 +1,11 @@
 <template>
-  <div class="home-page">
-    <aside class="home-page__aside">
-      <nav class="home-page__board-list" aria-label="Board list navigation">
+  <div>
+    <aside>
+      <nav aria-label="Board list navigation">
         <BoardListView />
       </nav>
     </aside>
-    <section class="home-page__board-detail" aria-label="Board detail">
+    <section aria-label="Board detail">
       <RouterView /> <!-- renders BoardDetailView based on route -->
     </section>
   </div>
@@ -17,11 +17,4 @@ import { RouterView } from 'vue-router'
 
 </script>
 
-<style lang="css">
-.home-page {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-}
-
-/* .home-page__board_list {} */
-</style>
+<style lang="css"></style>
