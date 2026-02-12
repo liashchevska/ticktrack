@@ -27,9 +27,9 @@ const validationSchema = object({
 
 const onSuccess = () => {
   if (auth.isVerificationPending) {
-    router.push('email/verify')
+    router.push({ name: 'email-verify' })
     return
   }
-  router.push('/')
+  router.push({ name: 'home' })
 }
 </script>

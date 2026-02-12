@@ -12,13 +12,15 @@ import BoardDetailView from '@/views/BoardDetailView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', redirect: '/boards' },
+    { path: '/', name: 'home', redirect: '/boards' },
     {
       path: '/boards',
+      name: 'boards',
       component: HomeView,
       children: [
         {
           path: ':id',
+          name: 'board-detail',
           component: BoardDetailView
         }
       ],
@@ -35,17 +37,20 @@ const router = createRouter({
     },
     {
       path: '/signup',
+      name: 'signup',
       component: SignupView,
       meta: { requiresNoAuth: true }
 
     },
     {
       path: '/email/verify',
+      name: 'email-verify',
       component: EmailVerificatoinView,
       meta: { requiresVerificationPending: true }
     },
     {
       path: '/password/request',
+      name: 'password-reset',
       component: PasswordResetView,
       meta: { requiresNoAuth: true }
     }

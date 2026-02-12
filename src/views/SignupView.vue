@@ -15,9 +15,9 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth';
 import { object, string } from 'yup';
-import router from '@/router';
 import BaseForm from '@/components/Base/BaseForm.vue';
 import BaseField from '@/components/Base/BaseField.vue';
+import { useRouter } from 'vue-router';
 
 const validationSchema = object({
   name: string().required(),
@@ -26,8 +26,9 @@ const validationSchema = object({
 })
 
 const auth = useAuthStore()
+const router = useRouter()
 
 const onSuccess = () => {
-  router.push('/email/verify')
+  router.push({ name: 'email-verify' })
 }
 </script>

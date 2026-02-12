@@ -24,7 +24,7 @@ const boardStore = useBoardStore()
 const { boardList } = storeToRefs(boardStore)
 
 function openBoardView(id) {
-  router.push(`/boards/${id}`)
+  router.push({ name: 'board-detail', params: { id } })
 }
 // function onBoardCreated()
 </script>

@@ -13,15 +13,17 @@
 import { useAuthStore } from '@/stores/auth';
 import BaseField from './Base/BaseField.vue';
 import BaseForm from './Base/BaseForm.vue';
-import router from '@/router';
 import { object, string } from 'yup';
+import { useRouter } from 'vue-router';
 
 const validationSchema = object({
   key: string().required(),
   password: string().required()
 })
+const router = useRouter()
 const auth = useAuthStore()
+
 const onSuccess = () => {
-  router.push('/login')
+  router.push({ name: 'login' })
 }
 </script>

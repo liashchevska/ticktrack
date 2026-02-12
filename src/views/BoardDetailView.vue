@@ -39,7 +39,7 @@ const tickets = computed(() => ticketStore.getTickets(route.params.id))
 
 async function deleteBoard() {
   await boardStore.deleteBoard(currentBoard.value.id)
-  router.push('/boards')
+  router.push({ name: 'boards' })
 }
 async function onTicketDelete(ticketId) {
   await ticketStore.deleteTicket(currentBoard.value.id, ticketId)

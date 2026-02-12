@@ -12,16 +12,18 @@
 
 <script setup>
 import BaseField from '@/components/Base/BaseField.vue';
-import router from '@/router';
 import { useAuthStore } from '@/stores/auth';
 import { object, string } from 'yup';
 import BaseForm from '@/components/Base/BaseForm.vue';
+import { useRouter } from 'vue-router';
 
 const validationSchema = object({
   key: string().required()
 })
 const auth = useAuthStore()
+const router = useRouter()
+
 const onSuccess = () => {
-  router.push('/')
+  router.push({ name: 'home' })
 }
 </script>
