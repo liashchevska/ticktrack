@@ -8,9 +8,9 @@
             <CloseIcon class="icon-button__icon modal__close-icon" />
           </button>
         </header>
-        <main class="modal__body">
+        <div class="modal__body">
           <slot></slot>
-        </main>
+        </div>
         <footer class="modal__footer">
           <slot name="actions"></slot>
         </footer>
