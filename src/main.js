@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import { API } from './endpoints'
 
-import './assets/main.css'
+import './assets/styles/main.css'
 
 async function bootstrap(params) {
   await fetch(API.CSRF, { credentials: 'include' })
