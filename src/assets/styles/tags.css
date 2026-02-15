@@ -1,1 +1,38 @@
 /* Semantic HTML tags */
+body {
+  font-family: var(--font-family-primary);
+  font-size: var(--text-md);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+h1,
+h2 {
+  font-family: var(--font-family-secondary);
+  line-height: var(--line-height-tight);
+  font-weight: var(--weight-bold);
+  color: var(--text-accent);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 {
+  font-size: var(--text-xxl);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+h2 {
+  font-size: var(--text-xl);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+
+}
+
+small {
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+}
