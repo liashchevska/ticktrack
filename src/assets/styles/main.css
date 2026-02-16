@@ -1,4 +1,5 @@
 @import './resets.css';
+@import './colors.css';
 @import './root.css';
 @import './tags.css';
 @import './utils.css';
