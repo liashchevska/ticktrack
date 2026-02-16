@@ -8,6 +8,7 @@
 
   --text-base: 1.3rem;
   --ratio: 1.125;
+
   /*
     sm - secondary info
     md - base size, body, p
@@ -21,14 +22,6 @@
   --text-xl: calc(var(--text-base) * var(--ratio) * var(--ratio));
   --text-xxl: calc(var(--text-base) * var(--ratio) * var(--ratio) * var(--ratio));
 
-  /* Text colors */
-  --text-primary: #111111;
-  --text-secondary: #555555;
-  --text-accent: #001261;
-  --text-link: blue;
-  --text-link-hover: darkblue;
-  --text-danger: #b42318;
-
   /*
     tight - headings
     normal - body
@@ -40,18 +33,26 @@
     tight - headings
     wide - small text, uppercase
   */
+
   --tracking-tight: -0.01em;
   --tracking-normal: 0;
   --tracking-wide: 0.05em;
+
 
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 700;
 
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
+
+  --space-unit: 1rem;
+  --space-xxs: calc(0.125 * var(--space-unit));
+  --space-xs: calc(0.25 * var(--space-unit));
+  --space-sm: calc(0.5 * var(--space-unit));
+  --space-md: calc(0.75 * var(--space-unit));
+  --space-lg: calc(1 * var(--space-unit));
+  --space-xl: calc(1.5 * var(--space-unit));
+  --space-xxl: calc(2 * var(--space-unit));
+
 
   --radius-sm: 4px;
   --radius-md: 8px;
