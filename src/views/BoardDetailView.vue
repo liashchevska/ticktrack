@@ -1,10 +1,13 @@
 <template>
   <template v-if="currentBoard">
-    <h1> {{ currentBoard.title }} </h1>
-
-    <button @click="isCreateTicketOpen = true">Create ticket</button>
-    <button @click="isUpdateBoardOpen = true">Edit board</button>
-    <button @click="isConfirmOpen = true">Delete board</button>
+    <div class="board__header">
+      <h1> {{ currentBoard.title }} </h1>
+      <div class="board__actions">
+        <button @click="isCreateTicketOpen = true">Create ticket</button>
+        <button @click="isUpdateBoardOpen = true">Edit board</button>
+        <button @click="isConfirmOpen = true">Delete board</button>
+      </div>
+    </div>
 
     <BoardTickets :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
 
@@ -54,3 +57,10 @@ onMounted(async () => {
   await fetchTicketStatusList()
 })
 </script>
+
+<style lang="css">
+.board__header {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

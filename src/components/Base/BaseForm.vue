@@ -1,5 +1,5 @@
 <template>
-  <form :id="props.id" @submit.prevent="onSubmit">
+  <form class="base-form" :id="props.id" @submit.prevent="onSubmit">
     <slot name="fields"></slot>
     <slot name="actions">
       <button type="submit">Submit</button>
@@ -47,4 +47,15 @@ watch(() => props.initialValues, values => {
 })
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+.base-form {
+  display: flex;
+  flex-direction: column;
+  background: var(--form-element-bg);
+}
+
+.base-form .field:not(:first-child) {
+  /* To do: use calc based on label size */
+  margin-top: var(--space-lg);
+}
+</style>

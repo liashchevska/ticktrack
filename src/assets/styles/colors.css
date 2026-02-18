@@ -1,11 +1,11 @@
 :root {
   /* Main colors */
-  --color-primary: #4D84F4;
+  --color-primary: #ffcf67;
   --color-primary-light: color-mod(var(--color-primary) tint(15%));
   --color-primary-dark: color-mod(var(--color-primary) shade(15%));
   --color-primary-bg: color-mod(var(--color-primary) alpha(20%));
 
-  --color-accent: #f5414f;
+  --color-accent: #77a2ff;
   --color-accent-light: color-mod(var(--color-accent) tint(15%));
   --color-accent-dark: color-mod(var(--color-accent) shade(10%));
   --color-accent-bg: color-mod(var(--color-accent) alpha(20%));

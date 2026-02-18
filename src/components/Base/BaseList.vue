@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <li v-for="item in itemList" :key="item.id" @click="emit('itemClicked', item.id)">
+  <ul class="list">
+    <li class="list__item" v-for="item in itemList" :key="item.id" @click="emit('itemClicked', item.id)">
       <slot :item="item"></slot>
     </li>
   </ul>
@@ -13,4 +13,11 @@ defineProps({
 const emit = defineEmits(["itemClicked"])
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list__item {}
+</style>

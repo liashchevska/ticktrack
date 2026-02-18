@@ -3,3 +3,8 @@
 @import './root.css';
 @import './tags.css';
 @import './utils.css';
+
+/* [class$='__header'] {
+  padding-top: var(--header-padding-top);
+  padding-bottom: var(--header-padding-bottom);
+} */
