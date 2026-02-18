@@ -1,12 +1,16 @@
 <template>
-  <h1>Boards:</h1>
-  <BaseList :item-list="boardList" @itemClicked="openBoardView">
-    <template #default="{ item }">
-      <div> {{ item.title }} </div>
-    </template>
-  </BaseList>
-  <button @click="isCreateOpen = true">Create board</button>
-  <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create" />
+  <nav class="board-list" aria-label="Board list navigation">
+    <div class="board-list__header">
+      <h1>Boards:</h1>
+    </div>
+    <BaseList :item-list="boardList" @itemClicked="openBoardView">
+      <template #default="{ item }">
+        <div> {{ item.title }} </div>
+      </template>
+    </BaseList>
+    <button @click="isCreateOpen = true">Create board</button>
+    <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create" />
+  </nav>
 </template>
 
 
