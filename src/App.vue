@@ -41,6 +41,7 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
   margin-top: 0;
   margin-bottom: 0;
   margin-right: auto;
+  font-size: var(--text-app-title);
 }
 
 .app__main {
