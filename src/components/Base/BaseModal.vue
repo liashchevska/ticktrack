@@ -4,9 +4,7 @@
       <div class="modal">
         <header class="modal__header">
           <h2 class="modal__title"> {{ title }} </h2>
-          <button class="icon-button modal__close-btn" @click="isOpen = false">
-            <CloseIcon class="icon-button__icon modal__close-icon" />
-          </button>
+          <CloseButton v-model="isOpen" />
         </header>
         <div class="modal__body">
           <slot></slot>
@@ -20,7 +18,8 @@
 </template>
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
-import CloseIcon from '@/assets/icons/close-x-svgrepo-com.svg?component'
+import CloseButton from './CloseButton.vue'
+
 defineProps({
   title: { type: String, required: false }
 })
