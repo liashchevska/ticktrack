@@ -4,7 +4,8 @@
 @import './tags.css';
 @import './utils.css';
 
-/* [class$='__header'] {
+.board-list__header,
+.board__header {
   padding-top: var(--header-padding-top);
   padding-bottom: var(--header-padding-bottom);
-} */
+}
