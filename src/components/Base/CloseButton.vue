@@ -12,9 +12,9 @@ const model = defineModel()
 
 <style lang="css">
 .icon-button {
-  font-size: var(--font-size-xl);
-  width: var(--font-size-xl);
-  height: var(--font-size-xl);
+  font-size: var(--text-xl);
+  width: var(--text-xl);
+  height: var(--text-xl);
   background: none;
 
   display: flex;
