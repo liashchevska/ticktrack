@@ -63,9 +63,12 @@
   --radius-md: 8px;
   --radius-lg: 16px;
 
+
   --header-padding-top: var(--space-lg);
   --header-padding-bottom: var(--space-md);
 
+
+  --z-modal: 100;
 }
 
 

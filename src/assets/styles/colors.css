@@ -1,14 +1,14 @@
 :root {
   /* Main colors */
-  --color-primary: #ffcf67;
-  --color-primary-light: color-mod(var(--color-primary) tint(15%));
+  --color-primary: rgb(255, 207, 103);
+  /* --color-primary-light: color-mod(var(--color-primary) tint(15%));
   --color-primary-dark: color-mod(var(--color-primary) shade(15%));
-  --color-primary-bg: color-mod(var(--color-primary) alpha(20%));
+  --color-primary-bg: color-mod(var(--color-primary) alpha(20%)); */
 
   --color-accent: #77a2ff;
-  --color-accent-light: color-mod(var(--color-accent) tint(15%));
+  /* --color-accent-light: color-mod(var(--color-accent) tint(15%));
   --color-accent-dark: color-mod(var(--color-accent) shade(10%));
-  --color-accent-bg: color-mod(var(--color-accent) alpha(20%));
+  --color-accent-bg: color-mod(var(--color-accent) alpha(20%)); */
 
 
   /* Shades */
@@ -52,4 +52,13 @@
   --btn-primary-hover: var(--color-primary-light);
   --btn-primary-active: var(--color-primary-dark);
   --btn-primary-label: var(--white);
+
+
+  --modal-header: var(--gray-3);
+  --modal-body: '';
+  --modal-footer: '';
+  --modal-backdrop: rgba(0, 0, 0, 0.4);
+
+  --nav-element-active: var(--color-accent);
+  /* --nav-element */
 }
