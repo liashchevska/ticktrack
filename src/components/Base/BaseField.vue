@@ -57,6 +57,7 @@ defineOptions({ inheritAttrs: false })
   border-radius: var(--space-xs);
   border-width: 1px;
   background: var(--form-element-bg);
+  width: 100%;
   /* transition: border-color 0.2s ease, color 0.2s ease; */
 }
 
