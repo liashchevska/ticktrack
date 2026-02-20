@@ -1,5 +1,5 @@
 const CLIENT = import.meta.env.VUE_APP_CLIENT || 'browser'
-const BASE_URL = import.meta.env.VUE_APP_API_URL || 'http://127.0.0.1:8000'
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
 
 export const API = {
   CSRF: `${BASE_URL}/api/csrf/`,
