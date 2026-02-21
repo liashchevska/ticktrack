@@ -3,7 +3,6 @@
     <p>{{ props.message }}</p>
     <template #actions>
       <button @click="confirm">Confirm</button>
-      <button @click="isOpen = false">Cancel</button>
     </template>
   </BaseModal>
 

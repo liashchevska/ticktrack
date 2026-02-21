@@ -11,6 +11,7 @@
         </div>
         <footer class="modal__footer">
           <slot name="actions"></slot>
+          <button class="modal__cancel" @click="isOpen = false">Cancel</button>
         </footer>
       </div>
     </div>
@@ -96,5 +97,9 @@ onUnmounted(() => {
 .modal__body,
 .modal__footer {
   padding: var(--space-lg) var(--space-xl);
+}
+
+.modal__cancel {
+  order: 1
 }
 </style>
