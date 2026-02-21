@@ -69,6 +69,10 @@
 
 
   --z-modal: 100;
+
+  --common-padding: var(--space-xs) var(--space-sm);
+
+  --icon-size: 2.75rem;
 }
 
 
