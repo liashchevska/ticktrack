@@ -1,7 +1,7 @@
 <template>
-  <template v-if="currentBoard">
+  <template v-if="activeBoard">
     <div class="board__header">
-      <h1> {{ currentBoard.title }} </h1>
+      <h1> {{ activeBoard.title }} </h1>
       <div class="board__actions">
         <button @click="isCreateTicketOpen = true">Create ticket</button>
         <button @click="isUpdateBoardOpen = true">Edit board</button>
@@ -9,10 +9,10 @@
       </div>
     </div>
 
-    <BoardTickets :board="currentBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
+    <BoardTickets :board="activeBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
 
     <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
-    <BoardFormModal v-model="isUpdateBoardOpen" :board="currentBoard" @updated="isUpdateBoardOpen = false" />
+    <BoardFormModal v-model="isUpdateBoardOpen" :board="activeBoard" @updated="isUpdateBoardOpen = false" />
     <TicketFormModal v-model="isCreateTicketOpen" @created="isCreateTicketOpen = false" title="Create new ticket" />
   </template>
 </template>
@@ -25,6 +25,7 @@ import { watch, ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTicketStore } from '@/stores/ticket'
 import { useTicketStatusList } from '@/composables/useTicketStatusList'
+import { useActiveBoard } from '@/composables/useActiveBoard'
 import ConfirmDialog from '@/components/Base/ConfirmDialog.vue'
 import TicketFormModal from '@/components/Ticket/TicketFormModal.vue'
 
@@ -37,15 +38,15 @@ const router = useRouter()
 const boardStore = useBoardStore()
 const ticketStore = useTicketStore()
 
-const currentBoard = computed(() => boardStore.boardList.find(b => b.id == route.params.id) || null)
+const { activeBoard } = useActiveBoard()
 const tickets = computed(() => ticketStore.getTickets(route.params.id))
 
 async function deleteBoard() {
-  await boardStore.deleteBoard(currentBoard.value.id)
+  await boardStore.deleteBoard(activeBoard.value.id)
   router.push({ name: 'boards' })
 }
 async function onTicketDelete(ticketId) {
-  await ticketStore.deleteTicket(currentBoard.value.id, ticketId)
+  await ticketStore.deleteTicket(activeBoard.value.id, ticketId)
 }
 watch(() => route.params.id, (id) => {
   if (!id) return
