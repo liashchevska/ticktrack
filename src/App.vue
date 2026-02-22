@@ -1,10 +1,12 @@
 <template>
   <header class="app__header">
-    <h1 class="app__title">AppTitle</h1>
-    <template v-if="isAuthenticated">
+    <div class="app__header-left">
+      <h1 class="app__title">AppTitle</h1>
+    </div>
+    <div v-if="isAuthenticated" class="app__header-right">
       <span class="app__user">{{ user.email }}</span>
       <LogoutButton />
-    </template>
+    </div>
   </header>
   <main class="app__main">
     <RouterView />
@@ -30,16 +32,25 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 .app__header {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-xs) var(--space-sm);
-  background-color: aliceblue;
+}
+
+.app__header-left {
+  padding: var(--space-sm);
+}
+
+/* .app__header-right { */
+/* padding: var(--pv) var(--ph) */
+/* } */
+
+.app__header-right {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .app__title {
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-right: auto;
   font-size: var(--text-app-title);
+  font-style: italic;
 }
 
 .app__main {
@@ -52,9 +63,17 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 }
 
 @media (min-width: 1024px) {
+  .app__header {}
+
   .app__main {
     display: grid;
     grid-template-columns: 1fr 5fr;
   }
+
+  .app__header-left {
+    width: var(--sidebar-width);
+    background: var(--sidebar);
+  }
+
 }
 </style>

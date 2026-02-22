@@ -1,11 +1,12 @@
 /* Variables */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap');
 
 :root {
   /* Typography */
-  --font-family-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-family-secondary: Georgia, "Times New Roman", serif;
-  --font-app-title: '';
-  --font-fallback: sans-serif;
+  --font-family-primary: "IBM Plex Mono";
+  --font-family-secondary: "IBM Plex Mono";
+  --font-app-title: "IBM Plex Mono";
+  --font-fallback: "IBM Plex Mono";
 
   --text-base: 1.125rem;
   --ratio: 1.125;
@@ -74,14 +75,27 @@
   --common-padding-horizontal: var(--space-sm);
   --common-padding-vertical: var(--space-sm);
 
+  --ph: var(--space-sm);
+  --pv: var(--space-sm);
+
   /* --icon-size: 2.75rem; */
   --icon-size: 2.5rem;
+
+  --sidebar-width: 15vw;
+  --sidebar-pd-left: var(--space-lg);
+
+  --main-pd-top: var(--space-sm);
+  --main-pd-side: var(--space-md);
 
 }
 
 @media (min-width: 1024px) {
   :root {
     --text-base: 1.125rem;
+
+
+    --ph: var(--space-sm);
+    --pv: var(--space-sm);
   }
 }
 

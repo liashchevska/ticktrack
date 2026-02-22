@@ -68,13 +68,13 @@ function openBoardView(id) {
 .board-list {
   display: flex;
   flex-direction: column;
+  padding-left: var(--main-pd-side);
 }
 
 .board-list__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--common-padding-vertical) var(--common-padding-horizontal);
 }
 
 .board-list__actions {
@@ -82,14 +82,12 @@ function openBoardView(id) {
   gap: var(--space-xs);
 }
 
-.board-list__main {
-  padding: 0 var(--space-xl);
-}
-
 
 @media (min-width: 1024px) {
   .board-list {
     height: 100%;
+    width: var(--sidebar-width);
+    background: var(--sidebar);
   }
 
   .board-list__main {
@@ -98,7 +96,6 @@ function openBoardView(id) {
 
   .board-list__footer {
     margin-top: auto;
-    padding: var(--space-md);
     display: flex;
     justify-content: center;
   }

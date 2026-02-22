@@ -59,6 +59,10 @@
   --modal-footer: '';
   --modal-backdrop: rgba(0, 0, 0, 0.4);
 
+  --nav-header: var(--gray-6);
+  --nav-main: var(--gray-4);
   --nav-element-active: var(--color-accent);
+
+  --sidebar: blue;
   /* --nav-element */
 }
