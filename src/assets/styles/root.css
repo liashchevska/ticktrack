@@ -7,7 +7,7 @@
   --font-app-title: '';
   --font-fallback: sans-serif;
 
-  --text-base: 1.3rem;
+  --text-base: 1.125rem;
   --ratio: 1.125;
 
   --text-app-title: 2.25rem;
@@ -70,11 +70,20 @@
 
   --z-modal: 100;
 
-  --common-padding: var(--space-xs) var(--space-sm);
+  /* --common-padding: var(--space-xs) var(--space-sm); */
+  --common-padding-horizontal: var(--space-sm);
+  --common-padding-vertical: var(--space-sm);
 
-  --icon-size: 2.75rem;
+  /* --icon-size: 2.75rem; */
+  --icon-size: 2.5rem;
+
 }
 
+@media (min-width: 1024px) {
+  :root {
+    --text-base: 1.125rem;
+  }
+}
 
 [data-theme="dark"] {
   --text-primary: #f5f5f5;

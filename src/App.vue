@@ -2,7 +2,7 @@
   <header class="app__header">
     <h1 class="app__title">AppTitle</h1>
     <template v-if="isAuthenticated">
-      <span>{{ user.email }}</span>
+      <span class="app__user">{{ user.email }}</span>
       <LogoutButton />
     </template>
   </header>
@@ -31,9 +31,7 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-lg) var(--space-xl);
-
-  /* dev */
+  padding: var(--space-xs) var(--space-sm);
   background-color: aliceblue;
 }
 
@@ -45,7 +43,18 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 }
 
 .app__main {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__user {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .app__main {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+  }
 }
 </style>
