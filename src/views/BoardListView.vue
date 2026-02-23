@@ -1,7 +1,7 @@
 <template>
   <nav class="board-list" aria-label="Board list navigation">
     <div class="board-list__header">
-      <h1>Your boards</h1>
+      <h1 class="board-list__title">Your boards</h1>
       <div v-if="!isDesktop" class="board-list__actions">
         <IconButton @click="isOpen = !isOpen">
           <ChevronDownIcon class="icon-button__chevron" :class="{ 'icon-button__chevron--open': isOpen }" />
@@ -68,14 +68,19 @@ function openBoardView(id) {
 .board-list {
   display: flex;
   flex-direction: column;
-  padding-left: var(--main-pd-side);
+  padding: 0 var(--space-sm);
+  background: var(--sidebar);
+
 }
 
 .board-list__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: var(--space-md) 0;
 }
+
+
 
 .board-list__actions {
   display: flex;
@@ -86,7 +91,7 @@ function openBoardView(id) {
 @media (min-width: 1024px) {
   .board-list {
     height: 100%;
-    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
     background: var(--sidebar);
   }
 
@@ -99,5 +104,20 @@ function openBoardView(id) {
     display: flex;
     justify-content: center;
   }
+
+  .board-list__title {
+    position: relative;
+  }
+
+  .board-list__title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: calc(-1 * var(--space-sm));
+    width: 100%;
+    height: 1px;
+    background-color: var(--seperator);
+  }
+
 }
 </style>

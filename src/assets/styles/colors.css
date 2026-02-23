@@ -63,6 +63,7 @@
   --nav-main: var(--gray-4);
   --nav-element-active: var(--color-accent);
 
-  --sidebar: blue;
+  --sidebar: rgb(158, 158, 255);
+  --seperator: white;
   /* --nav-element */
 }
