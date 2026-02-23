@@ -31,16 +31,13 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 
 .app__header {
   display: flex;
-  align-items: center;
+  background: var(--sidebar);
 }
 
-.app__header-left {
-  padding: var(--space-sm);
+.app__title {
+  font-size: var(--text-app-title);
+  font-style: italic;
 }
-
-/* .app__header-right { */
-/* padding: var(--pv) var(--ph) */
-/* } */
 
 .app__header-right {
   flex-grow: 1;
@@ -48,9 +45,10 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
   justify-content: flex-end;
 }
 
-.app__title {
-  font-size: var(--text-app-title);
-  font-style: italic;
+.app__header-left,
+.app__header-right {
+  padding: var(--space-sm);
+  align-items: center;
 }
 
 .app__main {
@@ -63,15 +61,21 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 }
 
 @media (min-width: 1024px) {
-  .app__header {}
+  .app__user {
+    display: initial;
+  }
 
   .app__main {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: var(--sidebar-width) 5fr;
+  }
+
+  .app__header {
+    background: initial;
   }
 
   .app__header-left {
-    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
     background: var(--sidebar);
   }
 
