@@ -14,11 +14,12 @@
     <BaseList class="board-list__main" :item-list="boardList" :active-id="activeBoard?.id" @itemClicked="openBoardView"
       v-show="isOpen">
       <template #default="{ item, isActive }">
-        {{ item.title }} <small v-if="isActive">(active)</small>
+        {{ item.title }}
+        <!-- <small v-if="isActive">(active)</small> -->
       </template>
     </BaseList>
     <div v-if="isDesktop" class="board-list__footer">
-      <button @click="isCreateOpen = true">Create board</button>
+      <button class="button" @click="isCreateOpen = true">Create board</button>
     </div>
     <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create" />
   </nav>
@@ -80,8 +81,6 @@ function openBoardView(id) {
   padding: var(--space-md) 0;
 }
 
-
-
 .board-list__actions {
   display: flex;
   gap: var(--space-xs);
@@ -93,6 +92,7 @@ function openBoardView(id) {
     height: 100%;
     min-width: var(--sidebar-width);
     background: var(--sidebar);
+    padding: 0 var(--space-lg);
   }
 
   .board-list__main {
@@ -103,7 +103,14 @@ function openBoardView(id) {
     margin-top: auto;
     display: flex;
     justify-content: center;
+    padding: var(--space-lg) 0;
   }
+
+  .board-list__footer .button {
+    width: 100%;
+  }
+
+  /* .board-list */
 
   .board-list__title {
     position: relative;

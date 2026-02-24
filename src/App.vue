@@ -79,5 +79,10 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
     background: var(--sidebar);
   }
 
+  .app__header-left,
+  .app__header-right {
+    padding: var(--space-md);
+  }
+
 }
 </style>
