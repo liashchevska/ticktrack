@@ -71,14 +71,13 @@ function openBoardView(id) {
   flex-direction: column;
   padding: 0 var(--space-sm);
   background: var(--sidebar);
-
 }
 
 .board-list__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-md) 0;
+  /* padding: var(--space-md) 0; */
 }
 
 .board-list__actions {
@@ -109,8 +108,6 @@ function openBoardView(id) {
   .board-list__footer .button {
     width: 100%;
   }
-
-  /* .board-list */
 
   .board-list__title {
     position: relative;
