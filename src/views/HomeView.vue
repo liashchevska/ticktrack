@@ -13,4 +13,14 @@ import { RouterView } from 'vue-router'
 
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+.board {
+  padding: 0 var(--space-md);
+}
+
+@media (min-width: 1024px) {
+  .board {
+    padding: 0 var(--space-lg);
+  }
+}
+</style>

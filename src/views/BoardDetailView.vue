@@ -1,9 +1,9 @@
 <template>
   <template v-if="activeBoard">
     <div class="board__header">
-      <h1> {{ activeBoard.title }} </h1>
+      <h1 class="board__title"> {{ activeBoard.title }} </h1>
       <div class="board__actions">
-        <button @click="isCreateTicketOpen = true">Create ticket</button>
+        <button @click="isCreateTicketOpen = true">New ticket</button>
         <button @click="isUpdateBoardOpen = true">Edit board</button>
         <button @click="isConfirmOpen = true">Delete board</button>
       </div>
@@ -62,6 +62,20 @@ onMounted(async () => {
 <style lang="css">
 .board__header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board__actions {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .board__header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
 }
 </style>

@@ -40,7 +40,14 @@ const ticketsByStatus = computed(() => {
 
 <style lang="css">
 .board__main {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .board__main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>
