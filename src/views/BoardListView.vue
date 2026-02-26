@@ -69,7 +69,7 @@ function openBoardView(id) {
 .board-list {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--space-sm);
+  padding: 0 var(--space-md);
   background: var(--sidebar);
 }
 
