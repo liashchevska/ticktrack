@@ -4,10 +4,11 @@
       <h1 class="board-list__title">Your boards</h1>
       <div v-if="!isDesktop" class="board-list__actions">
         <IconButton @click="isOpen = !isOpen">
-          <ChevronDownIcon class="icon-button__chevron" :class="{ 'icon-button__chevron--open': isOpen }" />
+          <ChevronDownIcon class="icon-button__icon icon-button__chevron "
+            :class="{ 'icon-button__chevron--open': isOpen }" />
         </IconButton>
         <IconButton @click="isCreateOpen = true">
-          <PlusIcon />
+          <PlusIcon class="icon-button__icon" />
         </IconButton>
       </div>
     </div>
@@ -57,7 +58,6 @@ function openBoardView(id) {
 
 <style lang="css">
 .icon-button__chevron {
-  display: inline-block;
   transform-origin: center;
   transition: transform 0.3s ease-in-out;
 }
@@ -77,7 +77,6 @@ function openBoardView(id) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: var(--space-md) 0; */
 }
 
 .board-list__actions {
