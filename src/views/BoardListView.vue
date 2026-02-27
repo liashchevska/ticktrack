@@ -20,7 +20,7 @@
       </template>
     </BaseList>
     <div v-if="isDesktop" class="board-list__footer">
-      <button class="button" @click="isCreateOpen = true">Create board</button>
+      <button class="btn" @click="isCreateOpen = true">Create board</button>
     </div>
     <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create" />
   </nav>
@@ -113,7 +113,7 @@ function openBoardView(id) {
     padding: var(--space-lg) 0;
   }
 
-  .board-list__footer .button {
+  .board-list__footer button {
     width: 100%;
   }
 

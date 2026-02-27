@@ -5,7 +5,7 @@
       <BaseField name="password" type="password">New password:</BaseField>
     </template>
     <template #actions>
-      <button type="submit">Reset password</button>
+      <button class="btn" type="submit">Reset password</button>
     </template>
   </BaseForm>
 </template>

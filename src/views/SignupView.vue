@@ -6,7 +6,7 @@
       <BaseField name="password" type="password" />
     </template>
     <template #actions>
-      <button type="submit">Signup</button>
+      <button class="btn" type="submit">Signup</button>
     </template>
   </BaseForm>
 </template>

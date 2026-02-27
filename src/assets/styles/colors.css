@@ -1,15 +1,27 @@
 :root {
   /* Main colors */
-  --color-primary: rgb(255, 207, 103);
   /* --color-primary-light: color-mod(var(--color-primary) tint(15%));
   --color-primary-dark: color-mod(var(--color-primary) shade(15%));
-  --color-primary-bg: color-mod(var(--color-primary) alpha(20%)); */
-
-  --color-accent: #77a2ff;
-  /* --color-accent-light: color-mod(var(--color-accent) tint(15%));
+  --color-primary-bg: color-mod(var(--color-primary) alpha(20%));
+  --color-accent-light: color-mod(var(--color-accent) tint(15%));
   --color-accent-dark: color-mod(var(--color-accent) shade(10%));
-  --color-accent-bg: color-mod(var(--color-accent) alpha(20%)); */
+  --color-accent-bg: color-mod(var(--color-accent) alpha(20%));
+  --color-accent: #77a2ff; */
 
+
+  --color-primary: #2563eb;
+  --color-secondary: #f3f4f6;
+  /* #111827 */
+  --color-danger: #ef4444;
+
+  --color-primary-dark: #3b82f6;
+  --color-secondary-dark: #e5e7eb;
+  --color-danger-dark: #dc2626;
+
+  /* Feedback */
+  --color-success: #88c459;
+  --color-error: #f5414f;
+  --color-warning: #ffd137;
 
   /* Shades */
   --black: #1d1d21;
@@ -22,10 +34,6 @@
   --white: white;
 
 
-  /* Feedback */
-  --color-success: #88c459;
-  --color-error: #f5414f;
-  --color-warning: #ffd137;
 
 
   /* Typography */
@@ -65,5 +73,7 @@
 
   --sidebar: rgb(158, 158, 255);
   --seperator: white;
+
+  --shadow: rgba(0, 0, 0, 0.05);
   /* --nav-element */
 }

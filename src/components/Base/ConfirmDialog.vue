@@ -2,7 +2,7 @@
   <BaseModal v-model="isOpen" :title="props.title">
     <p>{{ props.message }}</p>
     <template #actions>
-      <button @click="confirm">Confirm</button>
+      <button class="btn" @click="confirm">Confirm</button>
     </template>
   </BaseModal>
 
