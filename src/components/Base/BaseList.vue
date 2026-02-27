@@ -21,10 +21,4 @@ const emit = defineEmits(["itemClicked"])
   flex-direction: column;
   gap: var(--space-sm);
 }
-
-/* .list__item {} */
-
-.list__item--active {
-  font-weight: 700;
-}
 </style>

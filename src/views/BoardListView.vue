@@ -84,6 +84,15 @@ function openBoardView(id) {
   gap: var(--space-xs);
 }
 
+.board-list .list {
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+.board-list .list__item--active {
+  list-style-type: disc;
+  font-weight: 700;
+}
 
 @media (min-width: 1024px) {
   .board-list {
