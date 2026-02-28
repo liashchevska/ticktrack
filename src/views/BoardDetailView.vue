@@ -64,11 +64,13 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--space-sm);
 }
 
 .board__actions {
   display: flex;
   justify-content: center;
+  gap: var(--space-sm);
 }
 
 @media (min-width: 1024px) {
