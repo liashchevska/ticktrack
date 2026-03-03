@@ -107,7 +107,7 @@ function openBoardView(id) {
 }
 
 .board-list__main {
-  padding-top: var(--space-sm);
+  padding: var(--space-sm) 0;
   border-top: 1px solid var(--color-border-dark);
 }
 
