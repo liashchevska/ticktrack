@@ -65,6 +65,7 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   gap: var(--space-sm);
+  padding: var(--space-md) 0;
 }
 
 .board__actions {
