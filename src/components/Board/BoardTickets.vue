@@ -2,10 +2,11 @@
   <template v-if="isInitialized">
     <div class="board__main">
       <section class="ticket-group" v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-        <h2 class="ticket-group__title"> {{ ticketStatus }} </h2>
+        <!-- <h2 class="ticket-group__title"> {{ ticketStatus }} </h2> -->
         <BaseList :item-list="ticketGroup">
           <template #default="{ item }">
-            <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
+            <TicketInList :class="`ticket-${ticketStatus.toLocaleLowerCase()}`" :ticket="item"
+              :onTicketDelete="props.onTicketDelete" />
           </template>
         </BaseList>
       </section>
@@ -42,20 +43,19 @@ const ticketsByStatus = computed(() => {
 .board__main {
   display: flex;
   flex-direction: column;
+  gap: var(--space-xxl);
 }
 
 .ticket-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xl);
 }
 
 @media (min-width: 1024px) {
   .board__main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xxl);
   }
 }
 </style>
