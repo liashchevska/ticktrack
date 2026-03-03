@@ -23,6 +23,11 @@
   --color-error: #f5414f;
   --color-warning: #ffd137;
 
+  /* Tickets */
+  --color-new: #ff9900;
+  --color-active: #d400ff;
+  --color-done: #78c8fd;
+
   /* Shades */
   --black: #1d1d21;
   --gray-10: #2e2e31;
@@ -47,6 +52,7 @@
 
 
   /* Elements, components */
+  --color-border-dark: var(--black);
   --color-border: var(--gray-2);
   --color-body: var(--white);
 
