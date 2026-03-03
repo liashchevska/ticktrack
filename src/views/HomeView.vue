@@ -20,7 +20,9 @@ import { RouterView } from 'vue-router'
 
 @media (min-width: 1024px) {
   .board {
-    padding: 0 var(--space-lg);
+    padding: 0 var(--space-lg) var(--space-lg) var(--space-lg);
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 }
 </style>
