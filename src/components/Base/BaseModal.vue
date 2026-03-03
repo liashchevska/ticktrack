@@ -39,11 +39,11 @@ watch(isOpen, (open) => {
 })
 
 onMounted(() => {
-  window.addEventListener('keyup', closeOnEscape)
+  window.addEventListener('keydown', closeOnEscape)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('keyup', closeOnEscape)
+  window.removeEventListener('keydown', closeOnEscape)
   document.body.style.overflow = ''
 })
 
