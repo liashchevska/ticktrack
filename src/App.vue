@@ -67,7 +67,7 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
 
   .app__main {
     display: grid;
-    grid-template-columns: var(--sidebar-width) 5fr;
+    grid-template-columns: var(--sidebar-width) 1fr;
   }
 
   .app__header {
