@@ -88,6 +88,7 @@ onUnmounted(() => {
 
 .modal__footer {
   justify-content: flex-end;
+  gap: var(--actions-gap);
 }
 
 .modal__body {

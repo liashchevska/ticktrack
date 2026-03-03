@@ -51,7 +51,7 @@ const isConfirmOpen = ref(false)
 
 .ticket__actions {
   display: flex;
-  gap: var(--space-sm);
+  gap: var(--actions-gap);
 }
 
 .ticket__header,

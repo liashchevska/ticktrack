@@ -71,7 +71,7 @@ onMounted(async () => {
 .board__actions {
   display: flex;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--actions-gap);
 }
 
 @media (min-width: 1024px) {
