@@ -43,7 +43,7 @@ const ticketsByStatus = computed(() => {
 .board__main {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xxl);
+  gap: var(--tickets-grid-gap);
 }
 
 .ticket-group {

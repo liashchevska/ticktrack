@@ -64,9 +64,11 @@
 
   --icon-size: 2.5rem;
 
-  --sidebar-width: 15vw;
+  --sidebar-width: 320px;
   --sidebar-pd-left: var(--space-lg);
 
+  --ticket-height: 150px;
+  --tickets-grid-gap: var(--space-lg);
 }
 
 @media (min-width: 1024px) {
