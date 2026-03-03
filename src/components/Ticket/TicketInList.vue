@@ -34,6 +34,7 @@ const isConfirmOpen = ref(false)
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
   height: auto;
+  min-width: var(--ticket-width);
 }
 
 .ticket__header {

@@ -67,7 +67,7 @@
   --sidebar-width: 320px;
   --sidebar-pd-left: var(--space-lg);
 
-  --ticket-height: 150px;
+  --ticket-width: 340px;
   --tickets-grid-gap: var(--space-lg);
 }
 
