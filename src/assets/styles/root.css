@@ -22,7 +22,7 @@
   --text-lg: calc(var(--text-base) * var(--ratio));
   --text-xl: calc(var(--text-base) * var(--ratio) * var(--ratio));
   --text-xxl: calc(var(--text-base) * var(--ratio) * var(--ratio) * var(--ratio));
-  --text-app-title: 2.25rem;
+  --text-app-title: 2.05rem;
   /*
     compact - errors
     tight - headings
