@@ -2,7 +2,7 @@
   <form class="base-form" :id="props.id" @submit.prevent="onSubmit">
     <slot name="fields"></slot>
     <slot name="actions">
-      <button class="btn" type="submit">Submit</button>
+      <button class="btn btn--primary" type="submit">Submit</button>
     </slot>
   </form>
 </template>

@@ -13,7 +13,7 @@
         </div>
         <footer class="modal__footer">
           <slot name="actions"></slot>
-          <button class="btn modal__cancel" @click="isOpen = false">Cancel</button>
+          <button class="btn btn--secondary modal__cancel" @click="isOpen = false">Cancel</button>
         </footer>
       </div>
     </div>

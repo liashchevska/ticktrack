@@ -4,10 +4,10 @@
       <BaseField name="key" type="text" />
     </template>
     <template #actions>
-      <button class="btn" type="submit">Verify</button>
+      <button class="btn btn--primary" type="submit">Verify</button>
     </template>
   </BaseForm>
-  <button class="btn" @click="auth.resendVerificationCode">Resend verification code</button>
+  <button class="btn btn--primary" @click="auth.resendVerificationCode">Resend verification code</button>
 </template>
 
 <script setup>

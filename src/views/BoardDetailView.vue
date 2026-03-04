@@ -3,9 +3,9 @@
     <div class="board__header">
       <h1 class="board__title"> {{ activeBoard.title }} </h1>
       <div class="board__actions">
-        <button class="btn" @click="isCreateTicketOpen = true">New ticket</button>
-        <button class="btn" @click="isUpdateBoardOpen = true">Edit board</button>
-        <button class="btn" @click="isConfirmOpen = true">Delete board</button>
+        <button class="btn btn--primary" @click="isCreateTicketOpen = true">New ticket</button>
+        <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
+        <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
       </div>
     </div>
 

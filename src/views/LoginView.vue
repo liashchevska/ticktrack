@@ -5,7 +5,7 @@
       <BaseField name="password" type="password" />
     </template>
     <template #actions>
-      <button class="btn" type="submit">Login</button>
+      <button class="btn btn--primary" type="submit">Login</button>
     </template>
   </BaseForm>
   <RouterLink to="/password/request">Forgot your password?</RouterLink>

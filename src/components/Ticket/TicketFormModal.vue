@@ -15,7 +15,7 @@
       </template>
       <template #actions>
         <Teleport defer to=".modal__footer">
-          <button class="btn" type="submit" :form="formId">Submit</button>
+          <button class="btn btn--primary" type="submit" :form="formId">Submit</button>
         </Teleport>
       </template>
     </BaseForm>

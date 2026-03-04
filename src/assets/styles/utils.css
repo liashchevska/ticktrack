@@ -8,7 +8,6 @@
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-sm);
 
-  /* background: none; */
   border: 1px solid transparent;
   cursor: pointer;
   user-select: none;
@@ -42,11 +41,14 @@
 }
 
 .btn--primary:hover {
-  background: var(--color-primary-dark)
+  background: var(--color-primary-dark);
+  color: white;
+
 }
 
 .btn--secondary {
   background-color: var(--color-secondary);
+  color: white;
 }
 
 .btn--secondary:hover {
@@ -55,6 +57,7 @@
 
 .btn--danger {
   background-color: var(--color-danger);
+  color: white;
 }
 
 .btn--danger:hover {
