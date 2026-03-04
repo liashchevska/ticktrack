@@ -46,7 +46,6 @@ onUnmounted(() => {
   window.removeEventListener('keydown', closeOnEscape)
   document.body.style.overflow = ''
 })
-
 </script>
 
 <style lang="css">
@@ -64,15 +63,13 @@ onUnmounted(() => {
 .modal {
   display: flex;
   flex-direction: column;
+  width: 90%;
+  max-height: 90dvh;
   max-width: 30rem;
-  max-height: 90vh;
-  width: 100%;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-
   background-color: white;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
-
 
 .modal__header,
 .modal__footer {
@@ -104,6 +101,14 @@ onUnmounted(() => {
 }
 
 .modal__cancel {
-  order: 1
+  /* make cancel btn always last */
+  order: 99;
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    width: 100%;
+    max-height: 90vh;
+  }
 }
 </style>
