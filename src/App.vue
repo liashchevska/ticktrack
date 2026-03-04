@@ -43,6 +43,7 @@ const { isAuthenticated, user } = storeToRefs(useAuthStore())
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
+  gap: var(--actions-gap);
 }
 
 .app__header-left,
