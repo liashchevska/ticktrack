@@ -23,7 +23,7 @@
         {{ item.title }}
       </template>
     </BaseList>
-    <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create" />
+    <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create new board" />
   </nav>
 </template>
 
