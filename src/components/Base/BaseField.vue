@@ -3,10 +3,11 @@
     :class="{ dirty: meta.dirty, valid: meta.touched && meta.valid, invalid: meta.touched && !meta.valid }">
     <label class="field__label">
       <span class="field__label-text">
-        <slot name="label">{{ props.name }}</slot>
+        <slot>{{ props.name }}</slot>
       </span>
+
       <!-- Inject extra content into the field control, e.g., <option> into <select> -->
-      <component :is="props.as" :value="value" @input="value = $event.target.value" v-bind="$attrs" placeholder=""
+      <component :is="props.as" :value="value" @input="value = $event.target.value" v-bind="$attrs"
         class="field__control">
         <slot name="field-content"></slot>
       </component>
@@ -34,22 +35,10 @@ defineOptions({ inheritAttrs: false })
 </script>
 
 <style lang="css">
-.field {
-  position: relative;
-}
-
 .field__label {
-  position: relative;
-  display: block;
-}
-
-.field__label-text {
-  position: absolute;
-  left: var(--space-sm);
-  top: 50%;
-  transform: translateY(-50%);
-  transition: 0.2s ease;
-  background: var(--form-element-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
 .field__control {
@@ -58,24 +47,11 @@ defineOptions({ inheritAttrs: false })
   border-width: 1px;
   background: var(--form-element-bg);
   width: 100%;
-  /* transition: border-color 0.2s ease, color 0.2s ease; */
 }
 
 .field__control:focus {
   outline: none;
   border-color: var(--form-element-border-focus);
-}
-
-.field:focus-within .field__label-text,
-.field:has(.field__control:not(:placeholder-shown)) .field__label-text {
-  top: 0;
-  color: var(--form-element-border-focus);
-}
-
-.field.invalid .field__label-text,
-.field.invalid:focus-within .field__label-text,
-.field.invalid:has(.field__control:not(:placeholder-shown)) .field__label-text {
-  color: var(--color-error);
 }
 
 .field.invalid .field__control,
