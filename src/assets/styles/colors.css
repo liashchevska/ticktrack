@@ -59,7 +59,6 @@
   --form-element-border: var(--color-border);
   --form-element-border-focus: var(--color-primary);
   --form-element-border-error: var(--color-error);
-  --form-element-bg: var(--white);
   --form-text-placeholder: var(--gray-4);
 
   --btn-primary-bg: var(--color-primary);

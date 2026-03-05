@@ -45,7 +45,6 @@ defineOptions({ inheritAttrs: false })
   padding: var(--space-sm) var(--space-sm) var(--space-xxs);
   border-radius: var(--space-xs);
   border-width: 1px;
-  background: var(--form-element-bg);
   width: 100%;
 }
 
