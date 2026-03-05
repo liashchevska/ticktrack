@@ -1,14 +1,20 @@
 <template>
-  <BaseForm :schema="validationSchema" :action="auth.login" :onSuccess="onSuccess">
-    <template #fields>
-      <BaseField name="email" type="email" />
-      <BaseField name="password" type="password" />
+  <AuthLayout>
+    <template #header>Login</template>
+    <BaseForm :schema="validationSchema" :action="auth.login" :onSuccess="onSuccess">
+      <template #fields>
+        <BaseField name="email" type="email" />
+        <BaseField name="password" type="password" />
+      </template>
+      <template #actions>
+        <button class="btn btn--primary" type="submit">Login</button>
+      </template>
+    </BaseForm>
+    <template #footer>
+      <RouterLink :to="{ name: 'password-reset' }">Reset password</RouterLink>
+      <RouterLink :to="{ name: 'signup' }">Sign up</RouterLink>
     </template>
-    <template #actions>
-      <button class="btn btn--primary" type="submit">Login</button>
-    </template>
-  </BaseForm>
-  <RouterLink to="/password/request">Forgot your password?</RouterLink>
+  </AuthLayout>
 </template>
 
 <script setup>
@@ -17,6 +23,7 @@ import router from '@/router';
 import { object, string } from 'yup';
 import BaseField from '@/components/Base/BaseField.vue';
 import BaseForm from '@/components/Base/BaseForm.vue';
+import AuthLayout from '@/layouts/AuthLayout.vue';
 
 const auth = useAuthStore()
 
