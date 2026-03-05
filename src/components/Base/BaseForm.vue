@@ -51,11 +51,6 @@ watch(() => props.initialValues, values => {
 .base-form {
   display: flex;
   flex-direction: column;
-  background: var(--form-element-bg);
-}
-
-.base-form .field:not(:first-child) {
-  /* To do: use calc based on label size */
-  margin-top: var(--space-lg);
+  gap: var(--space-md);
 }
 </style>
