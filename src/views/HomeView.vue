@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <BoardListView />
+    <BoardList />
   </aside>
   <section class="board" aria-label="Board detail">
     <RouterView /> <!-- renders BoardDetailView based on route -->
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import BoardListView from './BoardListView.vue';
+import BoardList from '../components/Board/BoardList.vue';
 import { RouterView } from 'vue-router'
 
 </script>
