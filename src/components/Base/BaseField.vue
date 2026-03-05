@@ -69,7 +69,8 @@ defineOptions({ inheritAttrs: false })
   color: var(--color-error);
 }
 
-.field__error::first-letter {
+.field__error::first-letter,
+.field__label-text::first-letter {
   text-transform: uppercase;
 }
 </style>
