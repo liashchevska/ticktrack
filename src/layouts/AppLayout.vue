@@ -52,7 +52,7 @@ const { user } = storeToRefs(useAuthStore())
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
-  gap: var(--actions-gap);
+  gap: var(--space-md);
 }
 
 .app__header-left,
