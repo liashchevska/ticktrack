@@ -50,8 +50,8 @@ const router = createRouter({
       name: 'password-reset',
       component: PasswordResetView,
       meta: { requiresNoAuth: true }
-    }
-
+    },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 })
 
