@@ -36,11 +36,12 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import { object, string } from 'yup'
+import { object } from 'yup'
 import BaseForm from '@/components/Base/BaseForm.vue'
 import BaseField from '@/components/Base/BaseField.vue'
 import { useRouter } from 'vue-router'
 import AuthLayout from '@/layouts/AuthLayout.vue'
+import { codeRule, emailRule, passwordRule } from '@/utils/validationRules'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -48,12 +49,12 @@ const step = computed(() => auth.isPasswordResetPending ? 'reset' : 'request')
 
 const recoveryEmail = ref('')
 const requestSchema = object({
-  email: string().required().email(),
+  email: emailRule,
 })
 
 const resetSchema = object({
-  key: string().required(),
-  password: string().required()
+  key: codeRule,
+  password: passwordRule
 })
 
 const validationSchema = computed(() => {

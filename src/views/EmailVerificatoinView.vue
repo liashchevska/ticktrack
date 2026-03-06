@@ -13,12 +13,13 @@
 <script setup>
 import BaseField from '@/components/Base/BaseField.vue';
 import { useAuthStore } from '@/stores/auth';
-import { object, string } from 'yup';
+import { object } from 'yup';
 import BaseForm from '@/components/Base/BaseForm.vue';
 import { useRouter } from 'vue-router';
+import { codeRule } from '@/utils/validationRules';
 
 const validationSchema = object({
-  key: string().required()
+  key: codeRule
 })
 const auth = useAuthStore()
 const router = useRouter()

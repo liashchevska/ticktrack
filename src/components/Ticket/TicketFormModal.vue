@@ -24,7 +24,7 @@
 
 <script setup>
 import { toRef, computed } from 'vue'
-import { object, string } from 'yup'
+import { object } from 'yup'
 import BaseForm from '../Base/BaseForm.vue'
 import BaseModal from '../Base/BaseModal.vue'
 import BaseField from '../Base/BaseField.vue'
@@ -32,6 +32,7 @@ import { useEntityForm } from '@/composables/useEntityForm'
 import { useTicketStore } from '@/stores/ticket'
 import { useRoute } from 'vue-router'
 import { useTicketStatusList } from '@/composables/useTicketStatusList'
+import { ticketDescriptionRule, titleRule, ticketStatusRule } from '@/utils/validationRules'
 
 const props = defineProps({
   ticket: {
@@ -48,10 +49,11 @@ const emit = defineEmits(['created', 'updated'])
 const isOpen = defineModel('modelValue')
 
 const { ticketStatusList } = useTicketStatusList()
+
 const ticketValidationSchema = object({
-  title: string().required(),
-  description: string().required(),
-  status: string()
+  title: titleRule,
+  description: ticketDescriptionRule,
+  status: ticketStatusRule
 })
 const { createTicket, updateTicket } = useTicketStore()
 const route = useRoute()
@@ -62,5 +64,4 @@ const { isInUpdateMode, action, successEvent } = useEntityForm({
   updateAction: updateTicket
 })
 const formId = computed(() => isInUpdateMode.value ? 'ticketUpdate' : 'ticketCreate')
-
 </script>

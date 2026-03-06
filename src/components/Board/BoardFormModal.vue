@@ -19,10 +19,11 @@
 import BaseField from '@/components/Base/BaseField.vue'
 import BaseForm from '@/components/Base/BaseForm.vue'
 import { useBoardStore } from '@/stores/board'
-import { object, string } from 'yup'
+import { object } from 'yup'
 import { useEntityForm } from '@/composables/useEntityForm'
 import { toRef, computed } from 'vue'
 import BaseModal from '../Base/BaseModal.vue'
+import { boardDescriptionRule, titleRule } from '@/utils/validationRules'
 
 const { createBoard, updateBoard } = useBoardStore()
 const emit = defineEmits(['created', 'updated'])
@@ -44,9 +45,10 @@ const { isInUpdateMode, action, successEvent } = useEntityForm({
   updateAction: updateBoard
 })
 const formId = computed(() => isInUpdateMode.value ? 'boardUpdate' : 'boardCreate')
+
 const boardValidationSchema = object({
-  title: string().required(),
-  description: string().required()
+  title: titleRule,
+  description: boardDescriptionRule
 })
 
 </script>

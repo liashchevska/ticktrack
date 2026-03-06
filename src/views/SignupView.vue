@@ -20,17 +20,18 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth';
-import { object, string } from 'yup';
+import { object } from 'yup';
 import BaseForm from '@/components/Base/BaseForm.vue';
 import BaseField from '@/components/Base/BaseField.vue';
 import { useRouter } from 'vue-router';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { RouterLink } from 'vue-router';
+import { emailRule, nameRule, passwordRule } from '@/utils/validationRules';
 
 const validationSchema = object({
-  name: string().required(),
-  email: string().required().email(),
-  password: string().required()
+  name: nameRule,
+  email: emailRule,
+  password: passwordRule
 })
 
 const auth = useAuthStore()
