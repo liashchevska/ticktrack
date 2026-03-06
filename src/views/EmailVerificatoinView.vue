@@ -1,13 +1,23 @@
 <template>
-  <BaseForm :schema="validationSchema" :action="auth.verifyEmail" :onSuccess="onSuccess">
-    <template #fields>
-      <BaseField name="key" type="text" />
+  <AuthLayout>
+    <template #header> Verify your email </template>
+
+    <template #default>
+      <BaseForm :schema="validationSchema" :action="auth.verifyEmail" :onSuccess="onSuccess">
+        <template #fields>
+          <BaseField name="key" type="text">Verification code</BaseField>
+        </template>
+        <template #actions>
+          <button class="btn btn--primary" type="submit">Verify</button>
+          <button class="btn btn--secondary" @click="auth.resendVerificationCode">Resend verification code</button>
+        </template>
+      </BaseForm>
     </template>
-    <template #actions>
-      <button class="btn btn--primary" type="submit">Verify</button>
+
+    <template #footer>
+      <RouterLink :to="{ name: 'login' }">Log in</RouterLink>
     </template>
-  </BaseForm>
-  <button class="btn btn--primary" @click="auth.resendVerificationCode">Resend verification code</button>
+  </AuthLayout>
 </template>
 
 <script setup>
@@ -17,6 +27,7 @@ import { object } from 'yup';
 import BaseForm from '@/components/Base/BaseForm.vue';
 import { useRouter } from 'vue-router';
 import { codeRule } from '@/utils/validationRules';
+import AuthLayout from '@/layouts/AuthLayout.vue';
 
 const validationSchema = object({
   key: codeRule
