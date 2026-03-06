@@ -1,6 +1,5 @@
 <template>
-  <div class="field"
-    :class="{ dirty: meta.dirty, valid: meta.touched && meta.valid, invalid: meta.touched && !meta.valid }">
+  <div class="field" :class="{ invalid: meta.touched && !meta.valid }">
     <label class="field__label">
       <span class="field__label-text">
         <slot>{{ props.name }}</slot>
@@ -29,7 +28,8 @@ const props = defineProps({
   as: { type: String, default: 'input' },
 })
 const { value, errors, meta } = useField(props.name, undefined, {
-  syncVModel: true
+  syncVModel: true,
+  validateOnValueUpdate: false
 })
 defineOptions({ inheritAttrs: false })
 </script>
@@ -53,11 +53,11 @@ defineOptions({ inheritAttrs: false })
   border-color: var(--form-element-border-focus);
 }
 
-.field.invalid .field__control,
+/* .field.invalid .field__control,
 .field.invalid .field__control:focus {
   border-color: var(--color-error);
   color: var(--color-error);
-}
+} */
 
 .field__errors {
   list-style: disc;
