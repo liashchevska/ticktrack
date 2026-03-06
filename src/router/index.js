@@ -4,11 +4,10 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import EmailVerificatoinView from '@/views/EmailVerificatoinView.vue'
 import { useAuthStore } from '@/stores/auth'
-import PasswordResetView from '@/views/PasswordResetView.vue'
 import { storeToRefs } from 'pinia'
 import { useBoardStore } from '@/stores/board'
-import BoardDetail from '@/components/Board/BoardDetail.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
+import PasswordResetView from '@/views/PasswordResetView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,7 +46,7 @@ const router = createRouter({
       meta: { requiresVerificationPending: true }
     },
     {
-      path: '/password/request',
+      path: '/password/reset',
       name: 'password-reset',
       component: PasswordResetView,
       meta: { requiresNoAuth: true }
