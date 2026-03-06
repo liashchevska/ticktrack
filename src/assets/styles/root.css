@@ -61,7 +61,7 @@
   --header-padding-bottom: var(--space-md);
 
   --z-modal: 100;
-
+  --modal-width: 30rem;
   --icon-size: 2.5rem;
 
   --sidebar-width: 320px;

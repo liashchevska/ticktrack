@@ -65,7 +65,7 @@ onUnmounted(() => {
   flex-direction: column;
   width: 90%;
   max-height: 90dvh;
-  max-width: 30rem;
+  max-width: var(--modal-width);
   background-color: white;
   border-radius: var(--radius-sm);
   overflow: hidden;
