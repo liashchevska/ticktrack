@@ -8,20 +8,19 @@ import PasswordResetView from '@/views/PasswordResetView.vue'
 import { storeToRefs } from 'pinia'
 import { useBoardStore } from '@/stores/board'
 import BoardDetail from '@/components/Board/BoardDetail.vue'
+import AppLayout from '@/layouts/AppLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', name: 'home', redirect: '/boards' },
+    { path: '/', name: 'home', redirect: '/home' },
     {
-      path: '/boards',
-      name: 'boards',
-      component: HomeView,
+      component: AppLayout,
       children: [
         {
-          path: ':id',
-          name: 'board-detail',
-          component: BoardDetail
+          path: '/home/:id?',
+          name: 'home',
+          component: HomeView
         }
       ],
       meta: {
@@ -40,7 +39,6 @@ const router = createRouter({
       name: 'signup',
       component: SignupView,
       meta: { requiresNoAuth: true }
-
     },
     {
       path: '/email/verify',

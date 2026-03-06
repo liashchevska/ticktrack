@@ -3,13 +3,13 @@
     <BoardList />
   </aside>
   <section class="board" aria-label="Board detail">
-    <RouterView /> <!-- renders BoardDetailView based on route -->
+    <BoardDetail />
   </section>
 </template>
 
 <script setup>
+import BoardDetail from '@/components/Board/BoardDetail.vue';
 import BoardList from '../components/Board/BoardList.vue';
-import { RouterView } from 'vue-router'
 
 </script>
 

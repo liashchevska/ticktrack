@@ -17,7 +17,7 @@
         </template>
       </div>
     </div>
-    <BaseList class="board-list__main" :item-list="boardList" :active-id="activeBoard?.id" @itemClicked="openBoardView"
+    <BaseList class="board-list__main" :item-list="boardList" :active-id="activeBoard?.id" @itemClicked="openBoard"
       v-show="isOpen">
       <template #default="{ item, isActive }">
         {{ item.title }}
@@ -52,8 +52,8 @@ const boardStore = useBoardStore()
 const { boardList } = storeToRefs(boardStore)
 const { activeBoard } = useActiveBoard()
 
-function openBoardView(id) {
-  router.push({ name: 'board-detail', params: { id } })
+function openBoard(id) {
+  router.push({ name: 'home', params: { id } })
 }
 </script>
 
