@@ -50,6 +50,11 @@ const ticketsByStatus = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+.ticket-group .list {
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
