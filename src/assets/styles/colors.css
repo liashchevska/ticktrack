@@ -77,8 +77,6 @@
   --nav-element-active: var(--color-accent);
 
   --sidebar: rgb(158, 158, 255);
-  --seperator: white;
-
+  --dropdown: var(--white);
   --shadow: rgba(0, 0, 0, 0.05);
-  /* --nav-element */
-}
+  }
