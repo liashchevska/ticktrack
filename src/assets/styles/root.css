@@ -71,6 +71,7 @@
   --tickets-grid-gap: var(--space-lg);
 
   --actions-gap: var(--space-sm);
+  --board-actions-width: 165px;
 }
 
 @media (min-width: 1024px) {

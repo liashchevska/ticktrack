@@ -3,9 +3,19 @@
     <div class="board__header">
       <h1 class="board__title"> {{ activeBoard.title }} </h1>
       <div class="board__actions">
-        <button class="btn btn--primary" @click="isCreateTicketOpen = true">New ticket</button>
-        <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
-        <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
+
+        <div class="board__menu">
+          <IconButton @click.stop="toggleMenu(boardMenuId)">
+            <ThreeDotsIcon class="icon-button__icon" />
+          </IconButton>
+
+          <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown fixed-width-menu">
+            <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
+            <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
+          </div>
+        </div>
+
+        <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
       </div>
     </div>
 
@@ -28,10 +38,16 @@ import { useTicketStatusList } from '@/composables/useTicketStatusList'
 import { useActiveBoard } from '@/composables/useActiveBoard'
 import ConfirmDialog from '@/components/Base/ConfirmDialog.vue'
 import TicketFormModal from '@/components/Ticket/TicketFormModal.vue'
+import IconButton from '../Base/IconButton.vue'
+import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg'
+import { useMenu } from '@/composables/useMenu'
 
 const isUpdateBoardOpen = ref(false)
 const isConfirmOpen = ref(false)
 const isCreateTicketOpen = ref(false)
+const boardMenuId = ref('boardActionsMenu')
+
+const { isMenuOpen, toggleMenu } = useMenu()
 
 const route = useRoute()
 const router = useRouter()
@@ -68,16 +84,40 @@ onMounted(async () => {
   padding: var(--space-md) 0;
 }
 
+
 .board__actions {
   display: flex;
   justify-content: center;
   gap: var(--actions-gap);
 }
 
+.board__menu {
+  position: relative;
+}
+
+.board__dropdown {
+  position: absolute;
+  left: calc(var(--actions-gap) + var(--icon-size));
+  top: calc(100% + 6px);
+
+  background: var(--dropdown);
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 140px;
+}
+
+.fixed-width-menu {
+  width: var(--board-actions-width);
+}
+
 @media (min-width: 1024px) {
   .board__header {
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
 
 }
