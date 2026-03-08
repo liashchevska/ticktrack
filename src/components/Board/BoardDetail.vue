@@ -5,8 +5,9 @@
       <div class="board__actions">
 
         <template v-if="isDesktop">
+          <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
           <div class="board__menu">
-            <IconButton @click.stop="toggleMenu(boardMenuId)">
+            <IconButton class="board__menu-trigger" @click.stop="toggleMenu(boardMenuId)">
               <ThreeDotsIcon class="icon-button__icon" />
             </IconButton>
             <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
@@ -14,7 +15,6 @@
               <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
             </div>
           </div>
-          <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
         </template>
 
         <template v-else>
@@ -102,6 +102,7 @@ onMounted(async () => {
 @media (min-width: 1024px) {
   .board__header {
     flex-direction: row;
+    justify-content: space-between;
   }
 
   .board__menu {
@@ -109,9 +110,16 @@ onMounted(async () => {
   }
 
   .board__dropdown {
-    left: calc(var(--actions-gap) + var(--icon-size));
+    right: calc(var(--actions-gap) + var(--icon-size));
     top: calc(100% + 6px);
   }
+
+  .board__menu-trigger {
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    background: var(--color-secondary);
+  }
+
 
   .fixed-width-menu {
     width: var(--actions-menu-width);
