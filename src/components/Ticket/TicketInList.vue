@@ -4,12 +4,11 @@
       <h2>{{ ticket.title }}</h2>
       <div class="ticket__header-menu">
 
-        <IconButton class="trigger" @click="toggleDropdown(ticket.id)">
+        <IconButton @click.stop="toggleMenu(ticketId)">
           <ThreeDotsIcon class="icon-button__icon" />
         </IconButton>
 
-        <template v-if="isDropdownOpen(ticket.id)">
-          <div class="backdrop" @click.self="closeDropdown"></div>
+        <template v-if="isMenuOpen(ticketId)">
           <div class="ticket__dropdown">
             <button class="btn btn--primary" @click="openEdit">Edit</button>
             <button class="btn btn--primary" @click="openDelete">Delete</button>
@@ -31,7 +30,7 @@ import TicketFormModal from './TicketFormModal.vue'
 import IconButton from '../Base/IconButton.vue';
 import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg'
 import { ref } from 'vue'
-import { useDropdown } from '@/composables/useDropdown';
+import { useMenu } from '@/composables/useMenu';
 
 const props = defineProps({
   ticket: Object,
@@ -39,15 +38,16 @@ const props = defineProps({
 })
 const isUpdateOpen = ref(false)
 const isConfirmOpen = ref(false)
+const ticketId = `ticket-${props.ticket.id}`
 
-const { isOpen: isDropdownOpen, toggle: toggleDropdown, close: closeDropdown } = useDropdown()
+const { isMenuOpen, toggleMenu, closeMenu } = useMenu()
 
 function openEdit() {
-  closeDropdown()
+  closeMenu()
   isUpdateOpen.value = true
 }
 function openDelete() {
-  closeDropdown()
+  closeMenu()
   isConfirmOpen.value = true
 }
 </script>
@@ -81,7 +81,6 @@ function openDelete() {
 
 .ticket__dropdown {
   position: absolute;
-  z-index: 20;
   right: 0;
 
   background: var(--dropdown);
@@ -111,18 +110,6 @@ function openDelete() {
 
 .ticket-done {
   border-left: 4px solid var(--color-done);
-}
-
-.backdrop {
-  position: fixed;
-  z-index: 10;
-  inset: 0;
-  background: transparent;
-}
-
-.trigger {
-  position: relative;
-  z-index: 21;
 }
 
 /* .ticket-new .ticket__header {
