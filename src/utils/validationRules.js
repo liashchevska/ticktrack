@@ -21,11 +21,9 @@ const titleRule = string()
   .max(100, "Title cannot exceed 100 characters")
 
 const boardDescriptionRule = string()
-  .required()
   .max(200, "Board description cannot exceed 200 characters")
 
 const ticketDescriptionRule = string()
-  .required()
   .max(300, "Ticket description cannot exceed 300 characters")
 
 const ticketStatusRule = string().required()
