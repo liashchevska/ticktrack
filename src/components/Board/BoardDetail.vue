@@ -9,7 +9,7 @@
             <ThreeDotsIcon class="icon-button__icon" />
           </IconButton>
 
-          <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown fixed-width-menu">
+          <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
             <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
             <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
           </div>
@@ -96,22 +96,12 @@ onMounted(async () => {
 }
 
 .board__dropdown {
-  position: absolute;
   left: calc(var(--actions-gap) + var(--icon-size));
   top: calc(100% + 6px);
-
-  background: var(--dropdown);
-  border: 1px solid #ddd;
-  border-radius: var(--radius-sm);
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  min-width: 140px;
 }
 
 .fixed-width-menu {
-  width: var(--board-actions-width);
+  width: var(--actions-menu-width);
 }
 
 @media (min-width: 1024px) {

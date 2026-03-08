@@ -9,7 +9,7 @@
         </IconButton>
 
         <template v-if="isMenuOpen(ticketId)">
-          <div class="ticket__dropdown">
+          <div class="ticket__dropdown dropdown">
             <button class="btn btn--primary" @click="openEdit">Edit</button>
             <button class="btn btn--primary" @click="openDelete">Delete</button>
           </div>
@@ -80,19 +80,13 @@ function openDelete() {
 }
 
 .ticket__dropdown {
-  position: absolute;
   right: 0;
-
+  padding: var(--space-sm);
+  min-width: var(--actions-menu-width);
   background: var(--dropdown);
   border: 1px solid #ddd;
-
   border-radius: var(--radius-sm);
   box-shadow: 0 6px 20px var(--shadow);
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  padding: var(--space-sm);
 }
 
 .ticket__header,

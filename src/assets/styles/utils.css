@@ -63,3 +63,11 @@
 .btn--danger:hover {
   background-color: var(--color-danger-dark);
 }
+
+.dropdown {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
