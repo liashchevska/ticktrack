@@ -4,18 +4,24 @@
       <h1 class="board__title"> {{ activeBoard.title }} </h1>
       <div class="board__actions">
 
-        <div class="board__menu">
-          <IconButton @click.stop="toggleMenu(boardMenuId)">
-            <ThreeDotsIcon class="icon-button__icon" />
-          </IconButton>
-
-          <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
-            <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
-            <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
+        <template v-if="isDesktop">
+          <div class="board__menu">
+            <IconButton @click.stop="toggleMenu(boardMenuId)">
+              <ThreeDotsIcon class="icon-button__icon" />
+            </IconButton>
+            <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
+              <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
+              <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
+            </div>
           </div>
-        </div>
+          <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
+        </template>
 
-        <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
+        <template v-else>
+          <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">New ticket</button>
+          <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
+          <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
+        </template>
       </div>
     </div>
 
@@ -41,13 +47,16 @@ import TicketFormModal from '@/components/Ticket/TicketFormModal.vue'
 import IconButton from '../Base/IconButton.vue'
 import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg'
 import { useMenu } from '@/composables/useMenu'
+import { useBreakpoint } from '@/composables/useBreakpoint'
 
 const isUpdateBoardOpen = ref(false)
 const isConfirmOpen = ref(false)
 const isCreateTicketOpen = ref(false)
-const boardMenuId = ref('boardActionsMenu')
 
+const boardMenuId = ref('boardActionsMenu')
 const { isMenuOpen, toggleMenu } = useMenu()
+
+const { isDesktop } = useBreakpoint()
 
 const route = useRoute()
 const router = useRouter()
@@ -84,31 +93,28 @@ onMounted(async () => {
   padding: var(--space-md) 0;
 }
 
-
 .board__actions {
   display: flex;
   justify-content: center;
   gap: var(--actions-gap);
 }
 
-.board__menu {
-  position: relative;
-}
-
-.board__dropdown {
-  left: calc(var(--actions-gap) + var(--icon-size));
-  top: calc(100% + 6px);
-}
-
-.fixed-width-menu {
-  width: var(--actions-menu-width);
-}
-
 @media (min-width: 1024px) {
   .board__header {
     flex-direction: row;
-    /* justify-content: space-between; */
   }
 
+  .board__menu {
+    position: relative;
+  }
+
+  .board__dropdown {
+    left: calc(var(--actions-gap) + var(--icon-size));
+    top: calc(100% + 6px);
+  }
+
+  .fixed-width-menu {
+    width: var(--actions-menu-width);
+  }
 }
 </style>
