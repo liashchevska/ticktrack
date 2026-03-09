@@ -8,11 +8,10 @@
         </template>
         <template v-else>
           <IconButton @click="isOpen = !isOpen">
-            <ChevronDownIcon class="icon-button__icon icon-button__chevron "
-              :class="{ 'icon-button__chevron--open': isOpen }" />
+            <ChevronDownIcon class="icon-button__chevron " :class="{ 'icon-button__chevron--open': isOpen }" />
           </IconButton>
           <IconButton @click="isCreateOpen = true">
-            <PlusIcon class="icon-button__icon" />
+            <PlusIcon />
           </IconButton>
         </template>
       </div>

@@ -7,8 +7,8 @@
         <template v-if="isDesktop">
           <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
           <div class="board__menu">
-            <IconButton class="board__menu-trigger" @click.stop="toggleMenu(boardMenuId)">
-              <ThreeDotsIcon class="icon-button__icon" />
+            <IconButton @click.stop="toggleMenu(boardMenuId)">
+              <ThreeDotsIcon />
             </IconButton>
             <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
               <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
@@ -113,13 +113,6 @@ onMounted(async () => {
     right: calc(var(--actions-gap) + var(--icon-size));
     top: calc(100% + 6px);
   }
-
-  .board__menu-trigger {
-    padding: var(--space-xs);
-    border-radius: var(--radius-sm);
-    background: var(--color-secondary);
-  }
-
 
   .fixed-width-menu {
     width: var(--actions-menu-width);

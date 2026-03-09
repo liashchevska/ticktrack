@@ -5,7 +5,7 @@
       <div class="ticket__header-menu">
 
         <IconButton @click.stop="toggleMenu(ticketId)">
-          <ThreeDotsIcon class="icon-button__icon" />
+          <ThreeDotsIcon />
         </IconButton>
 
         <template v-if="isMenuOpen(ticketId)">

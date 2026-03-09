@@ -5,7 +5,7 @@
         <header class="modal__header">
           <h2 class="modal__title"> {{ title }} </h2>
           <IconButton @click="isOpen = false">
-            <CloseIcon class="icon-button__icon" />
+            <CloseIcon />
           </IconButton>
         </header>
         <div class="modal__body">
