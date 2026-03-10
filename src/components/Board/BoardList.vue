@@ -69,15 +69,18 @@ function openBoard(id) {
 .board-list {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--space-md);
   background: var(--sidebar);
+}
+
+.board-list li,
+.board-list__header {
+  padding: var(--space-sm) var(--space-md);
 }
 
 .board-list__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-md) 0;
 }
 
 .board-list__actions {
@@ -90,6 +93,7 @@ function openBoard(id) {
   font-size: var(--text-xl);
 }
 
+/* Change color */
 .btn.board-list__add:hover {
   box-shadow: none;
   background: rgba(0, 0, 0, 0.05);
@@ -100,7 +104,12 @@ function openBoard(id) {
   list-style-position: inside;
 }
 
+.board-list .list__item:hover {
+  background: var(--sidebar-element-hover);
+}
+
 .board-list .list__item--active {
+  background: var(--sidebar-element-active);
   list-style-type: disc;
   font-weight: 700;
 }
@@ -115,7 +124,11 @@ function openBoard(id) {
     height: 100%;
     min-width: var(--sidebar-width);
     background: var(--sidebar);
-    padding: 0 var(--space-lg);
+  }
+
+  .board-list li,
+  .board-list__header {
+    padding: var(--space-sm) var(--space-xl);
   }
 
   .board-list__main {

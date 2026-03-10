@@ -2,7 +2,7 @@
   <div class="app__layout">
     <header class="app__header">
       <div class="app__header-left">
-        <h1 class="app__title">AppTitle</h1>
+        <h1 class="app__title">TickTrack</h1>
       </div>
       <div class="app__header-right">
         <span class="app__user">{{ user.email }}</span>

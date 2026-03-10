@@ -55,10 +55,14 @@ function openDelete() {
 
 <style lang="css">
 .ticket {
-  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
   height: auto;
   min-width: var(--ticket-width);
+  background: var(--color-surface);
+}
+
+.ticket:hover {
+  background: var(--color-surface-darker);
 }
 
 .ticket__header {
@@ -83,7 +87,7 @@ function openDelete() {
   right: 0;
   padding: var(--space-sm);
   min-width: var(--actions-menu-width);
-  background: var(--dropdown);
+  background: var(--color-surface);
   border: 1px solid #ddd;
   border-radius: var(--radius-sm);
   box-shadow: 0 6px 20px var(--shadow);
@@ -94,27 +98,15 @@ function openDelete() {
   padding: var(--space-md) var(--space-lg);
 }
 
-.ticket-new {
-  border-left: 4px solid var(--color-new);
+.ticket-new .ticket {
+  border-left: var(--ticket-border) solid var(--color-new);
 }
 
-.ticket-inprogress {
-  border-left: 4px solid var(--color-active);
+.ticket-active .ticket {
+  border-left: var(--ticket-border) solid var(--color-active);
 }
 
-.ticket-done {
-  border-left: 4px solid var(--color-done);
+.ticket-done .ticket {
+  border-left: var(--ticket-border) solid var(--color-done);
 }
-
-/* .ticket-new .ticket__header {
-  border-left: 4px solid var(--color-new);
-}
-
-.ticket-inprogress .ticket__header {
-  border-left: 4px solid var(--color-active);
-}
-
-.ticket-done .ticket__header {
-  border-left: 4px solid var(--color-done);
-} */
 </style>

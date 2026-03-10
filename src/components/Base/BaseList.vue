@@ -19,6 +19,9 @@ const emit = defineEmits(["itemClicked"])
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+}
+
+.list__item {
+  cursor: pointer;
 }
 </style>

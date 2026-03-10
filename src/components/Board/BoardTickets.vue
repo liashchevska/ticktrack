@@ -1,12 +1,12 @@
 <template>
   <template v-if="isInitialized">
     <div class="board__main">
-      <section class="ticket-group" v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-        <!-- <h2 class="ticket-group__title"> {{ ticketStatus }} </h2> -->
+      <section class="ticket-group" :class="`ticket-${ticketStatus.toLocaleLowerCase()}`"
+        v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
+        <h2 class="ticket-group__title"> {{ ticketStatus }} </h2>
         <BaseList :item-list="ticketGroup">
           <template #default="{ item }">
-            <TicketInList :class="`ticket-${ticketStatus.toLocaleLowerCase()}`" :ticket="item"
-              :onTicketDelete="props.onTicketDelete" />
+            <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />
           </template>
         </BaseList>
       </section>
@@ -50,7 +50,29 @@ const ticketsByStatus = computed(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--space-md);
   width: 100%;
+}
+
+.ticket-group__title {
+  text-align: center;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) 0;
+  align-self: flex-start;
+  color: white;
+}
+
+.ticket-new .ticket-group__title {
+  background: var(--color-new);
+}
+
+.ticket-active .ticket-group__title {
+  background: var(--color-active);
+}
+
+.ticket-done .ticket-group__title {
+  background: var(--color-done);
 }
 
 .ticket-group .list {

@@ -63,11 +63,11 @@ onUnmounted(() => {
 .modal {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  max-height: 90dvh;
-  max-width: var(--modal-width);
+  width: 100dvw;
+  height: 100dvh;
   background-color: white;
   border-radius: var(--radius-sm);
+  box-shadow: 0 10px 10px var(--color-shadow);
   overflow: hidden;
 }
 
@@ -107,8 +107,11 @@ onUnmounted(() => {
 
 @media (min-width: 1024px) {
   .modal {
+    max-width: var(--modal-width);
     width: 100%;
+
     max-height: 90vh;
+    height: auto;
   }
 }
 </style>

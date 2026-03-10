@@ -7,7 +7,7 @@
         <template v-if="isDesktop">
           <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
           <div class="board__menu">
-            <IconButton @click.stop="toggleMenu(boardMenuId)">
+            <IconButton class="btn--secondary" @click.stop="toggleMenu(boardMenuId)">
               <ThreeDotsIcon />
             </IconButton>
             <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
@@ -28,7 +28,8 @@
     <BoardTickets :board="activeBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
 
     <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
-    <BoardFormModal v-model="isUpdateBoardOpen" :board="activeBoard" @updated="isUpdateBoardOpen = false" />
+    <BoardFormModal v-model="isUpdateBoardOpen" :board="activeBoard" @updated="isUpdateBoardOpen = false"
+      title="Edit board" />
     <TicketFormModal v-model="isCreateTicketOpen" @created="isCreateTicketOpen = false" title="Create new ticket" />
   </template>
 </template>
