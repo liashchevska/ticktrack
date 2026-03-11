@@ -1,6 +1,7 @@
 <template>
   <div class="auth__layout">
     <header class="auth__header">
+      <h1> TickTrack </h1>
       <slot name="header"></slot>
     </header>
     <main class="auth__main">
@@ -37,7 +38,9 @@
   align-items: center;
 }
 
-.auth__header {}
+.auth__header {
+  gap: var(--space-md)
+}
 
 .auth__main {}
 
