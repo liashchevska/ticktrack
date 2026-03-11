@@ -22,6 +22,7 @@ import { useAuthStore } from '@/stores/auth';
 import LogoutButton from '@/components/LogoutButton.vue';
 
 const { user } = storeToRefs(useAuthStore())
+
 </script>
 
 <style lang="css">
@@ -41,11 +42,6 @@ const { user } = storeToRefs(useAuthStore())
 .app__header {
   display: flex;
   background: var(--sidebar);
-}
-
-.app__title {
-  font-size: var(--text-app-title);
-  font-style: italic;
 }
 
 .app__header-right {
@@ -74,7 +70,6 @@ const { user } = storeToRefs(useAuthStore())
   .app__user {
     display: initial;
     font-style: italic;
-    font-size: var(--text-lg);
   }
 
   .app__main {
