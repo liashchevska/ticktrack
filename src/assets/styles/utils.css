@@ -64,6 +64,15 @@
   background-color: var(--color-danger-dark);
 }
 
+.btn--accent {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.btn--accent:hover {
+  background-color: var(--color-accent-dark);
+}
+
 .dropdown {
   position: absolute;
   z-index: 10;

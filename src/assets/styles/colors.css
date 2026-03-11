@@ -16,7 +16,7 @@
   --color-secondary-dark: color-mix(in srgb, var(--color-secondary), black 15%);
 
   --color-accent-light: #ee8e44;
-  --color-accent: #9ac6c5;
+  --color-accent: #ee8e44;
   --color-accent-dark: #ea7317;
 
   --color-danger: #ef4444;

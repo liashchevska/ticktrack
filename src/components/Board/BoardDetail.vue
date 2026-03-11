@@ -18,7 +18,7 @@
         </template>
 
         <template v-else>
-          <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">New ticket</button>
+          <button class="btn btn--accent" @click="isCreateTicketOpen = true">New ticket</button>
           <button class="btn btn--primary" @click="isUpdateBoardOpen = true">Edit board</button>
           <button class="btn btn--primary" @click="isConfirmOpen = true">Delete board</button>
         </template>
