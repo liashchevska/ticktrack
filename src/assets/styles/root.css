@@ -69,7 +69,7 @@
 
   --ticket-width: 340px;
   --ticket-border: 4.5px;
-  --tickets-grid-gap: var(--space-xl);
+  --tickets-grid-gap: var(--space-xxl);
 
   --actions-gap: var(--space-sm);
   --actions-menu-width: 165px;
