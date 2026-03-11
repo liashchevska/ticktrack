@@ -1,7 +1,7 @@
 <template>
   <template v-if="activeBoard">
     <div class="board__header">
-      <h1 class="board__title"> {{ activeBoard.title }} </h1>
+      <h2 class="board__title"> {{ activeBoard.title }} </h2>
       <div class="board__actions">
 
         <template v-if="isDesktop">

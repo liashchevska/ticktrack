@@ -1,7 +1,7 @@
 <template>
   <nav class="board-list" aria-label="Board list navigation">
     <div class="board-list__header">
-      <h1 class="board-list__title">Boards</h1>
+      <h2 class="board-list__title">Boards</h2>
       <div class="board-list__actions">
         <template v-if="isDesktop">
           <button class="btn board-list__add" @click="isCreateOpen = true">+ New</button>
