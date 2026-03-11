@@ -73,7 +73,7 @@ function openDelete() {
   padding-bottom: var(--space-xs);
 }
 
-.ticket__header h2 {
+.ticket__header h3 {
   overflow-wrap: anywhere;
 }
 
@@ -91,7 +91,6 @@ function openDelete() {
   border-radius: var(--radius-sm);
   box-shadow: 0 6px 20px var(--shadow);
 }
-
 
 .ticket__main {
   padding: var(--space-md);
