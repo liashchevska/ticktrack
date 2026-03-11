@@ -57,7 +57,6 @@ function openDelete() {
 .ticket {
   border-radius: var(--radius-sm);
   height: auto;
-  min-width: var(--ticket-width);
   background: var(--color-surface);
 }
 
