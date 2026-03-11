@@ -94,7 +94,7 @@ function openBoard(id) {
 }
 
 /* Change color */
-.btn.board-list__add:hover {
+.board-list__add:hover {
   box-shadow: none;
   background: rgba(0, 0, 0, 0.05);
 }

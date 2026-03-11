@@ -17,7 +17,6 @@
   width: var(--icon-size);
   height: var(--icon-size);
 
-  padding: var(--space-xs);
   border-radius: var(--radius-sm);
 
   cursor: pointer;
@@ -50,11 +49,4 @@
   outline: 2px solid var(--color-primary-dark);
   outline-offset: 2px;
 }
-
-
-/* .icon-button__icon {
-  width: 100%;
-  height: 100%;
-  display: block;
-} */
 </style>

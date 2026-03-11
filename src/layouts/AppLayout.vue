@@ -73,6 +73,8 @@ const { user } = storeToRefs(useAuthStore())
 @media (min-width: 1024px) {
   .app__user {
     display: initial;
+    font-style: italic;
+    font-size: var(--text-lg);
   }
 
   .app__main {
@@ -91,7 +93,7 @@ const { user } = storeToRefs(useAuthStore())
 
   .app__header-left,
   .app__header-right {
-    padding: var(--space-md);
+    padding: var(--tickets-grid-gap);
   }
 
 }

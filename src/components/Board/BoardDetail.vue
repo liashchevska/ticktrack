@@ -7,7 +7,7 @@
         <template v-if="isDesktop">
           <button class="btn btn--primary fixed-width-menu" @click="isCreateTicketOpen = true">+ New ticket</button>
           <div class="board__menu">
-            <IconButton class="btn--secondary" @click.stop="toggleMenu(boardMenuId)">
+            <IconButton class="btn--primary board__icon" @click.stop="toggleMenu(boardMenuId)">
               <ThreeDotsIcon />
             </IconButton>
             <div v-if="isMenuOpen(boardMenuId)" class="board__dropdown dropdown fixed-width-menu">
@@ -100,6 +100,14 @@ onMounted(async () => {
   gap: var(--actions-gap);
 }
 
+.board__icon path {
+  fill: white;
+}
+
+.board__icon {
+  height: 100%;
+}
+
 @media (min-width: 1024px) {
   .board__header {
     flex-direction: row;
@@ -113,10 +121,6 @@ onMounted(async () => {
   .board__dropdown {
     right: calc(var(--actions-gap) + var(--icon-size));
     top: calc(100% + 6px);
-  }
-
-  .fixed-width-menu {
-    width: var(--actions-menu-width);
   }
 }
 </style>

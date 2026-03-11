@@ -27,6 +27,10 @@ h2 {
   font-size: var(--text-xl);
 }
 
+h3 {
+  font-size: var(--text-lg);
+}
+
 small {
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wide);

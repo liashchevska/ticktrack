@@ -3,7 +3,7 @@
     <div class="board__main">
       <section class="ticket-group" :class="`ticket-${ticketStatus.toLocaleLowerCase()}`"
         v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
-        <h2 class="ticket-group__title"> {{ ticketStatus }} </h2>
+        <h3 class="ticket-group__title"> {{ ticketStatus }} </h3>
         <BaseList :item-list="ticketGroup">
           <template #default="{ item }">
             <TicketInList :ticket="item" :onTicketDelete="props.onTicketDelete" />

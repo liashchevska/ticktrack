@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn--primary" @click="isConfirmOpen = true">Logout</button>
+  <button class="btn btn--primary fixed-width-menu" @click="isConfirmOpen = true">Logout</button>
   <ConfirmDialog v-model="isConfirmOpen" @confirm="logout" />
 </template>
 

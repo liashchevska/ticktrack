@@ -1,7 +1,7 @@
 <template>
   <div :class="['ticket', $attrs.class]">
     <div class="ticket__header">
-      <h2>{{ ticket.title }}</h2>
+      <h3>{{ ticket.title }}</h3>
       <div class="ticket__header-menu">
 
         <IconButton @click.stop="toggleMenu(ticketId)">
@@ -58,6 +58,7 @@ function openDelete() {
   border-radius: var(--radius-sm);
   height: auto;
   background: var(--color-surface);
+  box-shadow: 0 1px 2px var(--shadow);
 }
 
 .ticket:hover {
@@ -68,9 +69,8 @@ function openDelete() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top-right-radius: var(--radius-sm);
-  border-top-left-radius: var(--radius-sm);
-  padding: var(--space-sm) 0;
+  padding: var(--space-md);
+  padding-bottom: var(--space-xs);
 }
 
 .ticket__header h2 {
@@ -92,9 +92,10 @@ function openDelete() {
   box-shadow: 0 6px 20px var(--shadow);
 }
 
-.ticket__header,
+
 .ticket__main {
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-md);
+  padding-top: var(--space-xs);
 }
 
 .ticket-new .ticket {

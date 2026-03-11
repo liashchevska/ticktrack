@@ -3,3 +3,7 @@
 @import './root.css';
 @import './tags.css';
 @import './utils.css';
+
+body {
+  background: var(--color-bg);
+}
