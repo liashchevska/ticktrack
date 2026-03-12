@@ -77,6 +77,9 @@ const ticketsByStatus = computed(() => {
 
 .ticket-group .list {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 @media (min-width: 1024px) {
