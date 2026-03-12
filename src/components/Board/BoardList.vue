@@ -88,12 +88,15 @@ function openBoard(id) {
   gap: var(--space-xs);
 }
 
+.board-list__actions button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .board-list__add {
   background: none;
   font-size: var(--text-xl);
 }
 
-/* Change color */
 .board-list__add:hover {
   box-shadow: none;
   background: rgba(0, 0, 0, 0.05);
