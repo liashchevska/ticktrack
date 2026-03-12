@@ -28,7 +28,7 @@ const ticketDescriptionRule = string()
   .max(300, "Ticket description cannot exceed 300 characters")
   .nullable()
 
-const ticketStatusRule = string().required()
+const ticketStatusRule = string()
 
 export {
   passwordRule,
