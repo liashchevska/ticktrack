@@ -2,7 +2,7 @@
   <div class="app__layout">
     <header class="app__header">
       <div class="app__header-left">
-        <h1 class="app__title">TickTrack</h1>
+        <h1 class="app__title">TickTrack </h1>
       </div>
       <div class="app__header-right">
         <span class="app__user">{{ user.email }}</span>
@@ -20,7 +20,6 @@
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth';
 import LogoutButton from '@/components/LogoutButton.vue';
-
 const { user } = storeToRefs(useAuthStore())
 
 </script>
@@ -41,20 +40,21 @@ const { user } = storeToRefs(useAuthStore())
 
 .app__header {
   display: flex;
+  align-items: center;
   background: var(--sidebar);
-}
-
-.app__header-right {
-  flex-grow: 1;
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-md);
 }
 
 .app__header-left,
 .app__header-right {
-  padding: var(--space-sm);
+  display: flex;
   align-items: center;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.app__header-right {
+  flex-grow: 1;
+  justify-content: flex-end;
+  gap: var(--space-md);
 }
 
 .app__main {
@@ -65,6 +65,11 @@ const { user } = storeToRefs(useAuthStore())
 .app__user {
   display: none;
 }
+
+.app__title {
+  font-size: var(--text-xl);
+}
+
 
 @media (min-width: 1024px) {
   .app__user {
@@ -88,7 +93,8 @@ const { user } = storeToRefs(useAuthStore())
 
   .app__header-left,
   .app__header-right {
-    padding: var(--tickets-grid-gap);
+    height: 100%;
+    padding: var(--space-md) var(--tickets-grid-gap);
   }
 
 }
