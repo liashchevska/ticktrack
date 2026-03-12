@@ -74,7 +74,7 @@ function openBoard(id) {
 
 .board-list li,
 .board-list__header {
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-md);
 }
 
 .board-list__header {
@@ -115,7 +115,7 @@ function openBoard(id) {
 }
 
 .board-list__main {
-  padding: var(--space-sm) 0;
+  padding: var(--space-xs) 0;
   border-top: 1px solid var(--color-border-dark);
 }
 
