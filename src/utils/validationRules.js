@@ -22,9 +22,11 @@ const titleRule = string()
 
 const boardDescriptionRule = string()
   .max(200, "Board description cannot exceed 200 characters")
+  .nullable()
 
 const ticketDescriptionRule = string()
   .max(300, "Ticket description cannot exceed 300 characters")
+  .nullable()
 
 const ticketStatusRule = string().required()
 
