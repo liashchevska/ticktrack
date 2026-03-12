@@ -36,7 +36,6 @@
 
 .icon-button:hover {
   background: var(--color-surface-hover);
-  border-color: #ddd;
   box-shadow: 0 1px 2px var(--shadow);
 }
 
