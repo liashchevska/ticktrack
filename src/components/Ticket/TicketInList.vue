@@ -1,5 +1,5 @@
 <template>
-  <div :draggable="true" @dragstart="onDragStart($event, ticket.id)" :class="['ticket', $attrs.class]">
+  <div :draggable="!isMobile" @dragstart="onDragStart($event, ticket.id)" :class="['ticket', $attrs.class]">
     <div class="ticket__header">
       <h3>{{ ticket.title }}</h3>
       <div class="ticket__header-menu">
@@ -25,13 +25,14 @@
 </template>
 
 <script setup>
-import ConfirmDialog from '../Base/ConfirmDialog.vue';
+import ConfirmDialog from '../Base/ConfirmDialog.vue'
 import TicketFormModal from './TicketFormModal.vue'
-import IconButton from '../Base/IconButton.vue';
+import IconButton from '../Base/IconButton.vue'
 import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg'
 import { ref } from 'vue'
-import { useMenu } from '@/composables/useMenu';
-import { useDragDrop } from '@/composables/useDragDrop';
+import { useMenu } from '@/composables/useMenu'
+import { useDragDrop } from '@/composables/useDragDrop'
+import MobileDetect from 'mobile-detect'
 
 const props = defineProps({
   ticket: Object,
@@ -47,11 +48,13 @@ function openEdit() {
   closeMenu()
   isUpdateOpen.value = true
 }
+
 function openDelete() {
   closeMenu()
   isConfirmOpen.value = true
 }
 
+const isMobile = new MobileDetect(window.navigator.userAgent).mobile()
 const { onDragStart } = useDragDrop()
 </script>
 
