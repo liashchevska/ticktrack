@@ -1,8 +1,9 @@
 <template>
   <template v-if="isInitialized">
     <div class="board__main">
-      <section class="ticket-group" :class="`ticket-${ticketStatus.toLocaleLowerCase()}`"
-        v-for="(ticketGroup, ticketStatus) in ticketsByStatus" :key="ticketStatus">
+      <section @dragover.prevent @dragenter.prevent @drop="onDrop($event, ticketStatus)" class="ticket-group"
+        :class="`ticket-${ticketStatus.toLocaleLowerCase()}`" v-for="(ticketGroup, ticketStatus) in ticketsByStatus"
+        :key="ticketStatus">
         <h3 class="ticket-group__title"> {{ ticketStatus }} </h3>
         <BaseList :item-list="ticketGroup">
           <template #default="{ item }">
@@ -19,6 +20,7 @@ import { useTicketStatusList } from '@/composables/useTicketStatusList';
 import BaseList from '../Base/BaseList.vue';
 import TicketInList from '../Ticket/TicketInList.vue';
 import { computed } from 'vue'
+import { useDragDrop } from '@/composables/useDragDrop';
 
 const props = defineProps({
   board: Object,
@@ -37,6 +39,8 @@ const ticketsByStatus = computed(() => {
   })
   return buckets
 })
+
+const { onDrop } = useDragDrop()
 </script>
 
 <style lang="css">

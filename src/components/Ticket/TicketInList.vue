@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ticket', $attrs.class]">
+  <div :draggable="true" @dragstart="onDragStart($event, ticket.id)" :class="['ticket', $attrs.class]">
     <div class="ticket__header">
       <h3>{{ ticket.title }}</h3>
       <div class="ticket__header-menu">
@@ -31,6 +31,7 @@ import IconButton from '../Base/IconButton.vue';
 import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg'
 import { ref } from 'vue'
 import { useMenu } from '@/composables/useMenu';
+import { useDragDrop } from '@/composables/useDragDrop';
 
 const props = defineProps({
   ticket: Object,
@@ -50,6 +51,8 @@ function openDelete() {
   closeMenu()
   isConfirmOpen.value = true
 }
+
+const { onDragStart } = useDragDrop()
 </script>
 
 
