@@ -39,7 +39,7 @@ class Board(models.Model):
 class Ticket(models.Model):
     class Status(models.TextChoices):
         NEW = "NEW", _('New')
-        IN_PROGRESS = "INPROGRESS", _('In progress')
+        ACTIVE = "ACTIVE", _('Active')
         DONE = "DONE", _('Done')
     
     board = models.ForeignKey(Board, on_delete=models.deletion.CASCADE, related_name='tickets')
