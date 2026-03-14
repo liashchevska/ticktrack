@@ -36,6 +36,6 @@ const auth = useAuthStore()
 const router = useRouter()
 
 const onSuccess = () => {
-  router.push({ name: 'home' })
+  router.push({ name: 'home', params: { id: '' } })
 }
 </script>

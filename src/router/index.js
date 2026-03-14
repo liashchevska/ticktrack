@@ -12,13 +12,13 @@ import PasswordResetView from '@/views/PasswordResetView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', name: 'home', redirect: '/home' },
     {
+      path: '/home/:id?',
       component: AppLayout,
       children: [
         {
-          path: '/home/:id?',
           name: 'home',
+          path: '',
           component: HomeView
         }
       ],
@@ -51,7 +51,7 @@ const router = createRouter({
       component: PasswordResetView,
       meta: { requiresNoAuth: true }
     },
-    { path: '/:pathMatch(.*)*', redirect: '/' },
+    { path: '/:pathMatch(.*)*', redirect: '/home' },
   ],
 })
 

@@ -38,6 +38,6 @@ const onSuccess = () => {
     router.push({ name: 'email-verify' })
     return
   }
-  router.push({ name: 'home' })
+  router.push({ name: 'home', params: { id: '' } })
 }
 </script>
