@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -47,6 +48,28 @@ class Ticket(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     due_at = models.DateTimeField(null=True)
     done_at = models.DateTimeField(null=True)
+    
     status = models.CharField(choices=Status, default=Status.NEW, max_length=10)
+    statusChangedAt = models.DateTimeField(auto_now_add=True)
+    
     title = models.CharField(max_length=175)
     description = models.TextField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['statusChangedAt']
+
+    @classmethod
+    def from_db(cls, db, field_names, values):
+        instance = super().from_db(db, field_names, values)
+        _loaded_values = dict(zip(field_names, values))
+        instance._loaded_status = _loaded_values.get('status')
+        return instance
+
+    def save(self, **kwargs):
+        if not self.pk: 
+            super().save(**kwargs)
+            return
+
+        if self.status != self._loaded_status:
+            self.statusChangedAt = timezone.now()
+        super().save(**kwargs)
