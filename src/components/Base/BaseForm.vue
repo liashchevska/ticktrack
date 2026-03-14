@@ -29,9 +29,9 @@ const { handleSubmit, setFieldError, resetForm } = useForm({
 })
 
 const { submit } = useFormSubmit({
-  onSuccess: () => {
+  onSuccess: (result) => {
     resetForm()
-    props.onSuccess?.()
+    props.onSuccess?.(result)
   },
   onError: (errors) => { setErrors(errors, setFieldError) }
 })

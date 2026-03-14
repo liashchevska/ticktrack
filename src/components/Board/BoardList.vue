@@ -22,7 +22,7 @@
         {{ item.title }}
       </template>
     </BaseList>
-    <BoardFormModal v-model="isCreateOpen" @created="isCreateOpen = false" title="Create new board" />
+    <BoardFormModal v-model="isCreateOpen" @created="openBoard" title="Create new board" />
   </nav>
 </template>
 
@@ -52,6 +52,7 @@ const { boardList } = storeToRefs(boardStore)
 const { activeBoard } = useActiveBoard()
 
 function openBoard(id) {
+  isCreateOpen.value = false
   router.push({ name: 'home', params: { id } })
 }
 </script>

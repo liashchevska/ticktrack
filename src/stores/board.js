@@ -34,6 +34,7 @@ export const useBoardStore = defineStore('board', () => {
     const { ok, data, errors } = await request(API.BOARD.LIST, 'POST', payload)
     if (!ok) { throw errors }
     boardList.value = [...boardList.value, data]
+    return data
   }
 
   async function updateBoard(id, payload) {

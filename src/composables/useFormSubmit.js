@@ -1,8 +1,8 @@
 export function useFormSubmit({ onSuccess, onError }) {
   async function submit({ action }) {
     try {
-      await action()
-      await onSuccess?.()
+      const result = await action()
+      await onSuccess?.(result)
     } catch (e) {
       onError?.(e)
     }
