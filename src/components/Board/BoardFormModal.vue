@@ -4,7 +4,6 @@
       :on-success="(result) => emit(successEvent, result?.id)">
       <template #fields>
         <BaseField name="title" type="text">title:</BaseField>
-        <BaseField name="description" as="textarea" type="text">description:</BaseField>
       </template>
       <template #actions>
         <Teleport defer to=".modal__footer">
@@ -23,7 +22,7 @@ import { object } from 'yup'
 import { useEntityForm } from '@/composables/useEntityForm'
 import { toRef, computed } from 'vue'
 import BaseModal from '../Base/BaseModal.vue'
-import { boardDescriptionRule, titleRule } from '@/utils/validationRules'
+import { titleRule } from '@/utils/validationRules'
 
 const { createBoard, updateBoard } = useBoardStore()
 const emit = defineEmits(['created', 'updated'])
@@ -48,7 +47,6 @@ const formId = computed(() => isInUpdateMode.value ? 'boardUpdate' : 'boardCreat
 
 const boardValidationSchema = object({
   title: titleRule,
-  description: boardDescriptionRule
 })
 
 </script>

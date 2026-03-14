@@ -20,10 +20,6 @@ const titleRule = string()
   .min(5, 'Title must be at least 5 characters')
   .max(100, "Title cannot exceed 100 characters")
 
-const boardDescriptionRule = string()
-  .max(200, "Board description cannot exceed 200 characters")
-  .nullable()
-
 const ticketDescriptionRule = string()
   .max(300, "Ticket description cannot exceed 300 characters")
   .nullable()
@@ -36,7 +32,6 @@ export {
   codeRule,
   nameRule,
   titleRule,
-  boardDescriptionRule,
   ticketDescriptionRule,
   ticketStatusRule
 }
