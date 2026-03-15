@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 import { request } from "@/utils/request";
 import { API } from "@/endpoints";
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export const useBoardStore = defineStore('board', () => {
   const isInitialized = ref(false)
   const isInitializing = ref(false)
   const boardList = ref([])
+  // List of board IDs as strings because it's used to check if the router's ID parameter corresponds to an existing board
+  const boardIdsList = computed(() => boardList.value.map(item => String(item.id)))
 
   function $reset() {
     boardList.value = []
@@ -52,6 +54,7 @@ export const useBoardStore = defineStore('board', () => {
   return {
     isInitialized,
     boardList,
+    boardIdsList,
     initBoardList,
     $reset,
     fetchBoardList,
