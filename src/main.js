@@ -6,14 +6,14 @@ import router from './router'
 import { API } from './endpoints'
 
 import './assets/styles/main.css'
+import { request } from './utils/request'
 
 async function bootstrap(params) {
-  await fetch(API.CSRF, { credentials: 'include' })
-
   const app = createApp(App)
   app.use(createPinia())
   app.use(router)
 
+  await request(API.CSRF)
   app.mount('#app')
 }
 

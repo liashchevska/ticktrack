@@ -1,5 +1,7 @@
 import { API } from "@/endpoints";
+import { useGlobalErrorStore } from "@/stores/error";
 import Cookies from "js-cookie";
+import { useRouter } from "vue-router";
 
 let csrfRefreshPromise = null
 
@@ -12,6 +14,7 @@ function refreshCsrfToken() {
 }
 
 async function request(endpoint, method, payload, triedCsrfTokenRefresh = false) {
+  const errorStore = useGlobalErrorStore()
   const csrftoken = Cookies.get('csrftoken')
   const options = {
     method: method,
@@ -26,13 +29,30 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
     options.headers['Content-Type'] = 'application/json'
     options.body = JSON.stringify(payload)
   }
-  const response = await fetch(endpoint, options)
-  if (response.status === 403 && !triedCsrfTokenRefresh) {
-    await refreshCsrfToken()
-    return request(endpoint, method, payload, true)
+
+  try {
+    errorStore.reset()
+
+    const response = await fetch(endpoint, options)
+    if (response.status === 403 && !triedCsrfTokenRefresh) {
+      await refreshCsrfToken()
+      return request(endpoint, method, payload, true)
+    }
+    const parsed = await parseResponse(response)
+    return normalizeResponse(parsed)
   }
-  const parsed = await parseResponse(response)
-  return normalizeResponse(parsed)
+  catch (error) {
+    // Catch global errors such as server down and save them directly to store
+    const normalized = {
+      ok: false,
+      status: null,
+      statusText: error.message || 'Network Error',
+      errors: [error.message || 'Server Unreachable'],
+      data: null
+    }
+    errorStore.set(normalized)
+    return normalized
+  }
 }
 
 async function parseResponse(response) {
