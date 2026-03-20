@@ -84,14 +84,33 @@ WSGI_APPLICATION = 'tickettracker.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+DATABASE_ENGINE = os.getenv("DATABASE_ENGINE", "sqlite3")
+DATABASE_NAME = os.getenv("DATABASE_NAME")
+DATABASE_USERNAME = os.getenv("DATABASE_USERNAME", "")
+DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD", "")
+DATABASE_HOST = os.getenv("DATABASE_HOST", "")
+DATABASE_PORT = os.getenv("DATABASE_PORT", "")
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DATABASE_ENGINE == "sqlite3":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": DATABASE_NAME or BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else: 
+    if not DATABASE_NAME:
+        raise("DATABASE_NAME must be set.")
+    DATABASES = {
+        'default': {
+            'ENGINE': f'django.db.backends.{DATABASE_ENGINE}',
+            'NAME': os.getenv('DATABASE_NAME', BASE_DIR / 'db.sqlite3'),
+            'USER': os.getenv('DATABASE_USERNAME', 'user'),
+            'PASSWORD': os.getenv('DATABASE_PASSWORD', ''),
+            'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
+            'PORT': os.getenv('DATABASE_PORT', 5432)
+        }
+    }
 
 
 # Password validation
