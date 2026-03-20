@@ -1,0 +1,87 @@
+/* Variables */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap');
+
+:root {
+  /* Typography */
+  --font-family-primary: "IBM Plex Mono";
+  --font-family-secondary: "IBM Plex Mono";
+  --font-app-title: "IBM Plex Mono";
+  --font-fallback: "IBM Plex Mono";
+
+  --text-base: 1.125rem;
+  --ratio: 1.125;
+  /*
+  sm - secondary info
+  md - base size, body, p
+  lg - subsection headings
+  xl - section headings
+  xxl - site title
+  */
+  --text-sm: calc(var(--text-base) / var(--ratio));
+  --text-md: var(--text-base);
+  --text-lg: calc(var(--text-base) * var(--ratio));
+  --text-xl: calc(var(--text-base) * var(--ratio) * var(--ratio));
+  --text-xxl: calc(var(--text-base) * var(--ratio) * var(--ratio) * var(--ratio));
+  --text-app-title: 2.0rem;
+  /*
+    compact - errors
+    tight - headings
+    normal - body
+  */
+  --line-height-compact: 1.05;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+
+  /*
+    tight - headings
+    wide - small text, uppercase
+  */
+
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  --space-unit: 1rem;
+  --space-xxs: calc(0.125 * var(--space-unit));
+  --space-xs: calc(0.25 * var(--space-unit));
+  --space-sm: calc(0.5 * var(--space-unit));
+  --space-md: calc(0.75 * var(--space-unit));
+  --space-lg: calc(1 * var(--space-unit));
+  --space-xl: calc(1.5 * var(--space-unit));
+  --space-xxl: calc(2 * var(--space-unit));
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --header-padding-top: var(--space-lg);
+  --header-padding-bottom: var(--space-md);
+
+  --z-modal: 100;
+  --modal-width: 30rem;
+  --icon-size: 2.5rem;
+
+  --sidebar-width: 320px;
+  --sidebar-pd-left: var(--space-lg);
+
+  --ticket-width: 340px;
+  --ticket-border: 4.5px;
+  --tickets-grid-gap: var(--space-xl);
+
+  --actions-gap: var(--space-sm);
+  --actions-menu-width: 165px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --text-base: 1.125rem;
+  }
+}
+
+[data-theme="dark"] {
+  --text-primary: #f5f5f5;
+  --text-secondary: #bbbbbb;
+}
