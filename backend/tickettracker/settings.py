@@ -4,13 +4,18 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+def get_list(env_var, default=None):
+    value = os.getenv(env_var)
+    if not value:
+        return default or []
+    return [v.strip() for v in value.split(",") if v.strip()]
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY must be set")
 
 DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = get_list("DJANGO_ALLOWED_HOSTS", ["127.0.0.1", "localhost"])
 
 # Application definition
 INSTALLED_APPS = [
@@ -127,13 +132,15 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-SECURE_SSL_REDIRECT = False
-SECURE_PROXY_SSL_HEADER = None
+
+
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Cross Site Request Forgery Protection
 CSRF_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SAMESITE = "Lax"
-CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+CSRF_TRUSTED_ORIGINS = get_list("DJANGO_CSRF_TRUSTED_ORIGINS")
 
 SESSION_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_SAMESITE = "Lax"
@@ -142,7 +149,7 @@ SESSION_COOKIE_HTTPONLY = True
 # Cross-Origin Resource Sharing
 from corsheaders.defaults import default_headers
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+CORS_ALLOWED_ORIGINS = get_list("CORS_ALLOWED_ORIGINS")
 CORS_ALLOW_HEADERS = (
     *default_headers,
     "x-session-token",
