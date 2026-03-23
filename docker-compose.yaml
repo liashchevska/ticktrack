@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+     - db
+    expose:
+      - "8000"
+    env_file:
+      - ./.env
+  
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    
+  
+volumes:
+  db-data:
