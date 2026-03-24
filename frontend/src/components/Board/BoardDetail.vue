@@ -27,7 +27,12 @@
 
     <BoardTickets :board="activeBoard" :tickets="tickets" :onTicketDelete="onTicketDelete" />
 
-    <ConfirmDialog v-model="isConfirmOpen" @confirm="deleteBoard" />
+    <ConfirmDialog title="Delete board" v-model="isConfirmOpen" @confirm="deleteBoard">
+      <template #message>
+        <p> Are you sure you want to delete this board? </p>
+        <p> All tickets associated with it will also be deleted. </p>
+      </template>
+    </ConfirmDialog>
     <BoardFormModal v-model="isUpdateBoardOpen" :board="activeBoard" @updated="isUpdateBoardOpen = false"
       title="Edit board" />
     <TicketFormModal v-model="isCreateTicketOpen" @created="isCreateTicketOpen = false" title="Create new ticket" />

@@ -20,7 +20,11 @@
       {{ ticket.description }}
     </div>
   </div>
-  <ConfirmDialog v-model="isConfirmOpen" @confirm="onTicketDelete(ticket.id)" />
+  <ConfirmDialog title="Delete ticket" v-model="isConfirmOpen" @confirm="onTicketDelete(ticket.id)">
+    <template #message>
+      <p> Are you sure you want to delete this ticket? </p>
+    </template>
+  </ConfirmDialog>
   <TicketFormModal v-model="isUpdateOpen" :ticket="props.ticket" @updated="isUpdateOpen = false" title="Edit ticket" />
 </template>
 

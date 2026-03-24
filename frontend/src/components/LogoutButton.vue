@@ -1,6 +1,10 @@
 <template>
   <button class="btn btn--primary fixed-width-menu" @click="isConfirmOpen = true">Logout</button>
-  <ConfirmDialog v-model="isConfirmOpen" @confirm="logout" />
+  <ConfirmDialog title="Log out" v-model="isConfirmOpen" @confirm="logout">
+    <template #message>
+      <p> Are you sure you want to log out? </p>
+    </template>
+  </ConfirmDialog>
 </template>
 
 <script setup>
