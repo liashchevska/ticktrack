@@ -5,8 +5,10 @@
         <h1 class="app__title">TickTrack </h1>
       </div>
       <div class="app__header-right">
-        <button class="btn delete-account" @click="isConfirmOpen = true">Delete account</button>
         <LogoutButton />
+        <IconButton class="" @click="isConfirmOpen = true">
+          <BinIcon/>
+        </IconButton>
       </div>
     </header>
     <main class="app__main">
@@ -14,9 +16,9 @@
     </main>
     <footer class="app__footer"></footer>
   </div>
-  <ConfirmDialog :title="`Delete account ${authStore.user.email}`" v-model="isConfirmOpen" @confirm="deleteAccount">
+  <ConfirmDialog title="Delete account" v-model="isConfirmOpen" @confirm="deleteAccount">
     <template #message>
-      <p> Are you sure you want to delete your account? This action cannot be undone. </p>
+      <p> Are you sure you want to delete your account, {{authStore.user.email}}? This action cannot be undone. </p>
       <p> All your boards and tickets will be permanently removed. </p>
     </template>
   </ConfirmDialog>
@@ -29,6 +31,8 @@ import LogoutButton from '@/components/LogoutButton.vue';
 import ConfirmDialog from '@/components/Base/ConfirmDialog.vue';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import IconButton from '@/components/Base/IconButton.vue';
+import BinIcon from '@/assets/icons/trash-bin-minimalistic-2-svgrepo-com.svg?component'
 
 const authStore = useAuthStore()
 const isConfirmOpen = ref(false)
@@ -85,15 +89,6 @@ async function deleteAccount(){
 .app__title {
   font-size: var(--text-xl);
 }
-
-.delete-account {
-  background: none;
-  text-decoration: underline;
-}
-.delete-account:hover{
-  text-decoration: underline red;
-}
-
 
 @media (min-width: 1024px) {
   .app__user {
