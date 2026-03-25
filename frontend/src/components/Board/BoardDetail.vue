@@ -51,7 +51,7 @@ import { useActiveBoard } from '@/composables/useActiveBoard'
 import ConfirmDialog from '@/components/Base/ConfirmDialog.vue'
 import TicketFormModal from '@/components/Ticket/TicketFormModal.vue'
 import IconButton from '../Base/IconButton.vue'
-import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg'
+import ThreeDotsIcon from '@/assets/icons/three-dots-horizontal-svgrepo-com.svg?component'
 import { useMenu } from '@/composables/useMenu'
 import { useBreakpoint } from '@/composables/useBreakpoint'
 
