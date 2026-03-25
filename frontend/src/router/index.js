@@ -73,6 +73,9 @@ router.beforeEach(async (to, from) => {
     await initBoardList()
   }
   const boardId = to.params.id
+  if (to.name === 'home' && !boardId && boardIdsList.value.length > 0) {
+    return `/home/${boardIdsList.value[0]}`
+  }
   if (boardId && !boardIdsList.value.includes(boardId)) {
     return '/home'
   }
