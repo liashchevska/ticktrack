@@ -74,7 +74,7 @@ async function deleteAccount(){
 .app__header-right {
   flex-grow: 1;
   justify-content: flex-end;
-  gap: var(--space-md);
+  gap: var(--actions-gap);
 }
 
 .app__main {
