@@ -5,7 +5,7 @@
         <h1 class="app__title">TickTrack </h1>
       </div>
       <div class="app__header-right">
-        <span class="app__user">{{ user.email }}</span>
+        <button class="btn delete-account" @click="isConfirmOpen = true">Delete account</button>
         <LogoutButton />
       </div>
     </header>
@@ -14,14 +14,30 @@
     </main>
     <footer class="app__footer"></footer>
   </div>
+  <ConfirmDialog :title="`Delete account ${authStore.user.email}`" v-model="isConfirmOpen" @confirm="deleteAccount">
+    <template #message>
+      <p> Are you sure you want to delete your account? This action cannot be undone. </p>
+      <p> All your boards and tickets will be permanently removed. </p>
+    </template>
+  </ConfirmDialog>
+
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth';
 import LogoutButton from '@/components/LogoutButton.vue';
-const { user } = storeToRefs(useAuthStore())
+import ConfirmDialog from '@/components/Base/ConfirmDialog.vue';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const authStore = useAuthStore()
+const isConfirmOpen = ref(false)
+const router = useRouter()
+
+async function deleteAccount(){
+  await authStore.deleteAccount()
+  router.replace({ name: 'login' })
+}
 </script>
 
 <style lang="css">
@@ -68,6 +84,14 @@ const { user } = storeToRefs(useAuthStore())
 
 .app__title {
   font-size: var(--text-xl);
+}
+
+.delete-account {
+  background: none;
+  text-decoration: underline;
+}
+.delete-account:hover{
+  text-decoration: underline red;
 }
 
 

@@ -1,4 +1,5 @@
 import { API } from "@/endpoints";
+import { useAuthStore } from "@/stores/auth";
 import { useGlobalErrorStore } from "@/stores/error";
 import Cookies from "js-cookie";
 import { useRouter } from "vue-router";
@@ -37,6 +38,10 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
     if (response.status === 403 && !triedCsrfTokenRefresh) {
       await refreshCsrfToken()
       return request(endpoint, method, payload, true)
+    }
+    if (response.status === 403) {
+      const authStore = useAuthStore()
+      authStore.$reset()
     }
     const parsed = await parseResponse(response)
     return normalizeResponse(parsed)

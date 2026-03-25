@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Board, Ticket
+from api.models import Board, Ticket, CustomUser
 
 
 class BoardPrimaryKeyRelatedField(serializers.PrimaryKeyRelatedField):
@@ -33,3 +33,9 @@ class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = ["id", "title"]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        field = ["id", "email"]
