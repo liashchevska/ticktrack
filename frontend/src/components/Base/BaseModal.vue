@@ -1,7 +1,7 @@
 <template>
   <Transition>
     <div v-if="isOpen" @click.self="isOpen = false" class="modal__backdrop">
-      <div class="modal">
+      <div ref="modal" class="modal">
         <header class="modal__header">
           <h2 class="modal__title"> {{ title }} </h2>
           <IconButton @click="isOpen = false">
@@ -20,14 +20,19 @@
   </Transition>
 </template>
 <script setup>
-import { onMounted, onUnmounted, watch } from 'vue'
+import { onMounted, onUnmounted, watch, useTemplateRef, nextTick } from 'vue'
 import CloseIcon from '@/assets/icons/close-x-svgrepo-com.svg?component'
 import IconButton from './IconButton.vue'
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 
 defineProps({
   title: { type: String, required: false }
 })
 const isOpen = defineModel()
+
+const modal = useTemplateRef('modal')
+const { activate, deactivate } = useFocusTrap(modal)
+
 
 function closeOnEscape(event) {
   if (event.key !== 'Escape') return
@@ -36,6 +41,17 @@ function closeOnEscape(event) {
 
 watch(isOpen, (open) => {
   document.body.style.overflow = open ? 'hidden' : ''
+})
+
+// Watch for isOpen change to activate/deactivate focus trap in a modal.
+watch(isOpen, async (open) => {
+  if (open) {
+    await nextTick()
+    activate()
+  }
+  else {
+    deactivate()
+  }
 })
 
 onMounted(() => {
