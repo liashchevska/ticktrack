@@ -27,6 +27,7 @@ media/
 
 # Node modules
 node_modules/
+.pnpm-store/
 
 # Test / coverage
 .pytest_cache/
