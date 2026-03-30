@@ -3,7 +3,6 @@
     <template #header>Sign up</template>
     <BaseForm :schema="validationSchema" :action="auth.signup" :onSuccess="onSuccess">
       <template #fields>
-        <BaseField name="name" type="text" />
         <BaseField name="email" type="email" />
         <BaseField name="password" type="password" />
       </template>
@@ -26,10 +25,9 @@ import BaseField from '@/components/Base/BaseField.vue';
 import { useRouter } from 'vue-router';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { RouterLink } from 'vue-router';
-import { emailRule, nameRule, passwordRule } from '@/utils/validationRules';
+import { emailRule, passwordRule } from '@/utils/validationRules';
 
 const validationSchema = object({
-  name: nameRule,
   email: emailRule,
   password: passwordRule
 })

@@ -11,10 +11,6 @@ const emailRule = string()
 const codeRule = string()
   .required('Recovery code is required')
 
-const nameRule = string()
-  .required('Name is required')
-  .max(50, "Name cannot exceed 50 characters")
-
 const titleRule = string()
   .required('Title is required')
   .min(5, 'Title must be at least 5 characters')
@@ -30,7 +26,6 @@ export {
   passwordRule,
   emailRule,
   codeRule,
-  nameRule,
   titleRule,
   ticketDescriptionRule,
   ticketStatusRule
