@@ -19,17 +19,30 @@ export const useAuthStore = defineStore('auth', () => {
     isPasswordResetPending.value = false
   }
 
-  async function login(payload) {
-    const response = await request(API.AUTH.LOGIN, 'POST', payload)
-    const { ok, errors, verificationPendingStatus, user: userData } = handleAuthResponse(response)
+  async function login({}, API.AUTH.DEMO_LOGIN)
+  }
 
+  // If server response with 409 C onfict try logging out
+  // and then retrying action once
+  async function retryOnConflictOnce(action, retry = true) {
+    const response = await action()
+    if (response.status === 409 && retry) {
+      await logout()
+      return retryOnConflictOnce(action, false)
+    }
+    return response
+  }
+
+  async function login(payload, endpoint = API.AUTH.LOGIN) {
+    const response = await retryOnConflictOnce(() => request(endpoint, 'POST', payload))
+    const { ok, errors, verificationPendingStatus, user: userData } = handleAuthResponse(response)
     if (!ok && errors.length) { throw errors }
     isVerificationPending.value = verificationPendingStatus
     user.value = userData
   }
 
   async function signup(payload) {
-    const response = await request(API.AUTH.SIGNUP, 'POST', payload)
+    const response = await retryOnConflictOnce(() => request(API.AUTH.SIGNUP, 'POST', payload))
     const { ok, errors, verificationPendingStatus } = handleAuthResponse(response)
     if (!ok && errors.length) { throw errors }
     isVerificationPending.value = verificationPendingStatus
@@ -87,6 +100,7 @@ export const useAuthStore = defineStore('auth', () => {
     resendVerificationCode,
     requestPasswordReset,
     resetPassword,
-    deleteAccount
+    deleteAccount,
+    retryOnConflictOnce
   }
 })
