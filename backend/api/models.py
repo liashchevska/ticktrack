@@ -20,7 +20,7 @@ class CustomUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
     def create_demo_user(self): 
-        userid = uuid.uuid4()    
+        userid = uuid.uuid4().hex[:8]    
         user = self.create_user(f"{userid}@demo.com", is_demo=True)
         EmailAddress.objects.create(user=user, email=user.email, verified=True, primary=True)
         return user
