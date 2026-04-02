@@ -63,7 +63,12 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
 async function parseResponse(response) {
   const text = await response.text()
   const body = text ? JSON.parse(text) : null
-  return { ...body, ok: response.ok, statusText: response.statusText }
+  return {
+    ...body,
+    ok: response.ok,
+    status: response.status,
+    statusText: response.statusText
+  }
 }
 
 function normalizeResponse(response) {
