@@ -6,8 +6,6 @@ export const useGlobalErrorStore = defineStore('globalError', () => {
     ok: true,
     status: null,
     statusText: '',
-    errors: [],
-    data: null
   });
   const isServerDown = computed(() => !errorState.value.ok)
 
@@ -20,8 +18,6 @@ export const useGlobalErrorStore = defineStore('globalError', () => {
       ok: true,
       status: null,
       statusText: '',
-      errors: [],
-      data: null
     }
   }
 
