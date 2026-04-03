@@ -33,7 +33,6 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
 
   try {
     errorStore.reset()
-
     const response = await fetch(endpoint, options)
     if (response.status === 403 && !triedCsrfTokenRefresh) {
       await refreshCsrfToken()
@@ -43,17 +42,20 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
       const authStore = useAuthStore()
       authStore.$reset()
     }
+    // Throw on server errors (5xx)
+    if (response.status >= 500) {
+      throw response
+    }
     const parsed = await parseResponse(response)
     return normalizeResponse(parsed)
   }
+
   catch (error) {
     // Catch global errors such as server down and save them directly to store
     const normalized = {
       ok: false,
-      status: null,
-      statusText: error.message || 'Network Error',
-      errors: [error.message || 'Server Unreachable'],
-      data: null
+      status: error.status ?? null,
+      statusText: error.statusText ?? 'Network Error',
     }
     errorStore.set(normalized)
     return normalized
