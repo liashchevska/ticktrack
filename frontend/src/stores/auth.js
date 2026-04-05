@@ -82,9 +82,10 @@ export const useAuthStore = defineStore('auth', () => {
     boardStore.$reset()
   }
 
-  async function deleteAccount(params) {
+  async function deleteAccount() {
     await request(API.AUTH.DELETE_ACCOUNT, 'DELETE')
     $reset()
+    boardStore.$reset()
   }
 
   return {
