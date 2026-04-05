@@ -9,6 +9,7 @@ import { useBoardStore } from './board';
 export const useAuthStore = defineStore('auth', () => {
   const boardStore = useBoardStore()
   const user = useStorage('user', {})
+  const isDemo = computed(() => user.value.is_demo)
   const isAuthenticated = computed(() => (Object.keys(user.value).length > 0))
   const isVerificationPending = useSessionStorage('isVerificationPending', false)
   const isPasswordResetPending = useSessionStorage('isPasswordResetPending', false)
@@ -91,6 +92,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
+    isDemo,
     isAuthenticated,
     isVerificationPending,
     isPasswordResetPending,
