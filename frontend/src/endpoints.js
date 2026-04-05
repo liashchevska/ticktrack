@@ -11,6 +11,7 @@ export const API = {
     REQUEST_PASSWORD_RESET: `/auth/${CLIENT}/password/request/`,
     RESET_PASSWORD: `/auth/${CLIENT}/password/reset/`,
     DELETE_ACCOUNT: '/api/delete-user/',
+    DEMO_LOGIN: '/api/demo-login/',
   },
   TICKET: {
     LIST: `/api/tickets/`,

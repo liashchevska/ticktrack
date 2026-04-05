@@ -3,17 +3,19 @@ from api.models import Ticket, CustomUser
 from api.serializers import BoardSerializer, TicketSerializer, TicketEditSerializer, UserSerializer
 from allauth.headless.contrib.rest_framework.authentication import XSessionTokenAuthentication
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.views import APIView
 from django.http.response import JsonResponse
 from allauth.account.internal.flows.logout import logout
 from rest_framework.generics import DestroyAPIView
-
+from allauth.account.utils import perform_login
+from rest_framework import status
+from api.utils import create_demo_environment
 
 @ensure_csrf_cookie
 def csrf(request):
     return JsonResponse({'detail': 'CSRF cookie set'})
+
 
 class BoardViewSet(viewsets.ModelViewSet):
     serializer_class = BoardSerializer
@@ -72,3 +74,20 @@ class UserDeleteView(DestroyAPIView):
         instance.delete()
         logout(self.request)
 
+
+class DemoLoginView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        # If user already logged in return 409 Conflict
+        if request.user.is_authenticated:
+            return Response(status=status.HTTP_409_CONFLICT)
+
+        # Else create demo user and seed demo data
+        user = create_demo_environment()
+        perform_login(request, user)
+
+        return JsonResponse({
+            "data": { "user": UserSerializer(user).data },
+            "meta": { "is_authenticated": "true" },
+        })

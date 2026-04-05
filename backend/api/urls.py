@@ -1,7 +1,7 @@
 from django.urls.conf import path, include
 from api import views
 from rest_framework import routers
-from api.views import BoardViewSet, TicketViewSet, UserDeleteView
+from api.views import BoardViewSet, TicketViewSet, UserDeleteView, DemoLoginView
 
 router = routers.SimpleRouter()
 router.register(r"boards", BoardViewSet, basename="board")
@@ -9,6 +9,7 @@ router.register(r"tickets", TicketViewSet, basename="ticket")
 
 urlpatterns = [
         path('csrf/', views.csrf),
+        path("demo-login/", DemoLoginView.as_view()),
         path('delete-user/', views.UserDeleteView.as_view()),
         path('meta/ticket-status-list/', views.TicketStatusList.as_view())
 ]

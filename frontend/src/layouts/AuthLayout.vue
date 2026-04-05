@@ -10,11 +10,20 @@
     <footer class="auth__footer">
       <slot name="footer"></slot>
     </footer>
+    <div class="auth__demo-login">
+      <DemoLogin />
+    </div>
   </div>
 </template>
 
+<script setup lang="ts">
+import DemoLogin from '@/components/Base/DemoLogin.vue';
+
+</script>
+
 <style lang="css">
 .auth__layout {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,9 +51,22 @@
   gap: var(--space-md)
 }
 
+.auth__demo-login {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .auth__main {}
 
 .auth__footer {}
 
-@media (min-width: 1024px) {}
+@media (max-height: 500px) {
+  .auth__demo-login {
+    position: static;
+    margin-top: var(--space-md);
+    transform: none;
+  }
+}
 </style>

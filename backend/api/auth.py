@@ -1,7 +1,7 @@
 from allauth.headless.account import views
 from django.urls.conf import path, include
 from allauth.headless.constants import Client
-from allauth.headless.account.views import SignupView
+from allauth.headless.account.views import SignupView, SessionView
 from allauth.headless.internal.restkit.response import ErrorResponse, APIResponse
 from http import HTTPStatus
 
@@ -23,10 +23,18 @@ class CustomSignupView(SignupView):
         return super().post(request, *args, **kwargs)
 
 
+class CustomSessionView(SessionView):
+    def delete(self, request, *args, **kwargs):
+        # Delete demo user and demo data on logout (session deletion)
+        if request.user.is_demo:
+            request.user.delete()
+
+        return super().delete(request, *args, **kwargs)
+
 url_to_view = {
     "login/": views.LoginView,
     "signup/": CustomSignupView,
-    "session/": views.SessionView,
+    "session/": CustomSessionView,
     "email/verify/": views.VerifyEmailView,
     "email/verify/resend/": views.ResendEmailVerificationCodeView,
     "password/request/": views.RequestPasswordResetView,

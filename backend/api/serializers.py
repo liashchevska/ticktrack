@@ -38,4 +38,4 @@ class BoardSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        field = ["id", "email"]
+        fields = ["id", "email", "is_demo"]

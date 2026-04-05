@@ -19,7 +19,8 @@ export const useAuthStore = defineStore('auth', () => {
     isPasswordResetPending.value = false
   }
 
-  async function login({}, API.AUTH.DEMO_LOGIN)
+  async function demoLogin() {
+    await login({}, API.AUTH.DEMO_LOGIN)
   }
 
   // If server response with 409 C onfict try logging out
@@ -94,6 +95,7 @@ export const useAuthStore = defineStore('auth', () => {
     isVerificationPending,
     isPasswordResetPending,
     $reset,
+    demoLogin,
     login,
     signup,
     logout,
