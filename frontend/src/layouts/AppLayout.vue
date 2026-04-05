@@ -2,12 +2,13 @@
   <div class="app__layout">
     <header class="app__header">
       <div class="app__header-left">
-        <h1 class="app__title">TickTrack </h1>
+        <h1 class="app__title">TickTrack</h1>
+        <div class="app__demo-badge btn btn--accent" v-if="authStore.isDemo">DEMO</div>
       </div>
       <div class="app__header-right">
         <LogoutButton />
         <IconButton class="" @click="isConfirmOpen = true">
-          <BinIcon/>
+          <BinIcon />
         </IconButton>
       </div>
     </header>
@@ -18,7 +19,7 @@
   </div>
   <ConfirmDialog title="Delete account" v-model="isConfirmOpen" @confirm="deleteAccount">
     <template #message>
-      <p> Are you sure you want to delete your account, {{authStore.user.email}}? This action cannot be undone. </p>
+      <p> Are you sure you want to delete your account, {{ authStore.user.email }}? This action cannot be undone. </p>
       <p> All your boards and tickets will be permanently removed. </p>
     </template>
   </ConfirmDialog>
@@ -38,7 +39,7 @@ const authStore = useAuthStore()
 const isConfirmOpen = ref(false)
 const router = useRouter()
 
-async function deleteAccount(){
+async function deleteAccount() {
   await authStore.deleteAccount()
   router.replace({ name: 'login' })
 }
@@ -90,6 +91,23 @@ async function deleteAccount(){
   font-size: var(--text-xl);
 }
 
+.app__demo-badge {
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  z-index: 1111;
+  cursor: default;
+  pointer-events: none;
+}
+
+.app__demo-badge:is(:active, :hover, :focus) {
+  background-color: inherit !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  transform: none !important;
+  outline: none !important;
+}
+
 @media (min-width: 1024px) {
   .app__user {
     display: initial;
@@ -106,6 +124,7 @@ async function deleteAccount(){
   }
 
   .app__header-left {
+    gap: var(--space-md);
     min-width: var(--sidebar-width);
     background: var(--sidebar);
   }
@@ -116,5 +135,8 @@ async function deleteAccount(){
     padding: var(--space-md) var(--tickets-grid-gap);
   }
 
+  .app__demo-badge{
+    position: initial;
+  }
 }
 </style>
