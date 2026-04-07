@@ -73,6 +73,8 @@
 
   --actions-gap: var(--space-sm);
   --actions-menu-width: 165px;
+
+  --auth-form-width: 320px;
 }
 
 @media (min-width: 1024px) {
