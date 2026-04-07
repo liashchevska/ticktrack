@@ -8,6 +8,7 @@
       </template>
       <template #actions>
         <button class="btn btn--primary" type="submit">Signup</button>
+        <DemoLogin />
       </template>
     </BaseForm>
     <template #footer>
@@ -26,6 +27,7 @@ import { useRouter } from 'vue-router';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { RouterLink } from 'vue-router';
 import { emailRule, passwordRule } from '@/utils/validationRules';
+import DemoLogin from '@/components/Base/DemoLogin.vue';
 
 const validationSchema = object({
   email: emailRule,

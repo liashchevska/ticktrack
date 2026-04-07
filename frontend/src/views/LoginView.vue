@@ -8,6 +8,7 @@
       </template>
       <template #actions>
         <button class="btn btn--primary" type="submit">Login</button>
+        <DemoLogin />
       </template>
     </BaseForm>
     <template #footer>
@@ -25,6 +26,7 @@ import BaseField from '@/components/Base/BaseField.vue';
 import BaseForm from '@/components/Base/BaseForm.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { emailRule, passwordRule } from '@/utils/validationRules';
+import DemoLogin from '@/components/Base/DemoLogin.vue';
 
 const auth = useAuthStore()
 
