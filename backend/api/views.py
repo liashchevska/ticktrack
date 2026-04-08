@@ -82,10 +82,11 @@ class DemoLoginView(APIView):
         # If user already logged in return 409 Conflict
         if request.user.is_authenticated:
             return Response(status=status.HTTP_409_CONFLICT)
-
         # Else create demo user and seed demo data
         user = create_demo_environment()
         perform_login(request, user)
+        # Set session expiry to 30 minutes for demo users
+        request.session.set_expiry(1800)
 
         return JsonResponse({
             "data": { "user": UserSerializer(user).data },
