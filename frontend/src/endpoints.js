@@ -7,7 +7,7 @@ export const API = {
     SESSION: `/auth/${CLIENT}/session/`,
     SIGNUP: `/auth/${CLIENT}/signup/`,
     VERIFY_EMAIL: `/auth/${CLIENT}/email/verify/`,
-    VERYFY_EMAIL_RESEND: `/auth/${CLIENT}/email/verify/resend/`,
+    VERIFY_EMAIL_RESEND: `/auth/${CLIENT}/email/verify/resend/`,
     REQUEST_PASSWORD_RESET: `/auth/${CLIENT}/password/request/`,
     RESET_PASSWORD: `/auth/${CLIENT}/password/reset/`,
     DELETE_ACCOUNT: '/api/delete-user/',

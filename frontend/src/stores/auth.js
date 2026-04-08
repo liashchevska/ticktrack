@@ -59,7 +59,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function resendVerificationCode() {
-    const response = await request(API.AUTH.VERYFY_EMAIL_RESEND, 'POST')
+    const response = await request(API.AUTH.VERIFY_EMAIL_RESEND, 'POST')
     const { ok, status } = handleAuthResponse(response)
     // if (!ok && status === 429) { throw {} }
   }
