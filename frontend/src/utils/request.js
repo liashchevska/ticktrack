@@ -2,7 +2,6 @@ import { API } from "@/endpoints";
 import { useAuthStore } from "@/stores/auth";
 import { useGlobalErrorStore } from "@/stores/error";
 import Cookies from "js-cookie";
-import { useRouter } from "vue-router";
 
 let csrfRefreshPromise = null
 
@@ -41,6 +40,8 @@ async function request(endpoint, method, payload, triedCsrfTokenRefresh = false)
     if (response.status === 403) {
       const authStore = useAuthStore()
       authStore.$reset()
+      window.location.href = '/login'
+      return { ok: false, status: 403 }
     }
     // Throw on server errors (5xx)
     if (response.status >= 500) {
