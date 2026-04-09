@@ -4,9 +4,11 @@ import { defineStore } from "pinia"
 import { handleAuthResponse, request } from '@/utils/request'
 import { API } from '@/endpoints'
 import { useBoardStore } from './board'
+import { useTicketStore } from './ticket'
 
 export const useAuthStore = defineStore('auth', () => {
   const boardStore = useBoardStore()
+  const ticketStore = useTicketStore()
   const user = useStorage('user', {})
   const isDemo = computed(() => !!user.value?.is_demo)
   const isAuthenticated = computed(() => !!user.value?.id)
@@ -17,6 +19,8 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = {}
     isVerificationPending.value = false
     isPasswordResetPending.value = false
+    boardStore.$reset()
+    ticketStore.$reset()
   }
 
   async function demoLogin() {
@@ -97,13 +101,13 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout() {
     await request(API.AUTH.SESSION, 'DELETE')
     $reset()
-    boardStore.$reset()
+    // boardStore.$reset()
   }
 
   async function deleteAccount() {
     await request(API.AUTH.DELETE_ACCOUNT, 'DELETE')
     $reset()
-    boardStore.$reset()
+    // boardStore.$reset()
   }
 
   return {
