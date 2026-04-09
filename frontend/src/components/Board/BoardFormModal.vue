@@ -1,7 +1,7 @@
 <template>
   <BaseModal v-model="isOpen" :title="props.title">
     <BaseForm :id="formId" :schema="boardValidationSchema" :action="action" :initial-values="props.board"
-      :on-success="(result) => emit(successEvent, result?.id)">
+      :on-success="(result) => result.ok && emit(successEvent, result.data.id)">
       <template #fields>
         <BaseField name="title" type="text">title:</BaseField>
       </template>

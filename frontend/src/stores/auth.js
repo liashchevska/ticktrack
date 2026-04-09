@@ -1,16 +1,15 @@
 import { ref, computed } from 'vue'
-import { useStorage } from "@vueuse/core";
-import { defineStore } from "pinia";
-import { handleAuthResponse, request, } from '@/utils/request';
-import { API } from '@/endpoints';
-import { useSessionStorage } from '@vueuse/core';
-import { useBoardStore } from './board';
+import { useStorage, useSessionStorage } from "@vueuse/core"
+import { defineStore } from "pinia"
+import { handleAuthResponse, request } from '@/utils/request'
+import { API } from '@/endpoints'
+import { useBoardStore } from './board'
 
 export const useAuthStore = defineStore('auth', () => {
   const boardStore = useBoardStore()
   const user = useStorage('user', {})
-  const isDemo = computed(() => user.value.is_demo)
-  const isAuthenticated = computed(() => (Object.keys(user.value).length > 0))
+  const isDemo = computed(() => !!user.value?.is_demo)
+  const isAuthenticated = computed(() => !!user.value?.id)
   const isVerificationPending = useSessionStorage('isVerificationPending', false)
   const isPasswordResetPending = useSessionStorage('isPasswordResetPending', false)
 
@@ -38,44 +37,61 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(payload, endpoint = API.AUTH.LOGIN) {
     const response = await retryOnConflictOnce(() => request(endpoint, 'POST', payload))
     const { ok, errors, verificationPendingStatus, user: userData } = handleAuthResponse(response)
-    if (!ok && errors.length) { throw errors }
+    if (!ok) {
+      return { ok, errors }
+    }
     isVerificationPending.value = verificationPendingStatus
     user.value = userData
+    return { ok }
   }
 
   async function signup(payload) {
     const response = await retryOnConflictOnce(() => request(API.AUTH.SIGNUP, 'POST', payload))
     const { ok, errors, verificationPendingStatus } = handleAuthResponse(response)
-    if (!ok && errors.length) { throw errors }
+    if (!ok) {
+      return { ok, errors }
+    }
     isVerificationPending.value = verificationPendingStatus
+    return { ok }
   }
 
   async function verifyEmail(payload) {
     const response = await request(API.AUTH.VERIFY_EMAIL, 'POST', payload)
     const { ok, errors, user: userData } = handleAuthResponse(response)
-    if (!ok && errors.length) { throw errors }
+    if (!ok) {
+      return { ok, errors }
+    }
     user.value = userData
     isVerificationPending.value = false
+    return { ok }
   }
 
   async function resendVerificationCode() {
     const response = await request(API.AUTH.VERIFY_EMAIL_RESEND, 'POST')
     const { ok, status } = handleAuthResponse(response)
     // if (!ok && status === 429) { throw {} }
+    return { ok }
   }
 
   async function requestPasswordReset(payload) {
     const response = await request(API.AUTH.REQUEST_PASSWORD_RESET, 'POST', payload)
-    const { errors, passwordResetPendingStatus } = handleAuthResponse(response)
-    if (errors.length) { throw errors }
+    const { ok, errors, passwordResetPendingStatus } = handleAuthResponse(response)
+    if (!ok) {
+      return { ok, errors }
+    }
     isPasswordResetPending.value = passwordResetPendingStatus
+    return { ok }
+
   }
 
   async function resetPassword(payload) {
     const response = await request(API.AUTH.RESET_PASSWORD, 'POST', payload)
-    const { errors, passwordResetPendingStatus } = handleAuthResponse(response)
-    if (errors.length) { throw errors }
+    const { ok, errors, passwordResetPendingStatus } = handleAuthResponse(response)
+    if (!ok) {
+      return { ok, errors }
+    }
     isPasswordResetPending.value = passwordResetPendingStatus
+    return { ok }
   }
 
   async function logout() {
