@@ -1,6 +1,6 @@
 <template>
   <Outage v-if="isServerDown" />
-  <RouterView />
+  <RouterView v-else/>
 </template>
 
 <script setup>
