@@ -61,8 +61,13 @@ export const useTicketStore = defineStore('ticket', () => {
     return { ok }
   }
 
+  function $reset(){
+    ticketsByBoard.value = {}
+  }
+
   return {
     ticketsByBoard,
+    $reset,
     getTickets,
     fetchTickets,
     createTicket,
