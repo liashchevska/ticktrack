@@ -41,7 +41,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(payload, endpoint = API.AUTH.LOGIN) {
     const response = await retryOnConflictOnce(() => request(endpoint, 'POST', payload))
     const { ok, errors, verificationPendingStatus, user: userData } = handleAuthResponse(response)
-    if (!ok) {
+    if (!ok && errors.length) {
       return { ok, errors }
     }
     isVerificationPending.value = verificationPendingStatus
@@ -52,7 +52,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function signup(payload) {
     const response = await retryOnConflictOnce(() => request(API.AUTH.SIGNUP, 'POST', payload))
     const { ok, errors, verificationPendingStatus } = handleAuthResponse(response)
-    if (!ok) {
+    if (!ok && errors.length) {
       return { ok, errors }
     }
     isVerificationPending.value = verificationPendingStatus
@@ -62,7 +62,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function verifyEmail(payload) {
     const response = await request(API.AUTH.VERIFY_EMAIL, 'POST', payload)
     const { ok, errors, user: userData } = handleAuthResponse(response)
-    if (!ok) {
+    if (!ok && errors.length) {
       return { ok, errors }
     }
     user.value = userData
