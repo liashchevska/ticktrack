@@ -95,7 +95,7 @@ async function deleteAccount() {
   position: fixed;
   bottom: var(--space-md);
   right: var(--space-md);
-  z-index: 1111;
+  z-index: 100;
   cursor: default;
   pointer-events: none;
 }
