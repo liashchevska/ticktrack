@@ -50,7 +50,8 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function signup(payload) {
-    const response = await retryOnConflictOnce(() => request(API.AUTH.SIGNUP, 'POST', payload))
+    const {passwordConfirmation , ...body} = payload
+    const response = await retryOnConflictOnce(() => request(API.AUTH.SIGNUP, 'POST', body))
     const { ok, errors, verificationPendingStatus } = handleAuthResponse(response)
     if (!ok && errors.length) {
       return { ok, errors }

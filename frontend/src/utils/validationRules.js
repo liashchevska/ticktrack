@@ -1,8 +1,10 @@
-import { string } from "yup";
+import { string, ref } from "yup";
 
 const passwordRule = string()
   .required('Password is required')
   .min(8, 'Password must be at least 8 characters')
+
+const passwordConfirmationRule = passwordRule.oneOf([ref('password')], "Passwords do not match")
 
 const emailRule = string()
   .required('Email is required')
@@ -24,6 +26,7 @@ const ticketStatusRule = string()
 
 export {
   passwordRule,
+  passwordConfirmationRule,
   emailRule,
   codeRule,
   titleRule,

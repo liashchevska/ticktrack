@@ -5,6 +5,7 @@
       <template #fields>
         <BaseField name="email" type="email" />
         <BaseField name="password" type="password" />
+        <BaseField name="passwordConfirmation" type="password">Confirm password</BaseField>
       </template>
       <template #actions>
         <button class="btn btn--primary" type="submit">Signup</button>
@@ -26,12 +27,13 @@ import BaseField from '@/components/Base/BaseField.vue';
 import { useRouter } from 'vue-router';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { RouterLink } from 'vue-router';
-import { emailRule, passwordRule } from '@/utils/validationRules';
+import { emailRule, passwordRule, passwordConfirmationRule } from '@/utils/validationRules';
 import DemoLogin from '@/components/Base/DemoLogin.vue';
 
 const validationSchema = object({
   email: emailRule,
-  password: passwordRule
+  password: passwordRule,
+  passwordConfirmation: passwordConfirmationRule,
 })
 
 const auth = useAuthStore()
