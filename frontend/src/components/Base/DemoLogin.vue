@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn--accent" @click="demoLogin">TRY DEMO</button>
+    <button type="button" class="btn btn--accent" @click="demoLogin">TRY DEMO</button>
 </template>
 
 <script setup>

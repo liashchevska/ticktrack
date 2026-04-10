@@ -9,7 +9,7 @@
         </template>
         <template #actions>
           <button class="btn btn--primary" type="submit">Verify</button>
-          <button class="btn btn--secondary" @click="auth.resendVerificationCode">Resend verification code</button>
+          <button class="btn btn--secondary" type="button" @click="auth.resendVerificationCode">Resend verification code</button>
         </template>
       </BaseForm>
     </template>
