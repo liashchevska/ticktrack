@@ -19,6 +19,7 @@ lerna-debug.log*
 
 # Environment / configuration
 .env
+certbot/conf/
 local_settings.py
 
 # Databases / media
