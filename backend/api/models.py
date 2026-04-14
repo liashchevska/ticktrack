@@ -57,7 +57,7 @@ class Ticket(models.Model):
     status = models.CharField(choices=Status, default=Status.NEW, max_length=10)
     statusChangedAt = models.DateTimeField(auto_now_add=True)
     
-    title = models.CharField(max_length=175)
+    title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
 
     class Meta:
