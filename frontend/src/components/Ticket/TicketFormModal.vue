@@ -60,7 +60,7 @@ const route = useRoute()
 const currentBoardId = route.params.id
 const { isInUpdateMode, action, successEvent } = useEntityForm({
   entity: toRef(props, 'ticket'),
-  createAction: (values) => { createTicket(currentBoardId, values) },
+  createAction: (values) => createTicket(currentBoardId, values),
   updateAction: updateTicket
 })
 const formId = computed(() => isInUpdateMode.value ? 'ticketUpdate' : 'ticketCreate')
