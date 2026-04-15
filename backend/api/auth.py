@@ -1,9 +1,12 @@
 from allauth.headless.account import views
 from django.urls.conf import path, include
 from allauth.headless.constants import Client
-from allauth.headless.account.views import SignupView, SessionView
+from allauth.headless.account.views import SignupView, SessionView,\
+    VerifyEmailView
 from allauth.headless.internal.restkit.response import ErrorResponse, APIResponse
 from http import HTTPStatus
+from api.models import Board, Ticket
+from django.db import transaction
 
 
 class CustomSignupView(SignupView):
@@ -23,6 +26,22 @@ class CustomSignupView(SignupView):
         return super().post(request, *args, **kwargs)
 
 
+class CustomVerifyEmailView(VerifyEmailView):
+    def post(self, request, *args, **kwargs):
+        _temp = super().post(request, *args, **kwargs)
+        # if user verified email successfully create welcome board and ticket
+        if _temp.status_code == 200:
+            user = request.user
+            with transaction.atomic():
+                if not Board.objects.filter(owner=user, title="Getting started").exists():
+                    board = Board.objects.create(owner=user, title="Getting started")
+                    Ticket.objects.create(board=board,
+                                                title="Welcome!",
+                                                description="Just a placeholder for your future task.")
+        
+        return _temp
+
+
 class CustomSessionView(SessionView):
     def delete(self, request, *args, **kwargs):
         # Delete demo user and demo data on logout (session deletion)
@@ -35,7 +54,7 @@ url_to_view = {
     "login/": views.LoginView,
     "signup/": CustomSignupView,
     "session/": CustomSessionView,
-    "email/verify/": views.VerifyEmailView,
+    "email/verify/": CustomVerifyEmailView,
     "email/verify/resend/": views.ResendEmailVerificationCodeView,
     "password/request/": views.RequestPasswordResetView,
     "password/reset/": views.ResetPasswordView,
