@@ -34,7 +34,7 @@ class TestTicketEndpoints:
         assert response.data["board"] == ticketsA[0].id
 
     def test_user_can_only_create_ticket_in_his_board(self, client, userA, boardB):
-        ticket = baker.prepare("Ticket", board=boardB)
+        ticket = baker.prepare("Ticket", board=boardB, description='')
         ticket_data = TicketSerializer(ticket).data
         ticket_data.pop("id")
         url = reverse("ticket-list")
