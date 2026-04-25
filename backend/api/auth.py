@@ -2,10 +2,10 @@ from allauth.headless.account import views
 from django.urls.conf import path, include
 from allauth.headless.constants import Client
 from allauth.headless.account.views import SignupView, SessionView,\
-    VerifyEmailView
+    VerifyEmailView, ResetPasswordView, RequestPasswordResetView
 from allauth.headless.internal.restkit.response import ErrorResponse, APIResponse
 from http import HTTPStatus
-from api.models import Board, Ticket
+from api.models import Board, Ticket, CustomUser
 from django.db import transaction
 
 
@@ -50,13 +50,31 @@ class CustomSessionView(SessionView):
 
         return super().delete(request, *args, **kwargs)
 
+
+class CustomRequestPasswordResetView(RequestPasswordResetView):
+    def post(self, request, *args, **kwargs):
+        email = self.input.cleaned_data.get("email", False)
+
+        # If the email exists, proceed to the default allauth behavior
+        if CustomUser.objects.filter(email=email).exists():
+            return super().post(request, *args, **kwargs)
+
+        # If the email does not exist, do not send an email to specified email (as allauth does by default)
+        # Return the same response as allauth in such use-cases to avoid user enumeration risk
+        return APIResponse(
+            request,
+            status=HTTPStatus.UNAUTHORIZED,
+            data={"flows": [{"id": "password_reset_by_code", "is_pending": True}]},
+        )
+
+
 url_to_view = {
     "login/": views.LoginView,
     "signup/": CustomSignupView,
     "session/": CustomSessionView,
     "email/verify/": CustomVerifyEmailView,
     "email/verify/resend/": views.ResendEmailVerificationCodeView,
-    "password/request/": views.RequestPasswordResetView,
+    "password/request/": CustomRequestPasswordResetView,
     "password/reset/": views.ResetPasswordView,
 }
 
