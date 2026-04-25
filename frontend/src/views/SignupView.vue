@@ -13,7 +13,7 @@
       </template>
     </BaseForm>
     <template #footer>
-      <RouterLink :to="{ name: 'login' }">Log in</RouterLink>
+      <RouterLink @click="auth.resetFlows" :to="{ name: 'login' }">Log in</RouterLink>
     </template>
   </AuthLayout>
 </template>
