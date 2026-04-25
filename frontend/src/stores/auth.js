@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
     await login({}, API.AUTH.DEMO_LOGIN)
   }
 
-  // If server response with 409 C onfict try logging out
+  // If server response with 409 Confict try logging out
   // and then retrying action once
   async function retryOnConflictOnce(action, retry = true) {
     const response = await action()
@@ -88,10 +88,11 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function resetPassword(payload) {
-const { passwordConfirmation, ...body } = payload
+    const { passwordConfirmation, ...body } = payload
     const response = await request(API.AUTH.RESET_PASSWORD, 'POST', body)
-    const { ok, errors, passwordResetPendingStatus } = handleAuthResponse(response)
+    const { ok, errors, passwordResetPendingStatus, user: userData } = handleAuthResponse(response)
     if (!errors.length) {
+      user.value = userData
       isPasswordResetPending.value = passwordResetPendingStatus
     }
     return { ok, errors }

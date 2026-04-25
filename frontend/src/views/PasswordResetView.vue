@@ -75,7 +75,7 @@ async function submit(values) {
 function onSuccess(result) {
   const { stepAtSubmit, } = result
   if (stepAtSubmit === 'reset') {
-    router.push({ name: 'login' })
+    router.push({ name: 'home', params: { id: '' } })
   }
 }
 </script>
