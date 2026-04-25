@@ -88,7 +88,8 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function resetPassword(payload) {
-    const response = await request(API.AUTH.RESET_PASSWORD, 'POST', payload)
+const { passwordConfirmation, ...body } = payload
+    const response = await request(API.AUTH.RESET_PASSWORD, 'POST', body)
     const { ok, errors, passwordResetPendingStatus } = handleAuthResponse(response)
     if (!errors.length) {
       isPasswordResetPending.value = passwordResetPendingStatus

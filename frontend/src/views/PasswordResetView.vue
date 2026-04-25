@@ -16,6 +16,7 @@
         <template v-else>
           <BaseField name="key" type="text">Recovery code:</BaseField>
           <BaseField name="password" type="password">New password:</BaseField>
+          <BaseField name="passwordConfirmation" type="password">Confirm password</BaseField>
         </template>
       </template>
 
@@ -40,7 +41,7 @@ import BaseForm from '@/components/Base/BaseForm.vue'
 import BaseField from '@/components/Base/BaseField.vue'
 import { useRouter } from 'vue-router'
 import AuthLayout from '@/layouts/AuthLayout.vue'
-import { codeRule, emailRule, passwordRule } from '@/utils/validationRules'
+import { codeRule, emailRule, passwordConfirmationRule, passwordRule } from '@/utils/validationRules'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -52,7 +53,8 @@ const requestSchema = object({
 
 const resetSchema = object({
   key: codeRule,
-  password: passwordRule
+  password: passwordRule,
+  passwordConfirmation: passwordConfirmationRule,
 })
 
 const validationSchema = computed(() => {
