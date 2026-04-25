@@ -3,12 +3,11 @@
     <template #header>
       <p>Forgot password?</p>
       <small v-if="step === 'reset'">
-        Recovery code was sent to {{ recoveryEmail }}.
-        Enter it below
+        If an account exists for this email, you'll receive a code shortly.
       </small>
     </template>
 
-    <BaseForm :schema="validationSchema" :action="submit">
+    <BaseForm :key="step" :schema="validationSchema" :action="submit" :onSuccess="onSuccess">
       <template #fields>
         <BaseField v-if="step === 'request'" name="email" type="email">
           Send recovery code to:
@@ -28,13 +27,13 @@
     </BaseForm>
 
     <template #footer>
-      <RouterLink :to="{ name: 'login' }">Return to log in</RouterLink>
+      <RouterLink @click="auth.resetFlows" :to="{ name: 'login' }">Return to log in</RouterLink>
     </template>
   </AuthLayout>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { object } from 'yup'
 import BaseForm from '@/components/Base/BaseForm.vue'
@@ -47,7 +46,6 @@ const router = useRouter()
 const auth = useAuthStore()
 const step = computed(() => auth.isPasswordResetPending ? 'reset' : 'request')
 
-const recoveryEmail = ref('')
 const requestSchema = object({
   email: emailRule,
 })
@@ -62,11 +60,19 @@ const validationSchema = computed(() => {
 })
 
 async function submit(values) {
-  if (step.value === 'request') {
-    recoveryEmail.value = values.email
-    await auth.requestPasswordReset(values)
+  let result
+  const stepAtSubmit = step.value
+  if (stepAtSubmit === 'request') {
+    result = await auth.requestPasswordReset(values)
   } else {
-    await auth.resetPassword(values)
+    result = await auth.resetPassword(values)
+  }
+  return { ...result, ...{ stepAtSubmit } }
+}
+
+function onSuccess(result) {
+  const { stepAtSubmit, } = result
+  if (stepAtSubmit === 'reset') {
     router.push({ name: 'login' })
   }
 }
