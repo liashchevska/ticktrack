@@ -50,7 +50,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function signup(payload) {
-    const {passwordConfirmation , ...body} = payload
+    const { passwordConfirmation, ...body } = payload
     const response = await retryOnConflictOnce(() => request(API.AUTH.SIGNUP, 'POST', body))
     const { ok, errors, verificationPendingStatus } = handleAuthResponse(response)
     if (!ok && errors.length) {
@@ -81,22 +81,19 @@ export const useAuthStore = defineStore('auth', () => {
   async function requestPasswordReset(payload) {
     const response = await request(API.AUTH.REQUEST_PASSWORD_RESET, 'POST', payload)
     const { ok, errors, passwordResetPendingStatus } = handleAuthResponse(response)
-    if (!ok) {
-      return { ok, errors }
+    if (!errors.length) {
+      isPasswordResetPending.value = passwordResetPendingStatus
     }
-    isPasswordResetPending.value = passwordResetPendingStatus
-    return { ok }
-
+    return { ok, errors }
   }
 
   async function resetPassword(payload) {
     const response = await request(API.AUTH.RESET_PASSWORD, 'POST', payload)
     const { ok, errors, passwordResetPendingStatus } = handleAuthResponse(response)
-    if (!ok) {
-      return { ok, errors }
+    if (!errors.length) {
+      isPasswordResetPending.value = passwordResetPendingStatus
     }
-    isPasswordResetPending.value = passwordResetPendingStatus
-    return { ok }
+    return { ok, errors }
   }
 
   async function logout() {
@@ -109,6 +106,11 @@ export const useAuthStore = defineStore('auth', () => {
     await request(API.AUTH.DELETE_ACCOUNT, 'DELETE')
     $reset()
     // boardStore.$reset()
+  }
+
+  function resetFlows() {
+    isPasswordResetPending.value = false
+    isVerificationPending.value = false
   }
 
   return {
@@ -127,6 +129,7 @@ export const useAuthStore = defineStore('auth', () => {
     requestPasswordReset,
     resetPassword,
     deleteAccount,
-    retryOnConflictOnce
+    retryOnConflictOnce,
+    resetFlows
   }
 })
