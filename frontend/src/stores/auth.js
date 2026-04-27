@@ -90,12 +90,12 @@ export const useAuthStore = defineStore('auth', () => {
   async function resetPassword(payload) {
     const { passwordConfirmation, ...body } = payload
     const response = await request(API.AUTH.RESET_PASSWORD, 'POST', body)
-    const { ok, errors, passwordResetPendingStatus, user: userData } = handleAuthResponse(response)
+    const { ok, errors, passwordResetPendingStatus, user: userData, status } = handleAuthResponse(response)
     if (!errors.length) {
       user.value = userData
       isPasswordResetPending.value = passwordResetPendingStatus
     }
-    return { ok, errors }
+    return { ok, status, errors }
   }
 
   async function logout() {

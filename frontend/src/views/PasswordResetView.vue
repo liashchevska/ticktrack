@@ -5,17 +5,21 @@
       <small v-if="step === 'reset'">
         If an account exists for this email, you'll receive a code shortly.
       </small>
+      <small v-if="isCodeExpired">
+        Previous code expired, please try again.
+      </small>
     </template>
 
-    <BaseForm :key="step" :schema="validationSchema" :action="submit" :onSuccess="onSuccess">
+    <BaseForm :key="step" :schema="validationSchema" :action="submit" :onSuccess="onSuccess"
+      :initialValues="isCodeExpired ? { email: recoveryEmail } : {}">
       <template #fields>
         <BaseField v-if="step === 'request'" name="email" type="email">
           Send recovery code to:
         </BaseField>
 
         <template v-else>
-          <BaseField name="key" type="text">Recovery code:</BaseField>
-          <BaseField name="password" type="password">New password:</BaseField>
+          <BaseField name="key" type="text">Recovery code</BaseField>
+          <BaseField name="password" type="password">New password</BaseField>
           <BaseField name="passwordConfirmation" type="password">Confirm password</BaseField>
         </template>
       </template>
@@ -34,7 +38,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { object } from 'yup'
 import BaseForm from '@/components/Base/BaseForm.vue'
@@ -44,6 +48,8 @@ import AuthLayout from '@/layouts/AuthLayout.vue'
 import { codeRule, emailRule, passwordConfirmationRule, passwordRule } from '@/utils/validationRules'
 
 const router = useRouter()
+const isCodeExpired = ref(false)
+const recoveryEmail = ref('')
 const auth = useAuthStore()
 const step = computed(() => auth.isPasswordResetPending ? 'reset' : 'request')
 
@@ -64,7 +70,10 @@ const validationSchema = computed(() => {
 async function submit(values) {
   let result
   const stepAtSubmit = step.value
+
   if (stepAtSubmit === 'request') {
+    recoveryEmail.value = values.email
+    isCodeExpired.value = false
     result = await auth.requestPasswordReset(values)
   } else {
     result = await auth.resetPassword(values)
@@ -73,9 +82,14 @@ async function submit(values) {
 }
 
 function onSuccess(result) {
-  const { stepAtSubmit, } = result
-  if (stepAtSubmit === 'reset') {
-    router.push({ name: 'home', params: { id: '' } })
+  const { stepAtSubmit, status } = result
+  if (stepAtSubmit !== 'reset') return
+
+  if (status == "409") {
+    isCodeExpired.value = true
+    return
   }
+
+  router.push({ name: 'home', params: { id: '' } })
 }
 </script>
