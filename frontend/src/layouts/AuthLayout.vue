@@ -26,8 +26,8 @@
           <h4>Features:</h4>
           <ul>
             <li>Distraction-free UI</li>
-            <li>Auth-based personal task lists</li>
-            <li>Drag & drop task management</li>
+            <li>Personal task boards</li>
+            <li>Drag-and-drop task management</li>
             <li>Demo account access</li>
           </ul>
         </div>
