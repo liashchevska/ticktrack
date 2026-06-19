@@ -7,7 +7,6 @@ services:
     env_file:
       - ./.env
 
-
   backend:
     build: ./backend
     restart: unless-stopped
@@ -25,18 +24,17 @@ services:
     restart: unless-stopped
     depends_on:
       - backend
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+    expose:
+      - "80"
+    networks:
+      default:
+      proxy_network:
+        aliases:
+          - ticktrack-nginx
   
 volumes:
   db-data:
+
+networks:
+  proxy_network:
+    external: true
