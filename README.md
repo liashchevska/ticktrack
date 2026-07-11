@@ -39,14 +39,3 @@ docker compose -f dev.docker-compose.yaml up -d --build
 ```
 `dev.env` already contains the required environment variables.  
 The application will be available at http://localhost:5173
-## Deployment  
-The application is deployed using Docker Compose.  
-- Nginx acts as a reverse proxy  
-- HTTPS is handled with Certbot (Let’s Encrypt)  
-- Frontend (Vue) and backend (Django REST API) run as separate services
-
-Two cron jobs run on the server:  
-- Cleanup of demo users  
-- Automatic renewal of SSL certificates
-
-Scripts are available in the `scripts/` folder.
